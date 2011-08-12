@@ -1,0 +1,18 @@
+<%= form_for @post, :url => url do |f| %>
+  <%= error_messages_for(@contact_message) %>
+  <p>
+    <%= f.label :title %>
+    <%= f.text_field :title %>
+  </p>
+  <p>
+    <%= f.label :published_at %>
+    <%= f.text_field :published_at %>
+  </p>
+  <p>
+    <%= f.label :body %>
+    <%= f.text_area :body %>
+  </p>
+  <p>
+    <%= f.submit "Save", :class => "submit" %>
+  </p>
+<% end %>

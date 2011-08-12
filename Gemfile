@@ -3,7 +3,7 @@ source :rubygems
 gem 'rails', '3.1.0.rc5'
 gem 'mysql2'
 gem 'jquery-rails'
-gem 'friendly_id'
+gem 'friendly_id', "3.3.0.rc2"
 
 group :assets do
   gem 'sass-rails', "~> 3.1.0.rc"
