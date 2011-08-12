@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+  <html>
+  <%= render :partial => "shared/head" %>
+  <body>
+    <div id="container">
+      <%= render :partial => "shared/flash_messages" %>
+      <div id="title">
+        <h1>Nick DeSteffen</h1>
+      </div>
+      <div id="navigation">
+        <ul>
+          <li><%= link_to "Home", root_path %></li>
+          <li><%= link_to "Blog", "#" %></li>
+          <li><%= link_to "Projects", "#" %></li>
+          <li><%= link_to "Contact", contact_path %></li>
+        </ul>
+      </div>
+      <div id="main">
+        <div class="left-col">
+          <%= yield %>
+        </div>
+        <div class="right-col">
+          <h2>SideBar</h2>
+          <%= content_for :sidebar %>
+        </div>
+      </div>
+      <div id="footer">
+        <div class="hr"></div>
+        <p>Copyright &copy; <%= Time.now.year %> | Nick DeSteffen</p>
+      </div>
+    </div>
+  </body>
+</html>

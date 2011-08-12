@@ -1,0 +1,12 @@
+<% if flash.any? %>
+  <script type="text/javascript" charset="utf-8">
+    $(function(){
+      $('.flash-messages').delay(5000).fadeOut(1500);
+    });
+  </script>
+<% end %> 
+<% flash.each do |key, value| %>
+  <div class="flash-messages">
+    <p class="<%= key %>"><%= value %></p>
+  </div>
+<% end %>

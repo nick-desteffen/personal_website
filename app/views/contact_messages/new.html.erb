@@ -1,0 +1,26 @@
+<%= form_for @contact_message, :url => create_contact_message_path do |f| %>
+  <%= error_messages_for(@contact_message) %>
+  <p>
+    <%= f.label :name %>
+    <%= f.text_field :name %>
+  </p>
+  <p>
+    <%= f.label :email %>
+    <%= f.email_field :email %>
+  </p>
+  <p>
+    <%= f.label :phone_number %>
+    <%= f.text_field :phone_number %>
+  </p>
+  <p>
+    <%= f.label :subject %>
+    <%= f.text_field :subject %>
+  </p>
+  <p>
+    <%= f.label :message %>
+    <%= f.text_area :message %>
+  </p>
+  <p>
+    <%= f.submit "Contact", :class => "submit" %>
+  </p>
+<% end %>
