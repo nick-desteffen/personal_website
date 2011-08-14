@@ -1,18 +1,20 @@
 class Comment < ActiveRecord::Base
   
+  default_scope :order => "created_at ASC"
+  
   belongs_to :post
   
   before_validation :generate_gravatar_url
   
   validates_presence_of :body, :name
-  ## Validate email format
+  validates_format_of :email, :with => EmailAddressValidation::EMAIL_ADDRESS_EXACT_PATTERN, :allow_blank => true
+  validates_format_of :url, :with => URI::regexp(%w(http https)), :allow_blank => true, :message => "should be fully qualified."
   
   private
   
   def generate_gravatar_url
-    #require 'digest/md5'
     hash = Digest::MD5.hexdigest(email)
-    write_attribute(:gravatar_url, "http://www.gravatar.com/avatar/#{hash}")
+    write_attribute(:gravatar_hash, hash)
   end
   
 end

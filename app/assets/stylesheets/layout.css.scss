@@ -4,6 +4,10 @@ $grey: #A6A6A6;
 $green: #017A4A;
 $red: #FF0000;
 
+$background_dark_grey: #666666;
+$background_light_grey: #CCCCCC;
+
+
 $navigation-background: $grey;
 $navigation-hover: $green;
 
@@ -12,34 +16,38 @@ $nav_radius: 15px;
 body{
   font-family: 'Istok Web', sans-serif;
   height:100%;
-  background: -moz-linear-gradient(top, #666, #ccc) no-repeat #ccc;
-  background: -webkit-gradient(linear, left top, left bottom, from(#666), to(#ccc)) no-repeat #ccc;
-  background: -o-linear-gradient(#666, #ccc) no-repeat #ccc;
-
-  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#666666', endColorstr='#cccccc') no-repeat #ccc; /* IE6 & IE7 */  
-  -ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorstr='#666666', endColorstr='#cccccc')" no-repeat #ccc; /* IE8+ */  
+  background: -moz-linear-gradient(top, $background_dark_grey, $background_light_grey) no-repeat $background_light_grey;
+  background: -webkit-gradient(linear, left top, left bottom, from($background_dark_grey), to($background_light_grey)) no-repeat $background_light_grey;
+  background: -o-linear-gradient($background_dark_grey, $background_light_grey) no-repeat $background_light_grey;
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#{$background_dark_grey}', endColorstr='#{$background_light_grey}') no-repeat $background_light_grey; /* IE6 & IE7 */  
+  -ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorstr='#{$background_dark_grey}', endColorstr='#{$background_light_grey}')" no-repeat $background_light_grey; /* IE8+ */  
+  padding: 0;
+  margin: 0;
 }
 
 #container {
-    position: relative;
-    width: 944px;
-    border: 1px solid $grey;
-    margin: 40px auto;
-    padding: 45px;
-    background-color: #fff;
+  position: relative;
+  width: 944px;
+  border: 1px solid $grey;
+  margin: 40px auto;
+  padding: 45px;
+  background-color: #fff;
+  min-height: 600px;
     
-    border-radius: 20px;
-    -moz-border-radius: 20px;
-    -webkit-border-radius: 20px;
-    
-    -moz-box-shadow: 3px 3px 3px #666;
-    -webkit-box-shadow: 3px 3px 3px #666;
-    box-shadow: 3px 3px 3px #666;
-    
+  border-radius: 20px;
+  -moz-border-radius: 20px;
+  -webkit-border-radius: 20px;
+  
+  -moz-box-shadow: 3px 3px 3px #666;
+  -webkit-box-shadow: 3px 3px 3px #666;
+  box-shadow: 3px 3px 3px #666;
 }
 
 #title{
   float: left;
+  h1{
+    color: red;
+  }
 }
 
 #navigation{
@@ -56,22 +64,31 @@ body{
       a{
         padding: 15px 20px;
         text-decoration: none;
+        position: relative;
         background: -moz-linear-gradient(top,  $navigation-background,  darken($navigation-background, 30%));
         background: -webkit-gradient(linear, left top, left bottom, from($navigation-background), to(darken($navigation-background, 30%))) no-repeat darken($navigation-background, 30%);
         background: -o-linear-gradient($navigation-background, darken($navigation-background, 30%));
+        filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#{$navigation-background}', endColorstr='#{darken($navigation-background, 30%)}') no-repeat darken($navigation-background, 30%); /* IE6 & IE7 */  
+        -ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorstr='#{$navigation-background}', endColorstr='#{darken($navigation-background, 30%)}')" no-repeat darken($navigation-background, 30%); /* IE8+ */  
+        
         color: #fff;//$navigation-hover;
         display: block;
         font-size: 20px;
+        text-align: center;
         border-right: 1px solid rgba(0, 0, 0, 0.2);
-        &:hover{ 
+        &:hover, &.active{ 
+          padding: 15px 20px;
           color: #fff;//$navigation-background; 
           background: -moz-linear-gradient(top,  $navigation-hover,  darken($navigation-hover, 20%));
-          background: -webkit-gradient(linear, left top, left bottom, from($navigation-hover), to(darken($navigation-hover, 30%))) no-repeat darken($navigation-hover, 30%);
+          background: -webkit-gradient(linear, left topI only use it to styl, left bottom, from($navigation-hover), to(darken($navigation-hover, 30%))) no-repeat darken($navigation-hover, 30%);
           background: -o-linear-gradient($navigation-hover, darken($navigation-hover, 30%));
+          filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#{$navigation-hover}', endColorstr='#{darken($navigation-hover, 30%)}') no-repeat darken($navigation-background, 30%); /* IE6 & IE7 */  
+          -ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorstr='#{$navigation-hover}', endColorstr='#{darken($navigation-hover, 30%)}')" no-repeat darken($navigation-background, 30%); /* IE8+ */  
+          
         }
       }
     }    
-    li:first-child a{
+    li:first-child a, {
       padding-left: 40px;
       border-radius: $nav_radius 0 0 $nav_radius;
       -moz-border-radius: $nav_radius 0 0 $nav_radius;
@@ -93,72 +110,145 @@ body{
   .right-col{
     float: right;
     width: 280px;
-//    border: 1px solid black;
   }
   .left-col{
     float: left;
     width: 660px;
-//    border: 1px solid black;
   }
 }
 
 #footer{
   margin-top: 25px;
   text-align: center;
+  
+  .hr{
+    border-bottom: 1px dotted black;
+    margin: 10px 100px;
+    text-align: center;
+  }
+  p{
+    font-size: 14px;
+  }
 }
 
-.hr{
-  border-bottom: 1px dotted black;
-  margin: 10px 100px;
-  text-align: center;
+h1{
+  color: $green;
+  font-weight: 32px;
+  a{
+    text-decoration: none;
+    color: $green;
+  }
+  a:hover{
+    text-decoration: underline;
+  }
 }
 
-#footer p{
-  font-size: 14px;
+h2{
+  color: $grey;
+  font-weight: 20px;
 }
 
-/**************** Form Fields *****************/
+h3{
+  
+}
 
+/******* Contact Us *////
+
+.contact_info{
+  margin-top: 50px;
+  padding: 20px;
+  border: 1px solid $grey;
+  background-color: lighten($grey, 28%);
+  
+  address{
+    font-size: 13px;
+    font-style: normal;
+  }
+}
+
+/******* Blog ******** */
+
+.blog_post{
+  h1{
+    margin: 10px 0 0 0;
+  }
+  time{
+    font-size: 13px;
+  }
+}
+.comment{
+  background-color: lighten($background_light_grey, 10%);
+  border: 1px solid $background_light_grey;
+  padding: 20px;
+  margin-bottom: 20px;
+  
+  img{
+    float: right;
+  }
+  .name, .name a{
+    color: #000;
+    text-decoration: none;
+    font-weight: bold;
+  }
+  .commented_at{
+    font-size: 12px;
+    font-color: $green;
+  }
+  p{
+    margin: 10px 0 5px 0;
+  }
+}
+
+.comment_form {
+  margin-top: 20px;
+}
+
+
+/*******************************/
+/******** Form fields **********/ 
+/*******************************/
 input, textarea {  
-    padding: 9px;  
-    border: solid 1px $grey;  
-    outline: 0;  
-    font: normal 13px/100% 'Istok Web', sans-serif;
-    width: 200px;  
-    background: #FFFFFF;  
-    }  
+  padding: 9px;  
+  border: solid 1px $grey;  
+  outline: 0;  
+  font: normal 13px/100% 'Istok Web', sans-serif;
+  width: 200px;  
+  background: #FFFFFF;  
+}  
   
 textarea {  
-    width: 400px;  
-    max-width: 400px;  
-    height: 150px;  
-    line-height: 150%;  
-    }  
+  width: 400px;  
+  max-width: 400px;  
+  height: 150px;  
+  line-height: 150%;  
+}  
   
-input:hover, textarea:hover,  
-input:focus, textarea:focus {  
-    border-color: $green; 
-    }  
+input:hover, textarea:hover, input:focus, textarea:focus {  
+  border-color: $green; 
+}  
   
 form label {  
-    margin-left: 5px;  
-    display: block;
-    }  
+  margin-left: 5px;  
+  display: block;
+}
+
+form p{
+  margin: 5px 0 0 0;
+}
   
 input.submit {  
-    width: auto;  
-    padding: 9px 15px;  
-    background: $grey;  
-    border: 0;  
-    font-size: 14px;  
-    color: #FFFFFF;
-    cursor: pointer; 
-    
-    border-radius: $nav_radius;
-    -moz-border-radius: $nav_radius;
-    -webkit-border-radius: $nav_radius;
-    
-    }
+  width: auto;  
+  padding: 9px 15px;  
+  background: $grey;  
+  border: 0;  
+  font-size: 14px;  
+  color: #FFFFFF;
+  cursor: pointer;   
+  border-radius: $nav_radius;
+  -moz-border-radius: $nav_radius;
+  -webkit-border-radius: $nav_radius;
+  
+}
     
 input.submit:hover {
   background: $green;
@@ -172,8 +262,9 @@ input.submit:hover {
   border-color: $red;
 }
 
-/****** Active Record Errors *****/
-
+/*******************************/
+/**** Active Record Errors *****/
+/*******************************/
 .form_errors{
   width: 500px;
   padding: 20px;
@@ -189,14 +280,11 @@ input.submit:hover {
     margin: 0;
     font-size: 14px;
   }
-  
 }
 
-
 /*******************************/
-/* Flash Messages */ 
+/******* Flash Messages ********/ 
 /*******************************/
-
 .flash-messages {
   position:absolute;
   top:20px;
@@ -209,11 +297,10 @@ input.submit:hover {
   border:1px solid #ddd;
   width:350px;
   z-index:999;
-   -moz-border-radius: 15px; /* FF1+ */
+  -moz-border-radius: 15px; /* FF1+ */
   -webkit-border-radius: 15px; /* Saf3-4 */
-   border-radius: 15px; /* Opera 10.5, IE 9, Saf5, Chrome */
-  /*behavior: url(/PIE.htc);*/
-/*  opacity:0.9;*/
+  border-radius: 15px; /* Opera 10.5, IE 9, Saf5, Chrome */
+  opacity:0.9;
 }
 .flash-messages p {
   padding:0;

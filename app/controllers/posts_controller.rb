@@ -1,5 +1,7 @@
 class PostsController < ApplicationController
   
+  before_filter :set_active_tab
+  
   def index
     @posts = Post.all
   end
@@ -37,4 +39,10 @@ class PostsController < ApplicationController
     end
   end
 
+  private
+  
+  def set_active_tab
+    @active_tab = :blog
+  end
+  
 end

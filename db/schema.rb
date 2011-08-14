@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110812123138) do
+ActiveRecord::Schema.define(:version => 20110814194157) do
 
   create_table "comments", :force => true do |t|
     t.integer  "post_id"
@@ -18,7 +18,7 @@ ActiveRecord::Schema.define(:version => 20110812123138) do
     t.string   "email"
     t.text     "body"
     t.string   "url"
-    t.string   "gravatar_url"
+    t.string   "gravatar_hash"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

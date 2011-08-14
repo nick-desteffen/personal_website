@@ -1,4 +1,6 @@
 class ContactMessagesController < ApplicationController
+  
+  before_filter :set_active_tab
 
   def new
     @contact_message = ContactMessage.new
@@ -17,4 +19,10 @@ class ContactMessagesController < ApplicationController
     
   end
 
+  private
+  
+  def set_active_tab
+    @active_tab = :contact
+  end
+  
 end
