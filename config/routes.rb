@@ -10,6 +10,8 @@ PersonalWebsite::Application.routes.draw do
   put "blog/:post_id/edit" => "posts#update", :as => "update_post"
   get "blog/:post_id" => "posts#show", :as => "blog_post"
   
+  post "blog/:post_id/comments/create" => "comments#create", :as => "create_comment"
+  
   root :to => 'home#index'
 
 end

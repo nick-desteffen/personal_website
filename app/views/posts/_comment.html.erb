@@ -1,0 +1,6 @@
+<div class="comment">
+  <%= image_tag(comment.gravatar_url) %>
+  <div class="name"><%= comment.name %></div>
+  <div class="url"><%= link_to comment.url, comment.url, :target => "_blank" %></div>
+  <p><%= comment.body %></p>
+</div>

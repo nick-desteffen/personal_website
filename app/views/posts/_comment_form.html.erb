@@ -1,0 +1,22 @@
+<%= form_for @comment, :url => create_comment_path(post) do |f| %>
+  <%= error_messages_for(@comment) %>
+  <p>
+    <%= f.label :name %>
+    <%= f.text_field :name %>
+  </p>
+  <p>
+    <%= f.label :email %>
+    <%= f.text_field :email %>
+  </p>
+  <p>
+    <%= f.label :url %>
+    <%= f.text_field :url %>
+  </p>  
+  <p>
+    <%= f.label :body %>
+    <%= f.text_area :body %>
+  </p>
+  <p>
+    <%= f.submit "Save", :class => "submit" %>
+  </p>
+<% end %>

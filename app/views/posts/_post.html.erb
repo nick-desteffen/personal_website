@@ -2,5 +2,12 @@
   <h2><%= post.title %></h2>
   <p><%= post.published_at %></p>
   <p><%= post.body %></p>
+  <h3>Comments</h3>
+  <% if post.comments.size > 0 %>
+    <%= render :partial => "posts/comment", :collection => post.comments %>
+  <% else %>
+    <p>There are no comments.  Be the first to post!</p>
+  <% end %>
+  <%= render :partial => "posts/comment_form", :locals => {:post => post} if show_comment_form %>
   <hr />
 </div>
