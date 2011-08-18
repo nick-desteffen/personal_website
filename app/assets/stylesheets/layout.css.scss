@@ -1,35 +1,44 @@
 @import url(http://fonts.googleapis.com/css?family=Istok+Web);
 
+$green: #4CA001;
+$light_green: #7FC342;
+
 $grey: #A6A6A6;
-$green: #017A4A;
+$light_teal: #035E6E;
 $red: #FF0000;
+$yellow: #CFC928;
 
-$background_dark_grey: #666666;
-$background_light_grey: #CCCCCC;
-
-
-$navigation-background: $grey;
-$navigation-hover: $green;
+$dark_teal: #01414C;
+$light_grey: #CCCCCC;
 
 $nav_radius: 15px;
 
+/*******************************/
+/******** Main Layout **********/ 
+/*******************************/
 body{
   font-family: 'Istok Web', sans-serif;
   height:100%;
-  background: -moz-linear-gradient(top, $background_dark_grey, $background_light_grey) no-repeat $background_light_grey;
-  background: -webkit-gradient(linear, left top, left bottom, from($background_dark_grey), to($background_light_grey)) no-repeat $background_light_grey;
-  background: -o-linear-gradient($background_dark_grey, $background_light_grey) no-repeat $background_light_grey;
-  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#{$background_dark_grey}', endColorstr='#{$background_light_grey}') no-repeat $background_light_grey; /* IE6 & IE7 */  
-  -ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorstr='#{$background_dark_grey}', endColorstr='#{$background_light_grey}')" no-repeat $background_light_grey; /* IE8+ */  
+  background: -moz-linear-gradient(top, $dark_teal, $light_grey) no-repeat $light_grey;
+  background: -webkit-gradient(linear, left top, left bottom, from($dark_teal), to($light_grey)) no-repeat $light_grey;
+  background: -o-linear-gradient($dark_teal, $light_grey) no-repeat $light_grey;
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#{$dark_teal}', endColorstr='#{$light_grey}') no-repeat $light_grey; /* IE6 & IE7 */  
+  -ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorstr='#{$dark_teal}', endColorstr='#{$light_grey}')" no-repeat $light_grey; /* IE8+ */  
   padding: 0;
   margin: 0;
+}
+
+#header{
+  position: relative; 
+  width: 944px; 
+  margin: 40px auto;
 }
 
 #container {
   position: relative;
   width: 944px;
   border: 1px solid $grey;
-  margin: 40px auto;
+  margin: 0 auto 40px auto;
   padding: 45px;
   background-color: #fff;
   min-height: 600px;
@@ -46,7 +55,8 @@ body{
 #title{
   float: left;
   h1{
-    color: red;
+    color: $yellow; 
+    font-size: 40px;
   }
 }
 
@@ -64,27 +74,21 @@ body{
       a{
         padding: 15px 20px;
         text-decoration: none;
-        position: relative;
-        background: -moz-linear-gradient(top,  $navigation-background,  darken($navigation-background, 30%));
-        background: -webkit-gradient(linear, left top, left bottom, from($navigation-background), to(darken($navigation-background, 30%))) no-repeat darken($navigation-background, 30%);
-        background: -o-linear-gradient($navigation-background, darken($navigation-background, 30%));
-        filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#{$navigation-background}', endColorstr='#{darken($navigation-background, 30%)}') no-repeat darken($navigation-background, 30%); /* IE6 & IE7 */  
-        -ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorstr='#{$navigation-background}', endColorstr='#{darken($navigation-background, 30%)}')" no-repeat darken($navigation-background, 30%); /* IE8+ */  
+        background: $grey;
+        background: -moz-linear-gradient(top,  $grey,  darken($grey, 40%));
+        background: -webkit-gradient(linear, left top, left bottom, from($grey), to(darken($grey, 40%))) no-repeat darken($grey, 30%);
+        background: -o-linear-gradient($grey, darken($grey, 40%));
         
-        color: #fff;//$navigation-hover;
-        display: block;
+        color: #fff;
+        display: inline;
         font-size: 20px;
-        text-align: center;
         border-right: 1px solid rgba(0, 0, 0, 0.2);
         &:hover, &.active{ 
-          padding: 15px 20px;
-          color: #fff;//$navigation-background; 
-          background: -moz-linear-gradient(top,  $navigation-hover,  darken($navigation-hover, 20%));
-          background: -webkit-gradient(linear, left topI only use it to styl, left bottom, from($navigation-hover), to(darken($navigation-hover, 30%))) no-repeat darken($navigation-hover, 30%);
-          background: -o-linear-gradient($navigation-hover, darken($navigation-hover, 30%));
-          filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#{$navigation-hover}', endColorstr='#{darken($navigation-hover, 30%)}') no-repeat darken($navigation-background, 30%); /* IE6 & IE7 */  
-          -ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorstr='#{$navigation-hover}', endColorstr='#{darken($navigation-hover, 30%)}')" no-repeat darken($navigation-background, 30%); /* IE8+ */  
-          
+          color: #fff;
+          background: $light_teal;
+          background: -moz-linear-gradient(top,  $light_teal,  darken($light_teal, 20%));
+          background: -webkit-gradient(linear, left top, left bottom, from($light_teal), to(darken($light_teal, 30%))) no-repeat darken($light_teal, 30%);
+          background: -o-linear-gradient($light_teal, darken($light_teal, 30%));
         }
       }
     }    
@@ -131,12 +135,15 @@ body{
   }
 }
 
+/*******************************/
+/****** General Styles *********/ 
+/*******************************/
 h1{
-  color: $green;
+  color: $light_teal;
   font-weight: 32px;
   a{
     text-decoration: none;
-    color: $green;
+    color: $light_teal;
   }
   a:hover{
     text-decoration: underline;
@@ -144,16 +151,26 @@ h1{
 }
 
 h2{
-  color: $grey;
+  color: #000;
   font-weight: 20px;
 }
 
 h3{
-  
+  color: $grey;
+  font-weight: 16px;
 }
 
-/******* Contact Us *////
+a{
+  color: $dark_teal;
+}
 
+.clear{
+  clear: both;
+}
+
+/*******************************/
+/****** Contact Form ***********/ 
+/*******************************/
 .contact_info{
   margin-top: 50px;
   padding: 20px;
@@ -166,8 +183,9 @@ h3{
   }
 }
 
-/******* Blog ******** */
-
+/*******************************/
+/********** Blog ***************/ 
+/*******************************/
 .blog_post{
   h1{
     margin: 10px 0 0 0;
@@ -175,10 +193,14 @@ h3{
   time{
     font-size: 13px;
   }
+  a{
+    font-weight: bold;
+  }
 }
+
 .comment{
-  background-color: lighten($background_light_grey, 10%);
-  border: 1px solid $background_light_grey;
+  background-color: lighten($light_grey, 10%);
+  border: 1px solid $light_grey;
   padding: 20px;
   margin-bottom: 20px;
   
@@ -192,7 +214,7 @@ h3{
   }
   .commented_at{
     font-size: 12px;
-    font-color: $green;
+    font-color: $light_teal;
   }
   p{
     margin: 10px 0 5px 0;
@@ -202,7 +224,6 @@ h3{
 .comment_form {
   margin-top: 20px;
 }
-
 
 /*******************************/
 /******** Form fields **********/ 
@@ -224,7 +245,7 @@ textarea {
 }  
   
 input:hover, textarea:hover, input:focus, textarea:focus {  
-  border-color: $green; 
+  border-color: $light_teal; 
 }  
   
 form label {  
@@ -236,10 +257,14 @@ form p{
   margin: 5px 0 0 0;
 }
   
-input.submit {  
+.button {  
+  margin-top: 10px;
   width: auto;  
   padding: 9px 15px;  
-  background: $grey;  
+  background: $grey;
+  background: -moz-linear-gradient(top,  $grey,  darken($grey, 20%));
+  background: -webkit-gradient(linear, left top, left bottom, from($grey), to(darken($grey, 30%))) no-repeat darken($grey, 30%);
+  background: -o-linear-gradient($grey, darken($grey, 30%));
   border: 0;  
   font-size: 14px;  
   color: #FFFFFF;
@@ -247,11 +272,22 @@ input.submit {
   border-radius: $nav_radius;
   -moz-border-radius: $nav_radius;
   -webkit-border-radius: $nav_radius;
+   
+}
+
+.button:hover {
+  background: $light_teal;
+  background: -moz-linear-gradient(top,  $light_teal,  darken($light_teal, 20%));
+  background: -webkit-gradient(linear, left top, left bottom, from($light_teal), to(darken($light_teal, 30%))) no-repeat darken($light_teal, 30%);
+  background: -o-linear-gradient($light_teal, darken($light_teal, 30%));  
   
 }
-    
-input.submit:hover {
-  background: $green;
+
+.button:active {
+  background: #2390A4;
+  background: -moz-linear-gradient(top, #2390A4, darken(#2390A4, 20%)); /* FF3.6 */
+  background: -webkit-gradient(linear,left top,left bottom,color-stop(0, #2390A4),color-stop(1, darken(#2390A4, 20%))); /* Saf4+, Chrome */
+  background: -o-linear-gradient(#2390A4, darken(#2390A4, 30%));
 }
 
 .field_with_errors label{
@@ -286,36 +322,27 @@ input.submit:hover {
 /******* Flash Messages ********/ 
 /*******************************/
 .flash-messages {
-  position:absolute;
-  top:20px;
-  left:40px;
-  -webkit-box-shadow:1px 2px 3px #000;
-  -moz-box-shadow:1px 2px 3px #000;
-  box-shadow:1px 2px 3px #000;
-  background:#fff;
-  padding:10px;
-  border:1px solid #ddd;
-  width:350px;
-  z-index:999;
-  -moz-border-radius: 15px; /* FF1+ */
-  -webkit-border-radius: 15px; /* Saf3-4 */
-  border-radius: 15px; /* Opera 10.5, IE 9, Saf5, Chrome */
-  opacity:0.9;
+  width: 100%;
+  margin-bottom: 20px;
 }
+
 .flash-messages p {
-  padding:0;
-  margin:0;
-  font-size:15px;
-  font-weight:bold;
-  color:#000;
-  padding:0 0 0 50px;
-  min-height:40px;
+  margin: 0;
+  padding: 10px 20px;
+  font-weight: bold;
+  a.close{
+    float: right;
+    text-decoration: none;
+  }
 }
+
 .flash-messages .notice {
-  //background:url(/images/icons/green/32x32/round_ok_32x32.png) top left no-repeat;
-  color: $green;
+  color: #fff;
+  border: 1px solid #000;
+  background-color: $light_teal;
 }
 .flash-messages .alert {
-  //background:url(/images/icons/red/32x32/warning_32x32.png) top left no-repeat;
   color: $red;
+  border: 1px solid $red;
+  background-color: lighten($red, 45%);
 }

@@ -3,6 +3,8 @@ PersonalWebsite::Application.routes.draw do
   get "contact" => "contact_messages#new", :as => "contact"
   post "contact" => "contact_messages#create", :as => "create_contact_message"
   
+  get "resume" => "resume#index", :as => "resume_download"
+  
   get "blog" => "posts#index", :as => "blog"
   get "blog/new" => "posts#new", :as => "new_post"
   post "blog/new" => "posts#create", :as => "create_post"

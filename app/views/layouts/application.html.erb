@@ -2,8 +2,7 @@
   <html>
   <%= render :partial => "shared/head" %>
   <body>
-    <div id="container">
-      <%= render :partial => "shared/flash_messages" %>
+    <div id="header">
       <div id="title">
         <h1>Nick DeSteffen</h1>
       </div>
@@ -11,10 +10,15 @@
         <ul>
           <li><%= link_to "Home", root_path, :class => navigation_class(:home) %></li>
           <li><%= link_to "Blog", blog_path, :class => navigation_class(:blog) %></li>
-          <li><%= link_to "Projects", "#", :class => navigation_class(:projects) %></li>
+          <!-- <li><%#= link_to "Projects", "#", :class => navigation_class(:projects) %></li> -->
+          <li><%= link_to "Resume", resume_download_path, :class => navigation_class(:resume) %></li>
           <li><%= link_to "Contact", contact_path, :class => navigation_class(:contact) %></li>
         </ul>
       </div>
+    </div>
+    <div class="clear"></div>
+    <div id="container">
+      <%= render :partial => "shared/flash_messages" %>
       <div id="main">
         <div class="left-col">
           <%= yield %>

@@ -1,6 +1,6 @@
 <div class="comment">
   <%= gravatar_image(comment.gravatar_hash, :alt => comment.name, :title => comment.name) %>
-  <% if comment.url %>
+  <% if comment.url.present? %>
     <div class="name"><%= link_to comment.name, comment.url, :target => "_blank" %> says:</div>
   <% else %>
     <div class="name"><%= comment.name %> says:</div>

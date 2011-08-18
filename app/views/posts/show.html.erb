@@ -2,9 +2,9 @@
   <h1><%= link_to @post.title, blog_post_path(@post) %></h1>
   <time><%= format_timestamp(@post.published_at) %></time>
   <p><%= simple_format(@post.body) %></p>
-  <h3>Comments</h3>
-  <% if @post.comments.size > 0 %>
-    <%= render :partial => "posts/comment", :collection => @post.comments %>
+  <h2>Comments</h2>
+  <% if @comments.size > 0 %>
+    <%= render :partial => "posts/comment", :collection => @comments %>
   <% else %>
     <p>There are no comments.  Be the first to post!</p>
   <% end %>
