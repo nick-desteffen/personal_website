@@ -12,11 +12,13 @@ group :assets do
   gem 'uglifier'
 end
 
-#gem "execjs"
+group :production do
+  gem "execjs"
+end
 
 group :development, :test do
   gem "rspec"
   gem "rspec-rails"
   gem "mocha"
-#  gem "heroku"
+  gem "heroku"
 end
