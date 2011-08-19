@@ -1,0 +1,15 @@
+<h1>Log in</h2>
+<%= form_for @session, :url => create_session_path do |f| %>
+  <%= error_messages_for(@session) %>
+  <p>
+    <%= f.label :email %>
+    <%= f.text_field :email %>
+  </p>
+  <p>
+    <%= f.label :password %>
+    <%= f.password_field :password %>
+  </p>
+  <p>
+    <%= f.submit "Login", :class => "button" %>
+  </p>
+<% end %>

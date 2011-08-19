@@ -114,6 +114,9 @@ body{
   .right-col{
     float: right;
     width: 280px;
+    .logged_in{
+      font-size: 11px;
+    }
   }
   .left-col{
     float: left;
