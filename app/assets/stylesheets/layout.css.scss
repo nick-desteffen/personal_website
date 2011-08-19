@@ -273,6 +273,9 @@ textarea {
   
 input:hover, textarea:hover, input:focus, textarea:focus {  
   border-color: $light_teal; 
+  -webkit-box-shadow: 0 0 6px $light_teal;
+  -moz-box-shadow: 0 0 6px $light_teal;
+  box-shadow: 0 0 6px $light_teal;
 }  
   
 form label {  
@@ -329,6 +332,9 @@ form p{
 
 .field_with_errors input, .field_with_errors textarea{
   border-color: $red;
+  -webkit-box-shadow: 0 0 6px $red;
+  -moz-box-shadow: 0 0 6px $red;
+  box-shadow: 0 0 6px $red;
 }
 
 /*******************************/

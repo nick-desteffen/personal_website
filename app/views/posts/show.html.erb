@@ -1,7 +1,7 @@
 <div class="blog_post">
   <h1><%= link_to @post.title, blog_post_path(@post) %></h1>
   <time><%= format_timestamp(@post.published_at) %></time>
-  <p><%= simple_format(@post.body) %></p>
+  <p><%= @post.body.html_safe %></p>
   <h2>Comments</h2>
   <% if @comments.size > 0 %>
     <%= render :partial => "posts/comment", :collection => @comments %>

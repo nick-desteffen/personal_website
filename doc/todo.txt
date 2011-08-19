@@ -1,5 +1,4 @@
-config email
-email on contact & resume download
+email on contact form
 form for adding links
 form for adding tags
 about me content
