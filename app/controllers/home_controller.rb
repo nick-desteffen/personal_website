@@ -1,14 +1,8 @@
 class HomeController < ApplicationController
   
-  before_filter :set_active_tab
+  active_tab :home
   
   def index
-  end
-  
-  private
-  
-  def set_active_tab
-    @active_tab = :home
   end
   
 end

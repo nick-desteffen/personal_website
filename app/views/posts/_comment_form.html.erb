@@ -6,7 +6,7 @@
       <%= f.text_field :name %>
     </p>
     <p>
-      <%= f.label :email %>
+      <%= f.label :email, "Email <span class='tiny_sub_label'>(Needed for Gravatar, not published)</span>".html_safe %>
       <%= f.text_field :email %>
     </p>
     <p>
@@ -18,7 +18,7 @@
       <%= f.text_area :body %>
     </p>
     <p>
-      <%= f.submit "Post Comment", :class => "button" %>
+      <%= button("Post Comment") %>
     </p>
   <% end %>
 </div>

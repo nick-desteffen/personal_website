@@ -18,9 +18,14 @@ module ApplicationHelper
   end
   
   def navigation_class(navigation_key)
-    return "" unless defined?(@active_tab)
-    return "active" if navigation_key == @active_tab
+    return "" unless controller.active_tab
+    return "active" if navigation_key == controller.active_tab
     return ""
+  end
+  
+  def button(text, options={})
+    type = options[:type] || :submit
+    content_tag(:button, text, :class => "button", :type => type)
   end
   
 end

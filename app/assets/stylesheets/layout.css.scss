@@ -256,6 +256,12 @@ form label {
   display: block;
 }
 
+label .tiny_sub_label{
+  font-size: 12px;
+  padding-bottom: 3px;
+  vertical-align: middle;
+}
+
 form p{
   margin: 5px 0 0 0;
 }

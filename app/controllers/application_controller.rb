@@ -1,6 +1,12 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery
   
+  class_attribute :active_tab
+
+  def self.active_tab(tab)
+    self.active_tab = tab
+  end
+  
   private
 
   def current_user

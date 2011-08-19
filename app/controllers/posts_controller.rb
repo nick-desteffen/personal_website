@@ -1,6 +1,6 @@
 class PostsController < ApplicationController
   
-  before_filter :set_active_tab
+  active_tab :blog
   
   def index
     @posts = Post.all
@@ -50,12 +50,6 @@ class PostsController < ApplicationController
       flash.now[:alert] = "There was an error with your comment. Please verify all the fields are correct."
       render :action => :show
     end
-  end
-
-  private
-  
-  def set_active_tab
-    @active_tab = :blog
   end
   
 end

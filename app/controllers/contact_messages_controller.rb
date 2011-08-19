@@ -1,6 +1,6 @@
 class ContactMessagesController < ApplicationController
   
-  before_filter :set_active_tab
+  active_tab :contact
 
   def new
     @contact_message = ContactMessage.new
@@ -16,13 +16,6 @@ class ContactMessagesController < ApplicationController
       flash.now[:alert] = "Please correct the highlighted fields and resubmit."
       render :action => :new
     end
-    
-  end
-
-  private
-  
-  def set_active_tab
-    @active_tab = :contact
   end
   
 end
