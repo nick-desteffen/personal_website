@@ -14,4 +14,10 @@ class ApplicationController < ActionController::Base
   end
   helper_method :current_user
   
+  def login_required
+    if current_user.nil?
+      redirect_to root_path, :alert => "Unauthorized!"
+    end
+  end
+  
 end

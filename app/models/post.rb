@@ -1,9 +1,11 @@
 class Post < ActiveRecord::Base
   extend FriendlyId
   
-  has_many :comments
-  has_many :related_links
-  has_many :tags
+  default_scope :order => "created_at DESC"
+  
+  has_many :comments, :dependent => :destroy
+  has_many :related_links, :dependent => :destroy
+  has_many :tags, :dependent => :destroy
   
   validates_presence_of :title, :body
   

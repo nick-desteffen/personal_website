@@ -4,7 +4,9 @@ class Comment < ActiveRecord::Base
   
   belongs_to :post
   
-  before_validation :generate_gravatar_url
+  attr_accessible :email, :name, :body, :url
+  
+  before_validation :generate_gravatar_hash
   
   validates_presence_of :body, :name
   validates_format_of :email, :with => EmailAddressValidation::EMAIL_ADDRESS_EXACT_PATTERN, :allow_blank => true
@@ -12,9 +14,11 @@ class Comment < ActiveRecord::Base
   
   private
   
-  def generate_gravatar_url
-    hash = Digest::MD5.hexdigest(email)
-    write_attribute(:gravatar_hash, hash)
+  def generate_gravatar_hash
+    if email.present?
+      hash = Digest::MD5.hexdigest(email)
+      write_attribute(:gravatar_hash, hash)
+    end
   end
   
 end
