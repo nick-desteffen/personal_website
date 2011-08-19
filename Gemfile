@@ -13,11 +13,11 @@ end
 
 group :production do
   gem "pg"
-  gem "execjs"
-  gem 'therubyracer'
+  # gem "execjs"
+  # gem 'therubyracer'
 end
 
-gem "rake", "0.8.7"
+# gem "rake", "0.8.7"
 
 group :development, :test do
   gem 'mysql2', "0.3.7"
