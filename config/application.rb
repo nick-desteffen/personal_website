@@ -1,11 +1,11 @@
 require File.expand_path('../boot', __FILE__)
 
 # Pick the frameworks you want:
- require "active_record/railtie"
+require "active_record/railtie"
 require "action_controller/railtie"
 require "action_mailer/railtie"
 require "active_resource/railtie"
- require "sprockets/railtie"
+require "sprockets/railtie"
 # require "rails/test_unit/railtie"
 
 # If you have a Gemfile, require the default gems, the ones in the
@@ -50,5 +50,15 @@ module PersonalWebsite
 
     # Enable the asset pipeline
     config.assets.enabled = true
+    
+    ActionMailer::Base.smtp_settings = {
+      :address        => "smtp.sendgrid.net",
+      :port           => "25",
+      :authentication => :plain,
+      :user_name      => ENV['SENDGRID_USERNAME'],
+      :password       => ENV['SENDGRID_PASSWORD'],
+      :domain         => ENV['SENDGRID_DOMAIN']
+    }
+    
   end
 end

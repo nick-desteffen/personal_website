@@ -1,3 +1,4 @@
+config email
 email on contact & resume download
 form for adding links
 form for adding tags
