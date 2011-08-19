@@ -1,5 +1,4 @@
 email on contact & resume download
-reconfigure heroku settings / move database to local postgres
 form for adding links
 form for adding tags
 about me content
