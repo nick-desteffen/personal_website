@@ -3,7 +3,7 @@ PersonalWebsite::Application.routes.draw do
   ## User session
   get "login" => "sessions#new", :as => "new_session"
   post "login" => "sessions#create", :as => "create_session"
-  delete "logout" => "sessoins#destroy", :as => "destroy_session"
+  delete "logout" => "sessions#destroy", :as => "destroy_session"
   
   ## User registration
   get "users/register" => "users#new", :as => "new_user"

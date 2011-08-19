@@ -138,6 +138,13 @@ body{
   }
 }
 
+.social_media{
+  float: right;
+  img{
+    margin: 5px;
+  }
+}
+
 /*******************************/
 /****** General Styles *********/ 
 /*******************************/
@@ -175,7 +182,7 @@ a{
 /****** Contact Form ***********/ 
 /*******************************/
 .contact_info{
-  margin-top: 50px;
+  margin-top: 10px;
   padding: 20px;
   border: 1px solid $grey;
   background-color: lighten($grey, 28%);
