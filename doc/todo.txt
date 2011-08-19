@@ -1,10 +1,23 @@
-tags for blog post
-related links for blog post
-user session model
+email on contact & resume download
+reconfigure heroku settings / move database to local postgres
+form for adding links
+form for adding tags
+about me content
+better header / logo
+allow tags in blog posts
+  - style them
+
+
+Future:  
 social links
-  - twitter
-  - google+
-  - github
   - stackoverflow
-  - linkedin
-  - delicious
+share on facebook button
+tweet button
+styles for 404, 500, 422
+favicon
+readme content
+allow certain tags in comments
+  - style them
+delete comments
+project pages
+unit tests
