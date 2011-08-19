@@ -3,10 +3,10 @@ class ApplicationController < ActionController::Base
   
   class_attribute :active_tab
 
-  def self.active_tab(tab)
+  def self.active_tab(tab=nil)
     self.active_tab = tab
   end
-  
+    
   private
 
   def current_user

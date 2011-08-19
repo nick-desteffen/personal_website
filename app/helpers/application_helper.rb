@@ -28,4 +28,11 @@ module ApplicationHelper
     content_tag(:button, text, :class => "button", :type => type)
   end
   
+  def page_title
+    return "#{@page_title} | Nick DeSteffen" if defined?(@page_title)
+    title = controller.active_tab.present? ? controller.active_tab.capitalize : nil
+    return "#{title} | Nick DeSteffen" if title
+    return "Nick DeSteffen"
+  end
+  
 end

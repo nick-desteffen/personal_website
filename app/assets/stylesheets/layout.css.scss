@@ -113,7 +113,8 @@ body{
   
   .right-col{
     float: right;
-    width: 280px;
+    width: 260px;
+    margin-left: 20px;
     .logged_in{
       font-size: 11px;
     }
@@ -233,6 +234,10 @@ a{
 
 .comment_form {
   margin-top: 20px;
+}
+
+.related_links{
+  margin-top: 95px;
 }
 
 /*******************************/

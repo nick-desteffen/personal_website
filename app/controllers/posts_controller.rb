@@ -10,6 +10,7 @@ class PostsController < ApplicationController
     @post = Post.find(params[:post_id])
     @comments = @post.comments
     @comment = Comment.new
+    @page_title = @post.title
   end
 
   def new
