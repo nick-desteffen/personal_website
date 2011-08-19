@@ -169,6 +169,7 @@ h2{
 h3{
   color: $grey;
   font-weight: 16px;
+  margin-bottom: 5px;
 }
 
 a{
@@ -243,6 +244,11 @@ a{
 
 .related_links{
   margin-top: 95px;
+}
+
+.tags{
+  color: $yellow;
+  margin-top: 30px;
 }
 
 /*******************************/

@@ -11,4 +11,8 @@ class Post < ActiveRecord::Base
   
   friendly_id :title, :use => :slugged
   
+  def tags_joined
+    tags.map(&:name).join(", ")
+  end
+  
 end
