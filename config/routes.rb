@@ -25,7 +25,10 @@ PersonalWebsite::Application.routes.draw do
   get "blog/:post_id" => "posts#show", :as => "blog_post"
   post "blog/:post_id/comments/create" => "posts#create_comment", :as => "create_comment"
   
+  ## Home
+  get "/about" => "home#about", :as => "about"
+  
   ## Root
-  root :to => 'home#index'
+  root :to => 'posts#index'
 
 end

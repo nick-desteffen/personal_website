@@ -8,9 +8,9 @@
       </div>
       <div id="navigation">
         <ul>
-          <li><%= link_to "Home", root_path, :class => navigation_class(:home) %></li>
-          <li><%= link_to "Blog", blog_path, :class => navigation_class(:blog) %></li>
-          <!-- <li><%#= link_to "Projects", "#", :class => navigation_class(:projects) %></li> -->
+          <!-- <li><%#= link_to "Home", root_path, :class => navigation_class(:home) %></li> -->
+          <li><%= link_to "Blog", root_path, :class => navigation_class(:blog) %></li>
+          <li><%= link_to "About", about_path, :class => navigation_class(:home) %></li>
           <li><%= link_to "Resume", resume_download_path, :class => navigation_class(:resume) %></li>
           <li><%= link_to "Contact", contact_path, :class => navigation_class(:contact) %></li>
         </ul>

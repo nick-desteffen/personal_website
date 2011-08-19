@@ -209,6 +209,11 @@ a{
   }
 }
 
+.comment_count{
+  font-size: 12px; 
+  margin-left: 10px;
+}
+
 .comment{
   background-color: lighten($light_grey, 10%);
   border: 1px solid $light_grey;

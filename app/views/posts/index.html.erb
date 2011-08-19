@@ -3,6 +3,10 @@
     <h1><%= post.title %></h1>
     <time><%= format_timestamp(post.published_at) %></time>
     <p><%= truncate(post.body, :length => 300, :omission => '...') %></p>
-    <p><%= link_to "Read more", blog_post_path(post) %><span class="comment_count" style="font-size: 12px; margin-left: 10px;"><%= post.comments.size %> comments</span></p>
+    <p><%= link_to "Read more", blog_post_path(post) %><span class="comment_count"><%= pluralize(post.comments.size, "comment") %></span></p>
   </div>
+<% end %>
+
+<% content_for :sidebar do %>
+  <%= render :partial => "shared/social_media" %>
 <% end %>
