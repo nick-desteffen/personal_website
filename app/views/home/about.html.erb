@@ -1,2 +1,14 @@
 <h1>Who is Nick DeSteffen?</h1>
 <p>This page is all about Nick...</p>
+
+<% content_for :sidebar do %>
+  <%= render :partial => "shared/social_media" %>
+  <h2>Projects / Sites</h2>
+  <p><%= link_to "CarePages", "http://www.carepages.com", :target => "_blank" %></p>
+  <p><%= link_to "My Health and Money", "http://www.myhealthandmoney.com", :target => "_blank" %></p>
+  <p><%= link_to "HomeLifePerks", "http://www.homelifeperks.com", :target => "_blank" %></p>
+  <p><%= link_to "ActiveRadius", "http://www.activeradius.com", :target => "_blank" %></p>
+  <p><%= link_to "WisePatient", "http://www.wisepatient.com", :target => "_blank" %></p>
+  <p><%= link_to "KoalaDeal", "http://www.koaladeal.com", :target => "_blank" %></p>
+  <!-- <p><%#= link_to "SplashSurveys", "http://www.splashsurveys.com", :target => "_blank" %></p> -->
+<% end %>
