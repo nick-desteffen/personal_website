@@ -1,3 +1,58 @@
-// Place all the styles related to the posts controller here.
-// They will automatically be included in application.css.
-// You can use Sass (SCSS) here: http://sass-lang.com/
+@import "variables";
+
+.blog_post{
+  h1{
+    margin: 10px 0 0 0;
+  }
+  time{
+    font-size: 13px;
+  }
+  a{
+    font-weight: bold;
+  }
+}
+
+.comment_count{
+  font-size: 12px; 
+  margin-left: 10px;
+}
+
+.comment{
+  background-color: lighten($light_grey, 10%);
+  border: 1px solid $light_grey;
+  padding: 20px;
+  margin-bottom: 20px;
+  
+  img{
+    float: right;
+  }
+  .name, .name a{
+    color: #000;
+    text-decoration: none;
+    font-weight: bold;
+  }
+  .commented_at{
+    font-size: 12px;
+    font-color: $light_teal;
+  }
+  p{
+    margin: 10px 0 5px 0;
+  }
+}
+
+.comment_form {
+  margin-top: 20px;
+}
+
+.related_links{
+  margin-top: 95px;
+}
+
+.tags{
+  color: $yellow;
+  margin-top: 30px;
+}
+
+.gist{
+  font-size: 14px;
+}

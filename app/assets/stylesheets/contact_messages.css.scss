@@ -1,3 +1,13 @@
-// Place all the styles related to the contact_messages controller here.
-// They will automatically be included in application.css.
-// You can use Sass (SCSS) here: http://sass-lang.com/
+@import "variables";
+
+.contact_info{
+  margin-top: 10px;
+  padding: 20px;
+  border: 1px solid $grey;
+  background-color: lighten($grey, 28%);
+  
+  address{
+    font-size: 13px;
+    font-style: normal;
+  }
+}

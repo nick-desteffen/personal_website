@@ -1,0 +1,86 @@
+@import "variables";
+
+input, textarea, select {  
+  padding: 5px;  
+  border: solid 1px $grey;  
+  outline: 0;  
+  font: normal 13px/100% 'Istok Web', sans-serif;
+  background: #FFFFFF;  
+}  
+
+input, textarea{
+  width: 200px;  
+}
+  
+textarea {  
+  width: 400px;  
+  max-width: 400px;  
+  height: 150px;  
+  line-height: 150%;  
+}  
+  
+input:hover, textarea:hover, input:focus, textarea:focus, select:hover, select:focus {  
+  border-color: $light_teal; 
+  -webkit-box-shadow: 0 0 6px $light_teal;
+  -moz-box-shadow: 0 0 6px $light_teal;
+  box-shadow: 0 0 6px $light_teal;
+}  
+  
+form label {  
+  margin-left: 5px;  
+  display: block;
+}
+
+label .tiny_sub_label{
+  font-size: 12px;
+  padding-bottom: 3px;
+  vertical-align: middle;
+}
+
+form p{
+  margin: 5px 0 0 0;
+}
+  
+.button {  
+  margin-top: 10px;
+  width: auto;  
+  padding: 9px 15px;  
+  background: $grey;
+  background: -moz-linear-gradient(top,  $grey,  darken($grey, 20%));
+  background: -webkit-gradient(linear, left top, left bottom, from($grey), to(darken($grey, 30%))) no-repeat darken($grey, 30%);
+  background: -o-linear-gradient($grey, darken($grey, 30%));
+  border: 0;  
+  font-size: 14px;  
+  color: #FFFFFF;
+  cursor: pointer;   
+  border-radius: $nav_radius;
+  -moz-border-radius: $nav_radius;
+  -webkit-border-radius: $nav_radius;
+   
+}
+
+.button:hover {
+  background: $light_teal;
+  background: -moz-linear-gradient(top,  $light_teal,  darken($light_teal, 20%));
+  background: -webkit-gradient(linear, left top, left bottom, from($light_teal), to(darken($light_teal, 30%))) no-repeat darken($light_teal, 30%);
+  background: -o-linear-gradient($light_teal, darken($light_teal, 30%));  
+  
+}
+
+.button:active {
+  background: #2390A4;
+  background: -moz-linear-gradient(top, #2390A4, darken(#2390A4, 20%)); /* FF3.6 */
+  background: -webkit-gradient(linear,left top,left bottom,color-stop(0, #2390A4),color-stop(1, darken(#2390A4, 20%))); /* Saf4+, Chrome */
+  background: -o-linear-gradient(#2390A4, darken(#2390A4, 30%));
+}
+
+.field_with_errors label{
+  color: $red;
+}
+
+.field_with_errors input, .field_with_errors textarea{
+  border-color: $red;
+  -webkit-box-shadow: 0 0 6px $red;
+  -moz-box-shadow: 0 0 6px $red;
+  box-shadow: 0 0 6px $red;
+}
