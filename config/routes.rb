@@ -27,6 +27,7 @@ PersonalWebsite::Application.routes.draw do
   
   ## Home
   get "/about" => "home#about", :as => "about"
+  get "/home" => "home#index", :as => "home"
   
   ## Root
   root :to => 'posts#index'

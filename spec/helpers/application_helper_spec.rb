@@ -15,9 +15,9 @@ describe ApplicationHelper do
     it "renders the error messages partial with the object" do
       contact_message = FactoryGirl.build(:contact_message, :name => nil)
       
-      response.expects(:render).with("shared/error_messages", {:object => contact_message}).once
-      
       error_messages = helper.error_messages_for(contact_message)
+      
+      error_messages.should_not be_nil
     end
   end
   
