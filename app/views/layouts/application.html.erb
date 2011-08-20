@@ -8,10 +8,10 @@
       </div>
       <div id="navigation">
         <ul>
-          <li><%= link_to "Blog", root_path, :class => navigation_class(:blog) %></li>
-          <li><%= link_to "About", about_path, :class => navigation_class(:home) %></li>
-          <li><%= link_to "Resume", resume_download_path, :class => navigation_class(:resume) %></li>
-          <li><%= link_to "Contact", contact_path, :class => navigation_class(:contact) %></li>
+          <li><%= navigation_link("Blog", root_path, :blog) %></li>
+          <li><%= navigation_link("About", about_path, :home) %></li>
+          <li><%= navigation_link("Resume", resume_download_path, :resume) %></li>
+          <li><%= navigation_link("Contact", contact_path, :contact) %></li>
         </ul>
       </div>
     </div>

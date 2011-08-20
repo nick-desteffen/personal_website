@@ -9,10 +9,10 @@ module ApplicationHelper
     timestamp.strftime("%m/%d/%Y %I:%M%p").downcase
   end
   
-  def navigation_class(navigation_key)
-    return "" unless controller.active_tab
-    return "active" if navigation_key == controller.active_tab
-    return ""
+  def navigation_link(title, path, key)
+    style_class = ""
+    style_class = "active" if key == controller.active_tab
+    link_to(title, path, :class => style_class)
   end
   
   def button(text, options={})

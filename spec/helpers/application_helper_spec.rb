@@ -21,22 +21,21 @@ describe ApplicationHelper do
     end
   end
   
-  describe "navigation_class" do
+  describe "navigation_link" do
     before(:each) do
       helper.stubs(:controller).returns(ApplicationController.new)
     end
-    it "returns nothing if there is no active_tab defined" do
-      helper.navigation_class(:contact).should == ""
+    it "has no class if the active_tab key doesn't match the key passed in" do
+      link = helper.navigation_link("Contact", root_path, :contact)
+      
+      link.should == "<a href=\"/\" class=\"\">Contact</a>"
     end
-    it "returns 'active' if the controller's active_tab is equal to the navigation_key" do
+    it "has the active class if the active_tab key matches the key passed in" do
       helper.controller.stubs(:active_tab).returns(:contact)
       
-      helper.navigation_class(:contact).should == "active"
-    end
-    it "returns nothing if the active_tab is not equal to the navigation_key" do
-      helper.controller.stubs(:active_tab).returns(:contact)
+      link = helper.navigation_link("Contact", root_path, :contact)
       
-      helper.navigation_class(:blog).should == ""
+      link.should == "<a href=\"/\" class=\"active\">Contact</a>"
     end
   end
     
