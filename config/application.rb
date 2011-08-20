@@ -51,6 +51,7 @@ module PersonalWebsite
     # Enable the asset pipeline
     config.assets.enabled = true
     
+    ActionMailer::Base.prepend_view_path "#{Rails.root}/app/mailer_views"
     ActionMailer::Base.smtp_settings = {
       :address        => "smtp.sendgrid.net",
       :port           => "25",
