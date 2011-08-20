@@ -12,7 +12,7 @@ class ContactMessage < ActiveRecord::Base
   private
   
   def sanitize_phone_number
-    write_attribute(:phone_number, phone_number.strip.gsub(/\D/, ""))
+    write_attribute(:phone_number, phone_number.strip.gsub(/\D/, "")) if phone_number.present?
   end
   
   def deliver_email_notification

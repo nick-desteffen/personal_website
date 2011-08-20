@@ -1,7 +1,7 @@
 class Post < ActiveRecord::Base
   extend FriendlyId
   
-  default_scope :order => "created_at DESC"
+  default_scope :order => "published_at DESC"
   
   has_many :comments, :dependent => :destroy
   has_many :related_links, :dependent => :destroy
@@ -12,6 +12,8 @@ class Post < ActiveRecord::Base
   accepts_nested_attributes_for :related_links, :tags, :allow_destroy => true
   
   friendly_id :title, :use => :slugged
+  
+  scope :published, where(["posts.published_at is not NULL"])
   
   def tags_joined
     tags.map(&:name).join(", ")

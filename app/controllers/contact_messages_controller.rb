@@ -13,7 +13,7 @@ class ContactMessagesController < ApplicationController
     if @contact_message.save
       redirect_to root_path, :notice => "Thanks! I'll be in touch soon!"
     else
-      flash.now[:alert] = "Please correct the highlighted fields and resubmit."
+      flash.now.alert = "Please correct the highlighted fields and resubmit."
       render :action => :new
     end
   end

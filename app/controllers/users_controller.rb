@@ -9,7 +9,7 @@ class UsersController < ApplicationController
     if @user.save
       redirect_to root_path, :notice => "Thanks for signing up!"
     else
-      flash.now[:alert] = "There was an error creating your account."
+      flash.now.alert = "There was an error creating your account."
       render :action => :new
     end
   end

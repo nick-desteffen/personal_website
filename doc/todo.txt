@@ -16,4 +16,3 @@ allow certain tags in comments
   - style them
 delete comments
 project pages
-unit tests
