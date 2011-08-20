@@ -1,5 +1,7 @@
 class Notifier < ActionMailer::Base
   
+  layout "application_mailer"
+  
   default from: "nick.desteffen@gmail.com"
   default to: "nick.desteffen@gmail.com"
   
