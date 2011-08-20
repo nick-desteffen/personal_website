@@ -7,11 +7,16 @@ class ContactMessage < ActiveRecord::Base
   validates_format_of :email, :with => EmailAddressValidation::EMAIL_ADDRESS_EXACT_PATTERN
   
   before_validation :sanitize_phone_number
+  after_create :deliver_email_notification
   
   private
   
   def sanitize_phone_number
     write_attribute(:phone_number, phone_number.strip.gsub(/\D/, ""))
+  end
+  
+  def deliver_email_notification
+    Notifier.new_contact_message(self).deliver
   end
   
 end

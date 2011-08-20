@@ -9,4 +9,9 @@ class Notifier < ActionMailer::Base
     mail(:subject => "Resume downloaded!")
   end
   
+  def new_contact_message(contact_message)
+    @contact_message = contact_message
+    mail(:subject => "New Contact Message!")
+  end
+  
 end
