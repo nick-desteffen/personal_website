@@ -9,6 +9,8 @@ class Post < ActiveRecord::Base
   
   validates_presence_of :title, :body
   
+  accepts_nested_attributes_for :related_links, :tags, :allow_destroy => true
+  
   friendly_id :title, :use => :slugged
   
   def tags_joined

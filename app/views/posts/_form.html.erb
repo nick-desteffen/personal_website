@@ -6,12 +6,29 @@
   </p>
   <p>
     <%= f.label :published_at %>
-    <%= f.text_field :published_at %>
+    <%= f.date_select :published_at %>
   </p>
   <p>
     <%= f.label :body %>
     <%= f.text_area :body %>
   </p>
+
+  <h2>Related Links</h2>
+  <div id="related-links">
+    <%= f.fields_for :related_links do |related_link_fields| %>
+      <%= render :partial => "posts/related_link_fields", :locals => {:form => related_link_fields} %>
+    <% end %>
+    <%= link_to_add_fields "Add Related Link", f, :related_links %>
+  </div>
+
+  <h2>Tags</h2>
+  <div id="related-links">
+    <%= f.fields_for :tags do |tag_fields| %>
+      <%= render :partial => "posts/tag_fields", :locals => {:form => tag_fields} %>
+    <% end %>
+    <%= link_to_add_fields "Add Tag", f, :tags %>
+  </div>
+
   <p>
     <%= button("Save") %>
   </p>
