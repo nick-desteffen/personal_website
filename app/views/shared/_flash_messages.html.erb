@@ -1,5 +1,5 @@
 <% flash.each do |key, value| %>
   <div class="flash-messages <%= key %>">
-    <p class="<%= key %>"><%= value %><%= link_to "X", "#", :class => "close", :onclick => "$(this).parents('.flash-messages').fadeOut(); return false;" %></p>
+    <p class="<%= key %>"><%= value %><%= link_to image_tag("icons/black/24x24/error.png"), "#", :class => "close", :onclick => "$(this).parents('.flash-messages').fadeOut(); return false;" %></p>
   </div>
 <% end %>

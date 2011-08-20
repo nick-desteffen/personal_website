@@ -1,14 +1,17 @@
-<h1>Who is Nick DeSteffen?</h1>
-<p>This page is all about Nick...</p>
+<h1>Who is Nick?</h1>
+<p>Hi, I'm Nick. I live in Chicago, Illinois and I've been doing web development for nearly 10 years. I started out programming in Java/J2EE and moved into Ruby / Rails about 4 years ago. The last year and 1/2 I've put on a number of additional hats and started doing some systems administration as well as jQuery and CSS.</p>
+<p>I am currently working at <%= link_to "Eight Bit Studios", "http://eightbitstudios.com", :target => "_blank" %> and am also a co-founder of <%= link_to "WisePatient", "https://www.wisepatient.com", :target => "_blank" %>.</p>
+
+<h3>Some of the sites I have worked on are:</h3>
+<div><%= link_to "CarePages", "http://www.carepages.com", :target => "_blank" %></div>
+<div><%= link_to "My Health and Money", "http://www.myhealthandmoney.com", :target => "_blank" %></div>
+<div><%= link_to "Home Life Perks", "http://www.homelifeperks.com", :target => "_blank" %></div>
+<div><%= link_to "Active Radius", "http://www.activeradius.com", :target => "_blank" %></div>
+<div><%= link_to "WisePatient", "http://www.wisepatient.com", :target => "_blank" %></div>
+<div><%= link_to "KoalaDeal", "http://www.koaladeal.com", :target => "_blank" %></div>
+<!-- <div><%#= link_to "SplashSurveys", "http://www.splashsurveys.com", :target => "_blank" %></div> -->
 
 <% content_for :sidebar do %>
   <%= render :partial => "shared/social_media" %>
-  <h2>Projects / Sites</h2>
-  <p><%= link_to "CarePages", "http://www.carepages.com", :target => "_blank" %></p>
-  <p><%= link_to "My Health and Money", "http://www.myhealthandmoney.com", :target => "_blank" %></p>
-  <p><%= link_to "HomeLifePerks", "http://www.homelifeperks.com", :target => "_blank" %></p>
-  <p><%= link_to "ActiveRadius", "http://www.activeradius.com", :target => "_blank" %></p>
-  <p><%= link_to "WisePatient", "http://www.wisepatient.com", :target => "_blank" %></p>
-  <p><%= link_to "KoalaDeal", "http://www.koaladeal.com", :target => "_blank" %></p>
-  <!-- <p><%#= link_to "SplashSurveys", "http://www.splashsurveys.com", :target => "_blank" %></p> -->
+  <%= image_tag("nick-d.jpg", :width => "250px")%>
 <% end %>

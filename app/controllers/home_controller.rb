@@ -6,6 +6,7 @@ class HomeController < ApplicationController
   end
   
   def about
+    @page_title = "About"
   end
   
 end

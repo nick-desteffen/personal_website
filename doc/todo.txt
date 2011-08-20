@@ -1,8 +1,4 @@
-about me content
 better header / logo
-allow tags in blog posts
-  - style them
-
 
 Future:  
 social links
@@ -15,4 +11,4 @@ readme content
 allow certain tags in comments
   - style them
 delete comments
-project pages
+projects section

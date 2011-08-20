@@ -110,7 +110,8 @@ body{
 
 #main{
   display: inline-block;
-  
+  min-height: 515px;
+   
   .right-col{
     float: right;
     width: 260px;
