@@ -3,8 +3,15 @@ require 'spec_helper'
 describe PostsHelper do
   
   describe "gravatar_image" do
-    it "does something" do
-      pending
+    it "returns nothing if the gravatar hash is blank" do
+      image = gravatar_image("")
+      
+      image.should == nil
+    end
+    it "returns an image tag with the gravatar hash if it isn't blank" do
+      image = gravatar_image("XXXXX")
+      
+      image.should == "<img alt=\"\" src=\"http://www.gravatar.com/avatar/XXXXX?size=75\" title=\"\" />"
     end
   end
   

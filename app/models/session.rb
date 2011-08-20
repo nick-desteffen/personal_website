@@ -20,7 +20,7 @@ class Session
   
   def authenticated?
     @user = User.find_by_email(email)
-    if @user && user.authenticate(password)
+    if @user && @user.authenticate(password)
       return true
     else
       return false

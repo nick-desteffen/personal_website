@@ -68,11 +68,15 @@ describe ApplicationHelper do
     
   
   describe "link_to_remove_fields" do
-    pending
+    it "does something" do
+      pending
+    end
   end
   
   describe "link_to_add_fields" do
-    pending
+    it "does something" do
+      pending
+    end
   end
   
 end
