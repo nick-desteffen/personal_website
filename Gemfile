@@ -13,8 +13,9 @@ group :assets do
 end
 
 group :development, :test do
-  gem "rspec"
-  gem "rspec-rails"
-  gem "mocha"
-  gem "heroku"
+  gem "rspec", "2.6.0"
+  gem "rspec-rails", "2.6.1"
+  gem "mocha", "0.9.12"
+  gem "heroku", "2.4.2"
+  gem "factory_girl_rails", "1.1.0"
 end
