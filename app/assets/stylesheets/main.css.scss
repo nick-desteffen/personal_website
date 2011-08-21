@@ -179,6 +179,15 @@ a{
   clear: both;
 }
 
+// Override social media'styles
+.fb_edge_widget_with_comment{
+  vertical-align: top;
+}
+
+.twitter-share-button{
+  margin-right: 50px;
+}
+
 /*******************************/
 /**** Active Record Errors *****/
 /*******************************/

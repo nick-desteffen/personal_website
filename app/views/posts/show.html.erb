@@ -2,6 +2,11 @@
   <h1><%= link_to @post.title, blog_post_path(@post) %></h1>
   <time><%= format_date(@post.published_at) %></time>
   <p><%= @post.body.html_safe %></p>
+  <div>
+    <%= render :partial => "shared/facebook_like_button" %>
+    <%= render :partial => "shared/twitter_tweet_button" %>
+    <%= render :partial => "shared/google_plus_one_button" %>
+  </div>
   <h2>Comments</h2>
   <% if @comments.size > 0 %>
     <%= render :partial => "posts/comment", :collection => @comments %>
