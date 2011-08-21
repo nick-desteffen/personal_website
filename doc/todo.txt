@@ -1,13 +1,7 @@
-better header / logo
-
-Future:  
 social links
   - stackoverflow
-share on facebook button
-tweet button
 styles for 404, 500, 422
 favicon
-readme content
 allow certain tags in comments
   - style them
 delete comments
