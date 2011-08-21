@@ -2,5 +2,5 @@
   <%= gravatar_image(comment.gravatar_hash, :alt => comment.name, :title => comment.name) %>
   <div class="name"><%= comment_name(comment) %> says:</div>
   <div class="commented_at"><%= format_timestamp(comment.created_at) %></div>
-  <p><%= comment.body %></p>
+  <p><%= simple_format(comment.body) %></p>
 </div>
