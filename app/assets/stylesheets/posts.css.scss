@@ -45,7 +45,7 @@
 }
 
 .related_links{
-  margin-top: 95px;
+  margin-top: 75px;
 }
 
 .tags{
@@ -55,4 +55,13 @@
 
 .gist{
   font-size: 14px;
+}
+
+.terminal{
+  background: none repeat scroll 0 0 #000000;
+  color: #FFFFFF;
+  font-family: courier;
+  font-size: 13px;
+  margin: 5px 0;
+  padding: 5px 10px;
 }
