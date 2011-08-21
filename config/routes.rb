@@ -6,8 +6,8 @@ PersonalWebsite::Application.routes.draw do
   delete "logout" => "sessions#destroy", :as => "destroy_session"
   
   ## User registration
-  get "users/register" => "users#new", :as => "new_user"
-  post "users/register" => "users#create", :as => "create_user"
+  # get "users/register" => "users#new", :as => "new_user"
+  # post "users/register" => "users#create", :as => "create_user"
 
   ## Contact form
   get "contact" => "contact_messages#new", :as => "contact"
