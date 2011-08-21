@@ -7,6 +7,7 @@ class UsersController < ApplicationController
   def create
     @user = User.new(params[:user])
     if @user.save
+      session[:user_id] = @user.id
       redirect_to root_path, :notice => "Thanks for signing up!"
     else
       flash.now.alert = "There was an error creating your account."
