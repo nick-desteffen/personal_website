@@ -1,7 +1,7 @@
 <% @posts.each do |post| %>
   <div class="blog_post">
     <h1><%= post.title %></h1>
-    <time><%= format_timestamp(post.published_at) %></time>
+    <time><%= format_date(post.published_at) %></time>
     <p><%= truncate(strip_tags(post.body), :length => 300, :omission => '...') %></p>
     <p><%= link_to "Read more", blog_post_path(post) %><span class="comment_count"><%= pluralize(post.comments.size, "comment") %></span></p>
   </div>

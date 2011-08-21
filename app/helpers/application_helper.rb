@@ -9,6 +9,11 @@ module ApplicationHelper
     timestamp.strftime("%m/%d/%Y %I:%M%p").downcase
   end
   
+  def format_date(timestamp)
+    return if timestamp.blank?
+    timestamp.strftime("%m/%d/%Y").downcase
+  end
+  
   def navigation_link(title, path, key)
     style_class = ""
     style_class = "active" if key == controller.active_tab
