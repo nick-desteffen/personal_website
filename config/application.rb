@@ -8,10 +8,12 @@ require "active_resource/railtie"
 require "sprockets/railtie"
 # require "rails/test_unit/railtie"
 
-# If you have a Gemfile, require the default gems, the ones in the
-# current environment and also include :assets gems if in development
-# or test environments.
-Bundler.require *Rails.groups(:assets) if defined?(Bundler)
+if defined?(Bundler)
+  # If you precompile assets before deploying to production, use this line
+  Bundler.require *Rails.groups(:assets => %w(development test))
+  # If you want your assets lazily compiled in production, use this line
+  # Bundler.require(:default, :assets, Rails.env)
+end
 
 module PersonalWebsite
   class Application < Rails::Application
@@ -50,6 +52,9 @@ module PersonalWebsite
 
     # Enable the asset pipeline
     config.assets.enabled = true
+    
+    # Version of your assets, change this if you want to expire all your assets
+    config.assets.version = '1.0'
     
     ActionMailer::Base.prepend_view_path "#{Rails.root}/app/mailer_views"
     ActionMailer::Base.smtp_settings = {

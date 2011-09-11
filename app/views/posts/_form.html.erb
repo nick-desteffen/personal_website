@@ -22,7 +22,7 @@
   </div>
 
   <h2>Tags</h2>
-  <div id="related-links">
+  <div id="related-tags">
     <%= f.fields_for :tags do |tag_fields| %>
       <%= render :partial => "posts/tag_fields", :locals => {:form => tag_fields} %>
     <% end %>
