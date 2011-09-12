@@ -9,6 +9,8 @@
 //= require jquery_ujs
 //= require syntaxhighlighter_3.0.83/scripts/shCore
 //= require syntaxhighlighter_3.0.83/scripts/shBrushRuby
+//= require syntaxhighlighter_3.0.83/scripts/shBrushJScript
+//= require syntaxhighlighter_3.0.83/scripts/shBrushCss
 //= require_tree .
 
 function remove_fields(link) {
