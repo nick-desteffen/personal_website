@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110819020452) do
+ActiveRecord::Schema.define(:version => 20110916031350) do
 
   create_table "comments", :force => true do |t|
     t.integer  "post_id"
@@ -23,6 +23,8 @@ ActiveRecord::Schema.define(:version => 20110819020452) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  add_index "comments", ["post_id"], :name => "index_comments_on_post_id"
 
   create_table "contact_messages", :force => true do |t|
     t.string   "name"
@@ -54,12 +56,16 @@ ActiveRecord::Schema.define(:version => 20110819020452) do
     t.datetime "updated_at"
   end
 
+  add_index "related_links", ["post_id"], :name => "index_related_links_on_post_id"
+
   create_table "tags", :force => true do |t|
     t.integer  "post_id"
     t.string   "name"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  add_index "tags", ["post_id"], :name => "index_tags_on_post_id"
 
   create_table "users", :force => true do |t|
     t.string   "email"
@@ -69,5 +75,7 @@ ActiveRecord::Schema.define(:version => 20110819020452) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  add_index "users", ["email"], :name => "index_users_on_email"
 
 end
