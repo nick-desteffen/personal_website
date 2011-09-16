@@ -13,7 +13,7 @@ class Post < ActiveRecord::Base
   
   friendly_id :title, :use => :slugged
   
-  scope :published, where(["posts.published_at is not NULL"])
+  scope :published, lambda { where('posts.published_at < ?', Time.now) }
   
   def tags_joined
     tags.map(&:name).join(", ")
