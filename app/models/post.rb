@@ -16,7 +16,7 @@ class Post < ActiveRecord::Base
   scope :published, lambda { where('posts.published_at < ?', Time.now) }
   
   def tags_joined
-    tags.map(&:name).join(", ")
+    tags.alphabetized.map(&:name).join(", ")
   end
   
 end

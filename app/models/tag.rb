@@ -4,4 +4,6 @@ class Tag < ActiveRecord::Base
   
   validates_presence_of :name
   
+  scope :alphabetized, :order => :name
+  
 end
