@@ -1,0 +1,22 @@
+<table style="width: 100%">
+  <thead>
+    <tr>
+      <th>Title</th>
+      <th>Publish Date</th>
+      <th>Created at</th>
+      <th>Updated at</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @posts.each do |post| %>
+      <tr>
+        <td><%= post.title %></td>
+        <td><%= format_date(post.published_at) %></td>
+        <td><%= format_timestamp(post.created_at) %></td>
+        <td><%= format_timestamp(post.updated_at) %></td>
+        <td><%= link_to "View", blog_post_path(post) %> | <%= link_to "Edit", edit_post_path(post) %> | <%= link_to "Destroy", destroy_post_path(post), :method => :delete, :confirm => "Are you sure?" %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

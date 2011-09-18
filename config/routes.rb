@@ -14,11 +14,13 @@ PersonalWebsite::Application.routes.draw do
   
   ## Blog
   get "blog" => "posts#index", :as => "blog"
+  get "blog/admin" => "posts#admin_index", :as => "admin_index"
   get "blog/new" => "posts#new", :as => "new_post"
   post "blog/new" => "posts#create", :as => "create_post"
   get "blog/:post_id/edit" => "posts#edit", :as => "edit_post"
   put "blog/:post_id/edit" => "posts#update", :as => "update_post"
   get "blog/:post_id" => "posts#show", :as => "blog_post"
+  delete "blog/:post_id" => "posts#destroy", :as => "destroy_post"
   post "blog/:post_id/comments/create" => "posts#create_comment", :as => "create_comment"
   
   ## Home

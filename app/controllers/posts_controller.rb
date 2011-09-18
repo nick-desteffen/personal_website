@@ -1,11 +1,15 @@
 class PostsController < ApplicationController
   
-  before_filter :login_required, :only => [:new, :create, :edit, :update]
+  before_filter :login_required, :only => [:new, :create, :edit, :update, :admin_index, :destroy]
   
   active_tab :blog
   
   def index
     @posts = Post.published
+  end
+  
+  def admin_index
+    @posts = Post.order(:created_at).all
   end
   
   def show
@@ -53,6 +57,12 @@ class PostsController < ApplicationController
       flash.now.alert = "There was an error with your comment. Please verify all the fields are correct."
       render :action => :show
     end
+  end
+  
+  def destroy
+    @post = Post.find(params[:post_id])
+    @post.destroy
+    redirect_to admin_index_path
   end
   
 end
