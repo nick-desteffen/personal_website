@@ -2,7 +2,7 @@
   For a recent Rails 3.1 project one of the features requested was to allow users to painlessly upload videos and have them all look consistent. 
   We choose <a href="http://zencoder.com" target="_blank">Zencoder</a> for our video encoding service and <a href="http://www.rackspace.com/cloud/cloud_hosting_products/files/" target="_blank">Rackspace Cloud Files</a> for storage. We were already using the gem <a href="https://github.com/jnicklas/carrierwave" target="_blank">CarrierWave</a> for attachments and the jQuery plugin <a href="http://www.uploadify.com/" target="_blank">Uploadify</a> for uploading files.
   <br /><br />
-  Having large files uploaded through Uploadify works really well since as soon as a file is selected it starts to upload, this is a much better experience than making a user wait while a video uploads over a standard request.
+  Having large files uploaded through Uploadify works really well. As soon as a file is selected, it starts to upload; this is a much better experience than making a user wait while a video uploads over a standard request. 
   This post will outline all the steps to get a video uploaded, encoded, and displayed to your users.
   <br /><br />
   This is a short rundown of what will happen:
@@ -311,7 +311,7 @@
             config.action_mailer.default_url_options = {:host => "your_ip_address"}
           </pre>
         </li>
-        <li>Since routes aren't available in uploaders include the Rails.application.routes.url_helpers module</li>
+        <li>Include the Rails.application.routs.url_helpers module, since routes aren't available in uploaders.</li>
         <li>Set the default url to be the host of your callback, if you want to just use the same host as your email just add: Rails.application.routes.default_url_options = ActionMailer::Base.default_url_options</li>
         <li>Use the ssl protocol in the callback url if your site is running ssl.</li>
       </ol>
