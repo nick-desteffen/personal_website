@@ -199,9 +199,9 @@
 
 <h2>Create a Video model</h2>
 <p>
-  Create a model to store our uploaded video information. It will have an attachment column for the filename used by CarrierWave, a column to put the job id from Zencoder and a processed boolean flag.
+  Create a model to store our uploaded video information. It will have an attachment column for the filename used by CarrierWave, a column to put the output id from Zencoder and a processed boolean flag.
   <ol>
-    <li><div class='terminal'>$ bundle exec rails g model video attachment:string zencoder_job_id:string processed:boolean</div></li>
+    <li><div class='terminal'>$ bundle exec rails g model video attachment:string zencoder_output_id:string processed:boolean</div></li>
     <li>Migrate your database:
       <div class='terminal'>$ bundle exec rake db:migrate</div>
     </li>
@@ -254,10 +254,10 @@
             end
 
             json = JSON.parse(zencoder_response)
-            job_id = json["output"]["id"]
+            output_id = json["output"]["id"]
             job_state = json["output"]["state"]
 
-            video = Video.find_by_zencoder_job_id(job_id)
+            video = Video.find_by_zencoder_output_id(output_id)
             if job_state == "finished" && video
               video.processed!
             end
@@ -281,7 +281,7 @@
         <li>Since Zencoder will be sending a POST request and won't have the authenticity token we should skip checking it.</li>
         <li>Remove the controller and action parameters from the params hash since they aren't needed, this will leave just the JSON from Zencoder.</li>
         <li>We had to unescape the string prior to parsing it with JSON.</li>
-        <li>After parsing it you should be able to pull the job_id and state.  If the state is finished and a video was found via the job_id then flag it as processed using the method we created on the video model.</li>
+        <li>After parsing it you should be able to pull the output id and state.  If the state is finished and a video was found via the output id then flag it as processed using the method we created on the video model.</li>
       </ol>
       
     </li>
@@ -303,7 +303,7 @@
       <ol>
         <li>Input should be the location of the video that was uploaded</li>
         <li>Outputs should be an array. You can tell Zencoder to encode multiple formats, just label each hash of options appropriately (web, mobile, etc.)</li>
-        <li>After a job is submitted Zencoder will respond with an array of jobs that it has created. We need to loop over the array of jobs from Zencoder and grab the job_id and update the model.</li>
+        <li>After a job is submitted Zencoder will respond with an array of jobs that it has created. We need to loop over the array of jobs from Zencoder and grab the output id and update the model.</li>
         <li>The notifications option is where we'll tell Zencoder to we want to receive the callback. This is the controller we created earlier.<br />
           <span class="note">In order to receive the callback Zencoder must be able to connect to your server, so it needs to be on the open internet</span><br />
           <span class="file_path">/config/application.rb</span>
@@ -359,7 +359,7 @@
 
         zencoder_response.body["outputs"].each do |output|
           if output["label"] == "web"
-            @model.zencoder_job_id = output["id"]
+            @model.zencoder_output_id = output["id"]
             @model.processed = false
             @model.save(:validate => false)
           end
