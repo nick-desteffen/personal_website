@@ -1,0 +1,38 @@
+<p>
+  If you are working on several projects that are all deployed on <a href='http://www.engineyard.com/products/appcloud' target="_blank">EngineYard AppCloud</a> managing deployments can be a bit tricky.  
+  <br /><br />
+  When you first deploy an application using the <a href='https://github.com/engineyard/engineyard' target='_blank'>engineyard gem</a> you authenticate using your email and password.  
+  A file named <span class="file_path">.eyrc</span> containing an API token is then generated in your home directory.  
+  Each deployment the gem reads the environment variable <strong>ENV['EYRC']</strong>, this contains the location of the .eyrc file.
+  EngineYard <a href="http://docs.engineyard.com/deployment-faqs.html" target="_blank">recommends</a> renaming the .eyrc file and using aliases to change update the environment variable with the location of the renamed file for account you are deploying.
+  <br /><br />
+  My solution to this problem was to move the .eyrc right into the source code.  I then wrote a rake task to handle deployments. 
+  Each task in the Rakefile first calls <strong>:set_eyrc</strong> which just updates the environment variable with with the path of the .eyrc file stored in the project.
+  <br /><br />
+  With this approach everybody working on your project can deploy without setting up aliases on their machine (provided their public key is on the server being deployed to).
+  <br /><br />
+  Another thing I did to ease deployments was move our Chef Deploy recipes into the project under the directory <span class="file_path">/ey-cloud-recipes</span>, this way it is versioned and can be updated using the same system for multiple accounts.
+  <br /><br />
+  I've included the Rakefile below.<br /><br />
+  <span class="file_path">/config/.eyrc</span>
+  <pre class="brush: ruby;">
+    --- 
+    api_token: YOUR_API_TOKEN
+  </pre>
+  <br />
+  <script src="https://gist.github.com/1228245.js?file=engineyard.rake"></script>
+</p>
+
+EngineYard AppCloud
+http://www.engineyard.com/products/appcloud
+
+EngineYard CLI User Guide
+http://docs.engineyard.com/ey_cli_user_guide.html
+
+EngineYard Deployment FAQ
+http://docs.engineyard.com/deployment-faqs.html
+
+EngineYard Gem
+https://github.com/engineyard/engineyard
+
+EngineYard, AppCloud, Rake, Chef
