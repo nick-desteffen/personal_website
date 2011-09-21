@@ -15,7 +15,7 @@
         <td><%= format_date(post.published_at) %></td>
         <td><%= format_timestamp(post.created_at) %></td>
         <td><%= format_timestamp(post.updated_at) %></td>
-        <td><%= link_to "View", blog_post_path(post) %> | <%= link_to "Edit", edit_post_path(post) %> | <%= link_to "Destroy", destroy_post_path(post), :method => :delete, :confirm => "Are you sure?" %></td>
+        <td><%= link_to "View", blog_post_path(post) %> | <%= link_to "Edit", edit_post_path(post) %></td>
       </tr>
     <% end %>
   </tbody>

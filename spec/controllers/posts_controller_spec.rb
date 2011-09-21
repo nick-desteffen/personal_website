@@ -122,12 +122,6 @@ describe PostsController do
     end
   end
   
-  describe "destroy" do
-    it "destroys the post and redirects to the admin index" do
-      pending
-    end
-  end
-  
   describe "admin_index" do
     it "has a listing of all blog posts" do
       pending
