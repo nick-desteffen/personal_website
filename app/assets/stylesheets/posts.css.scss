@@ -37,7 +37,19 @@
   }
   p{
     margin: 10px 0 5px 0;
-  }
+  }  
+}
+
+code{
+  background-color: $light_grey;
+  border: 1px solid $grey;
+}
+
+blockquote {
+  border-left: 5px solid $light_grey;
+  color: #000;
+  margin: 0;
+  padding-left: 10px;
 }
 
 .comment_form {
@@ -78,4 +90,25 @@
 .syntaxhighlighter {
   border: 1px solid #D4D0C8;
   padding: 10px;
+}
+
+#markdown_examples {
+  margin: 15px 0;
+  table{
+    border-collapse: collapse;
+    td{
+      border: 1px solid $light_grey;
+      padding: 5px 15px;
+    }
+  }
+}
+
+.body_label{
+  display: inline;
+  float: left;
+}
+
+#markdown_link{
+  float: right;
+  margin-right: 250px;
 }

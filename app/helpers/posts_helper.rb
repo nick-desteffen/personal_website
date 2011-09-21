@@ -16,4 +16,8 @@ module PostsHelper
     end
   end
   
+  def format_comment(comment)
+    MARKDOWN_RENDERER.render(comment).html_safe
+  end
+  
 end

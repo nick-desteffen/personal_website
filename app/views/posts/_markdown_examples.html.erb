@@ -1,0 +1,63 @@
+<script type="text/javascript" charset="utf-8">
+  $(function(){
+    $("#markdown_link").click(function(){
+      $("#markdown_examples").slideToggle();
+    });
+  });
+</script>
+<div id="markdown_examples" style="display: none;">
+  <table border="0" cellspacing="0" cellpadding="0">
+    <tr>
+      <td>
+        [Link](http://www.example.com/)
+      </td>
+      <td>
+        <a href="#">Link</a>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        *Italic*
+      </td>
+      <td>
+        <em>Italic</em>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        **Bold**
+      </td>
+      <td>
+        <strong>Bold</strong>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        * Item1<br />
+        * Item2
+      </td>
+      <td>
+        <ul>
+          <li>Item1</li>
+          <li>Item2</li>
+        </ul>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        > Block quote
+      </td>
+      <td>
+        <blockquote>Block quote</blockquote>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        `Inline code`
+      </td>
+      <td>
+        <code>Inline code</code>
+      </td>
+    </tr>
+  </table>
+</div>

@@ -12,9 +12,12 @@
     <p>
       <%= f.label :url %>
       <%= f.url_field :url %>
-    </p>  
+    </p>
+    <%= render :partial => "posts/markdown_examples" %>
     <p>
-      <%= f.label :body %>
+      <%= f.label :body, :class => "body_label" %>
+      <a href="#" id="markdown_link" onclick="return false;">Format using Markdown</a>
+      <div class="clear"></div>
       <%= f.text_area :body %>
     </p>
     <p>
