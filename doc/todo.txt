@@ -1,8 +1,0 @@
-social links
-  - stackoverflow
-styles for 404, 500, 422
-favicon
-allow certain tags in comments
-  - style them
-delete comments
-projects section
