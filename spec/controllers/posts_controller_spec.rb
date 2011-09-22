@@ -124,7 +124,15 @@ describe PostsController do
   
   describe "admin_index" do
     it "has a listing of all blog posts" do
-      pending
+      published_post = FactoryGirl.create(:post)
+      unpublished_post = FactoryGirl.create(:post, :published_at => nil)
+      user = FactoryGirl.create(:user)
+      login_as user
+      
+      get :admin_index
+      
+      assigns(:posts).size.should == 2
+      assigns(:posts).include?(unpublished_post).should == true
     end
   end
     
