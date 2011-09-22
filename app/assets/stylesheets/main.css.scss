@@ -42,7 +42,9 @@ body{
 
 #title{
   float: left;  
-   
+  .headline{
+    text-decoration: none;
+  }
   h1{
     color: $yellow; 
     margin: 0;
