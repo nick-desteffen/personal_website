@@ -20,4 +20,9 @@ module PostsHelper
     MARKDOWN_RENDERER.render(comment).html_safe
   end
   
+  def flag_spam_link(comment)
+    return unless current_user
+    link_to "Flag Spam", flag_spam_path(comment), :remote => true, :method => :post, :class => "spam_link", :confirm => "Are you sure?"
+  end
+  
 end

@@ -14,7 +14,7 @@ class PostsController < ApplicationController
   
   def show
     @post = Post.find(params[:post_id])
-    @comments = @post.comments
+    @comments = @post.comments.not_spam
     @comment = Comment.new
     @page_title = @post.title
   end
@@ -49,7 +49,7 @@ class PostsController < ApplicationController
   
   def create_comment
     @post = Post.find(params[:post_id])
-    @comments = @post.comments.all
+    @comments = @post.comments.not_spam.all
     @comment = @post.comments.build(params[:comment])
     if @comment.save
       redirect_to blog_post_path(@post), :notice => "Thanks for commenting!"
@@ -57,6 +57,11 @@ class PostsController < ApplicationController
       flash.now.alert = "There was an error with your comment. Please verify all the fields are correct."
       render :action => :show
     end
+  end
+  
+  def flag_spam
+    @comment = Comment.find(params[:comment_id])
+    @comment.spam!
   end
   
 end

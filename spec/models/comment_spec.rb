@@ -31,6 +31,17 @@ describe Comment do
       comment.errors.size.should == 1
       comment.errors[:url].size.should == 1
     end
+    it "requires the robot validation phrase to be correct" do
+      comment = FactoryGirl.build(:comment, :robot => Comment::ROBOT_VALIDATION_PHRASE)
+      
+      comment.valid?.should == true
+    end
+    it "is invalid wiht an incorrect robot validation phrase" do
+      comment = FactoryGirl.build(:comment, :robot => "I am a robot")
+      
+      comment.valid?.should == false
+      comment.errors.size.should == 1
+    end
   end
   
   describe "generate_gravatar_hash" do
@@ -46,4 +57,26 @@ describe Comment do
     end
   end
   
+  describe "spam!" do
+    it "flags a comment as spam" do
+      comment = FactoryGirl.create(:comment)
+      
+      comment.spam!
+      
+      comment.spam?.should == true
+    end
+  end
+  
+  describe "not_spam" do
+    it "only returns comments that haven't been flagged as spam" do
+      spam = FactoryGirl.create(:comment, :spam => true)
+      not_spam = FactoryGirl.create(:comment, :spam => false)
+      
+      comments = Comment.not_spam
+      
+      comments.include?(not_spam).should == true
+      comments.include?(spam).should == false
+    end
+  end
+    
 end

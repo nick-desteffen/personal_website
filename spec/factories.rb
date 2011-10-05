@@ -46,6 +46,8 @@ FactoryGirl.define do
     body "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis dolor tortor, tincidunt non tincidunt a, pellentesque non eros. Aenean condimentum molestie tristique. Sed convallis pulvinar nulla, auctor vestibulum tellus iaculis eu. Mauris consequat laoreet eros eget interdum. Suspendisse potenti."
     url "http://www.paytondog.com"
     gravatar_hash "400741f047e4a0e6d3c5d5b962dba6c5"
+    robot Comment::ROBOT_VALIDATION_PHRASE
+    spam false
     created_at { Time.now }
     updated_at { Time.now }
   end

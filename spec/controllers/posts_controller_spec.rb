@@ -135,5 +135,17 @@ describe PostsController do
       assigns(:posts).include?(unpublished_post).should == true
     end
   end
+  
+  describe "flag_spam" do
+    it "should update a comment's spam flag" do
+      comment = FactoryGirl.create(:comment, :spam => false)
+      
+      post :flag_spam, :comment_id => comment.id, :format => "js"
+      
+      assigns(:comment).should == comment
+      assigns(:comment).spam?.should == true
+      response.should be_success
+    end
+  end
     
 end

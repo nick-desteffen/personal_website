@@ -37,7 +37,13 @@
   }
   p{
     margin: 10px 0 5px 0;
-  }  
+  }
+  
+  a.spam_link{
+    color: $yellow;
+    font-weight: bold;
+    float: right;
+  }
 }
 
 code{
