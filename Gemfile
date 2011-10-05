@@ -8,11 +8,11 @@ gem "whois", "2.1.0"
 gem 'bcrypt-ruby', '3.0.1'
 gem 'redcarpet', '2.0.0b5'
 
-group :assets do
+#group :assets do
   gem 'sass-rails', "3.1.1"
   gem 'coffee-rails', "3.1.1"
   gem 'uglifier', "1.0.3"
-end
+#end
 
 group :development, :test do
   gem "rspec", "2.6.0"
