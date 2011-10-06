@@ -1,6 +1,6 @@
 source :rubygems
 
-gem 'rails', '3.1.1.rc2'
+gem 'rails', '3.1.1.rc3'
 gem "pg", "0.11.0"
 gem 'jquery-rails', "1.0.14"
 gem 'friendly_id', "4.0.0.beta12"
