@@ -7,6 +7,7 @@ gem 'friendly_id', "4.0.0.beta14"
 gem "whois", "2.1.0"
 gem 'bcrypt-ruby', '3.0.1'
 gem 'redcarpet', '2.0.0b5'
+gem 'exception_notification'
 
 group :assets do
   gem 'sass-rails', "3.1.4"
