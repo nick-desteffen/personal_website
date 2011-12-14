@@ -1,8 +1,8 @@
 source :rubygems
 
-gem 'rails', '3.1.1'
+gem 'rails', '3.1.3'
 gem "pg", "0.11.0"
-gem 'jquery-rails', "1.0.16"
+gem 'jquery-rails', "1.0.19"
 gem 'friendly_id', "4.0.0.beta14"
 gem "whois", "2.1.0"
 gem 'bcrypt-ruby', '3.0.1'
@@ -17,9 +17,8 @@ group :assets do
 end
 
 group :development, :test do
-  gem "rspec", "2.7.0"
-  gem "rspec-rails", "2.7.0"
+  gem "rspec-rails", "2.8.0.rc1"
   gem "mocha", "0.10.0"
-  gem "heroku", "2.9.0"
-  gem "factory_girl_rails", "1.3.0"
+  gem "heroku", "2.14.0"
+  gem "factory_girl_rails", "1.4.0"
 end
