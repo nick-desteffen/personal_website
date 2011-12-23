@@ -1,7 +1,6 @@
 require 'spec_helper'
 
 describe ResumeController do
-  render_views
   
   describe "index" do
     it "send the resume file and sends an email" do

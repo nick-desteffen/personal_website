@@ -1,7 +1,6 @@
 require 'spec_helper'
 
 describe SessionsController do
-  render_views
   
   describe "new" do
     it "has a session object" do

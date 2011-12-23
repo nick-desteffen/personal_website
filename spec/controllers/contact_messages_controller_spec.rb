@@ -1,7 +1,6 @@
 require 'spec_helper'
 
 describe ContactMessagesController do
-  render_views
   
   describe "new" do
     it "has a contact_message object" do

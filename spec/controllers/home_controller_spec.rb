@@ -1,7 +1,6 @@
 require 'spec_helper'
 
 describe HomeController do
-  render_views
   
   describe "index" do
     it "renders" do
