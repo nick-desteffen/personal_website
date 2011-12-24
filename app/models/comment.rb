@@ -6,7 +6,7 @@ class Comment < ActiveRecord::Base
   
   belongs_to :post
   
-  attr_accessible :email, :name, :body, :url, :robot
+  attr_accessible :email, :name, :body, :url, :robot, :post_id
   
   attr_accessor :robot
   
