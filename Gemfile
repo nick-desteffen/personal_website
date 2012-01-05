@@ -21,5 +21,6 @@ group :development, :test do
   gem "rspec-rails", "2.8.0.rc2"
   gem "mocha", "0.10.0"
   gem "heroku", "2.17.0"
+  gem "taps", "0.3.23"
   gem "factory_girl_rails", "1.4.0"
 end
