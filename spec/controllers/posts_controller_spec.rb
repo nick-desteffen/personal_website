@@ -138,12 +138,14 @@ describe PostsController do
   
   describe "flag_spam" do
     it "should update a comment's spam flag" do
-      comment = FactoryGirl.create(:comment, :spam => false)
+      user = FactoryGirl.create(:user)
+      login_as user
+      comment = FactoryGirl.create(:comment, :spam_flag => false)
       
       post :flag_spam, :comment_id => comment.id, :format => "js"
       
       assigns(:comment).should == comment
-      assigns(:comment).spam?.should == true
+      assigns(:comment).spam_flag?.should == true
       response.should be_success
     end
   end

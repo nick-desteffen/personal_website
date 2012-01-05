@@ -9,10 +9,7 @@
       <%= f.label :email, "Email <span class='tiny_sub_label'>(Needed for <a href='http://gravatar.com/' target='_blank'>Gravatar</a>, not published)</span>".html_safe %>
       <%= f.text_field :email %>
     </p>
-    <div style="display: none;">
-      <%= f.label :robot %>
-      <%= f.text_field :robot, :value => Comment::ROBOT_VALIDATION_PHRASE %>
-    </div>
+
     <p>
       <%= f.label :url %>
       <%= f.url_field :url %>

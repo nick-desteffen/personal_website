@@ -1,26 +1,33 @@
 class Comment < ActiveRecord::Base
-  
-  ROBOT_VALIDATION_PHRASE = "I am not a robot"
+  include Rakismet::Model
   
   default_scope :order => "created_at ASC"
   
   belongs_to :post
   
-  attr_accessible :email, :name, :body, :url, :robot, :post_id
-  
-  attr_accessor :robot
+  attr_accessible :email, :name, :body, :url, :post_id
   
   before_validation :generate_gravatar_hash
-  
+  after_create :spam_check
+
+  store :request, accessors: [:remote_ip, :user_agent, :referrer]
+
+  rakismet_attrs author: :name, author_email: :email, author_url: :url, content: :body, user_ip: :remote_ip, user_agent: :user_agent, referrer: :referrer
+
   validates_presence_of :body, :name
   validates_format_of :email, :with => EmailAddressValidation::EMAIL_ADDRESS_EXACT_PATTERN, :allow_blank => true
   validates_format_of :url, :with => URI::regexp(%w(http https)), :allow_blank => true, :message => "should be fully qualified."
-  validate :not_robot
   
-  scope :not_spam, where(:spam => false)
+  scope :not_spam, where(:spam_flag => false)
   
-  def spam!
-    update_attribute(:spam, true)
+  def http_request=(http_request)
+    request[:remote_ip] = http_request.remote_ip
+    request[:user_agent] = http_request.env['HTTP_USER_AGENT']
+    request[:referrer] = http_request.env['HTTP_REFERER']
+  end
+
+  def flag_spam!
+    update_attribute(:spam_flag, true)
   end
   
   private
@@ -31,11 +38,9 @@ class Comment < ActiveRecord::Base
       write_attribute(:gravatar_hash, hash)
     end
   end
-  
-  def not_robot
-    if robot != ROBOT_VALIDATION_PHRASE
-      errors.add(:base, "Sorry, no robots allowed")
-    end
+
+  def spam_check
+    flag_spam! if spam?
   end
-  
+    
 end

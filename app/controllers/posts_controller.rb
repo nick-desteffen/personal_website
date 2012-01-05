@@ -1,6 +1,6 @@
 class PostsController < ApplicationController
   
-  before_filter :login_required, :only => [:new, :create, :edit, :update, :admin_index, :destroy]
+  before_filter :login_required, :only => [:new, :create, :edit, :update, :admin_index, :destroy, :flag_spam]
   
   active_tab :blog
   
@@ -51,6 +51,7 @@ class PostsController < ApplicationController
     @post = Post.find(params[:post_id])
     @comments = @post.comments.not_spam.all
     @comment = @post.comments.build(params[:comment])
+    @comment.http_request = request
     if @comment.save
       redirect_to blog_post_path(@post), :notice => "Thanks for commenting!"
     else
@@ -61,7 +62,7 @@ class PostsController < ApplicationController
   
   def flag_spam
     @comment = Comment.find(params[:comment_id])
-    @comment.spam!
+    @comment.flag_spam!
   end
   
 end
