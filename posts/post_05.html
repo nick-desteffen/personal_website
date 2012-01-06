@@ -1,0 +1,67 @@
+<p>
+  I recently switched over to <a href="http://www.sublimetext.com/2" target="_blank">Sublime Text 2</a> for my primary development editor.  I was waiting to see what <a href="http://blog.macromates.com/2011/textmate-2-0-alpha/" target="_blank">TextMate 2</a> would be like, needless to say I didn't see much an improvement.  Sublime Text 2 has got some nifty features like multiple columns, rows, or even grid views.  After a few hours of having 2 files open side by side I was hooked.  Below are the things I had to do to get it customized enough for me to use every day. As I continue to customize and setup Sublime Text 2 I'll be updating this post.
+</p>
+
+<h2>Command line Tool</h2>
+To be able to open a file or folder from the command line from anywhere create a symlink to the <strong>subl</strong> command line tool.
+<div class='terminal'>ln -s "/Applications/Sublime Text 2.app/Contents/SharedSupport/bin/subl" /usr/bin/subl</div>
+
+<h2>RVM</h2>
+Edit Sublime Text's ruby settings file:
+<div class='terminal'>$ subl ~/Library/Application\ Support/Sublime\ Text\ 2/Packages/Ruby/Ruby.sublime-build</div>
+<br />
+It should looks like this:
+<div class='terminal'>
+  { <br />    
+  &nbsp;&nbsp;"cmd": ["ruby", "$file"],<br />
+  &nbsp;&nbsp;"file_regex": "^(...*?):([0-9]*):?([0-9]*)",<br />
+  &nbsp;&nbsp;"selector": "source.ruby"<br />
+  }
+</div>
+<br />
+Change it to this (replacing nickd with your username) in order to use the rvm-auto-ruby binary:
+<div class='terminal'>
+  {<br />
+  &nbsp;&nbsp;"cmd": ["/Users/nickd/.rvm/bin/rvm-auto-ruby", "$file"],<br />
+  &nbsp;&nbsp;"file_regex": "^(...*?):([0-9]*):?([0-9]*)",<br />
+  &nbsp;&nbsp;"selector": "source.ruby"<br />
+  }
+</div>
+
+<h2>Spacing and tabs</h2>
+You can set Sublime Text 2 to use spaces instead of tabs and adjust the indentation, however it seems to only change it for the current file your on, to make it global edit the File settings file.
+<div class='terminal'>$ subl ~/Library/Application\ Support/Sublime\ Text\ 2/Packages/Default/Base\ File.sublime-settings</div>
+There are a lot of settings you can adjust here, but look for the tab_size and translate_tabs_to_spaces and adjust accordingly.
+<div class='terminal'>
+  &nbsp;&nbsp;// The number of spaces a tab is considered equal to<br />
+  &nbsp;&nbsp;"tab_size": 2,<br />
+  <br />
+  &nbsp;&nbsp;// Set to true to insert spaces when tab is pressed<br />
+  &nbsp;&nbsp;"translate_tabs_to_spaces": true,<br />
+</div>
+
+<h2>RSpec &amp; Test::Unit</h2>
+I found this great plugin for running both RSpec and Test::Unit tests from within Sublime Text 2, 
+<a href='https://github.com/maltize/sublime-text-2-ruby-tests' target='_blank'>https://github.com/maltize/sublime-text-2-ruby-tests</a>.  It allows you to run all the tests in an individual file and also supports focused tests, however focused tests don't seem to work for me.  To get this installed:
+<div class='terminal'>$ cd ~/Library/Application\ Support/Sublime\ Text\ 2/Packages/</div>
+<div class='terminal'>$ git clone https://github.com/maltize/sublime-text-2-ruby-tests.git</div>
+
+<h2>CoffeeScript</h2>
+Sublime Text 2 supports TextMate bundles, to get CoffeeScript syntax highlighting just install the bundle.
+<div class='terminal'>$ cd ~/Library/Application\ Support/Sublime\ Text\ 2/Packages/</div>
+<div class='terminal'>$ git clone https://github.com/jashkenas/coffee-script-tmbundle.git</div>
+
+<h2>Haml &amp; Sass</h2>
+To get Haml &amp; Sass support clone <a href='https://github.com/n00ge/sublime-text-haml-sass' target='_blank'>this repository</a> and copy the Ruby Haml and SASS folders into the Packages folder.
+<div class='terminal'>$ git clone https://github.com/n00ge/sublime-text-haml-sass.git</div>
+<div class='terminal'>$ open ~/Library/Application\ Support/Sublime\ Text\ 2/Packages/</div>
+
+
+Sublime Text 2
+http://www.sublimetext.com/2
+
+Text Mate 2
+http://blog.macromates.com/2011/textmate-2-0-alpha/
+
+Sublime Text 2 Ruby Tests
+https://github.com/maltize/sublime-text-2-ruby-tests
