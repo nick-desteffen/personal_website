@@ -8,7 +8,6 @@ class Comment < ActiveRecord::Base
   attr_accessible :email, :name, :body, :url, :post_id
   
   before_validation :generate_gravatar_hash
-  after_create :spam_check
 
   store :request, accessors: [:remote_ip, :user_agent, :referrer]
 
@@ -17,6 +16,7 @@ class Comment < ActiveRecord::Base
   validates_presence_of :body, :name
   validates_format_of :email, :with => EmailAddressValidation::EMAIL_ADDRESS_EXACT_PATTERN, :allow_blank => true
   validates_format_of :url, :with => URI::regexp(%w(http https)), :allow_blank => true, :message => "should be fully qualified."
+  validate :spam_check
   
   scope :not_spam, where(:spam_flag => false)
   
@@ -40,7 +40,9 @@ class Comment < ActiveRecord::Base
   end
 
   def spam_check
-    flag_spam! if spam?
+    if spam?
+      errors.add(:base, "Sorry, but this comment appears to be spam. If it is not spam please use the contact form.")
+    end
   end
     
 end
