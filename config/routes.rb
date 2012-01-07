@@ -23,6 +23,10 @@ PersonalWebsite::Application.routes.draw do
   post "blog/:post_id/comments/create" => "posts#create_comment", :as => "create_comment"
   post "comments/:comment_id/spam" => "posts#flag_spam", :as => "flag_spam"
   
+  ## Comments
+  get "blog/:post_id/comments/:comment_id/edit" => "comments#edit", :as => "edit_comment"
+  put "blog/:post_id/comments/:comment_id/edit" => "comments#update", :as => "update_comment"
+
   ## Home
   get "/about" => "home#about", :as => "about"
   get "/home" => "home#index", :as => "home"
