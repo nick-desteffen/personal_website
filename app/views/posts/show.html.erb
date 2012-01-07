@@ -21,7 +21,9 @@
   <% else %>
     <p>There are no comments.  Be the first to post!</p>
   <% end %>
-  <%= render :partial => "posts/comment_form", :locals => {:post => @post} %>
+  <%= form_for @comment, :url => create_comment_path(@post) do |f| %>
+    <%= render partial: "comments/form", locals: {:f => f} %>
+  <% end %>
 </div>
 
 <% content_for :sidebar do %>

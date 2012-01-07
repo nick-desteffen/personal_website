@@ -1,28 +1,5 @@
 <div class="comment_form">
   <%= form_for @comment, :url => update_comment_path(@post, @comment) do |f| %>
-    <%= error_messages_for(@comment) %>
-    <p>
-      <%= f.label :name %>
-      <%= f.text_field :name %>
-    </p>
-    <p>
-      <%= f.label :email, "Email <span class='tiny_sub_label'>(Needed for <a href='http://gravatar.com/' target='_blank'>Gravatar</a>, not published)</span>".html_safe %>
-      <%= f.text_field :email %>
-    </p>
-
-    <p>
-      <%= f.label :url %>
-      <%= f.url_field :url %>
-    </p>
-    <%= render :partial => "posts/markdown_examples" %>
-    <p>
-      <%= f.label :body, :class => "body_label" %>
-      <a href="#" id="markdown_link" onclick="return false;">Format using Markdown</a>
-      <div class="clear"></div>
-      <%= f.text_area :body %>
-    </p>
-    <p>
-      <%= button("Post Comment") %>
-    </p>
+    <%= render partial: "comments/form", locals: {f: f} %>
   <% end %>
 </div>

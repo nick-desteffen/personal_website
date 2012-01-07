@@ -10,13 +10,6 @@ describe ContactMessage do
       contact_message.errors.size.should == 2
       contact_message.errors[:email].size.should == 2
     end
-    it "requires a phone number" do
-      contact_message = FactoryGirl.build(:contact_message, :phone_number => nil)
-      
-      contact_message.valid?.should == false
-      contact_message.errors.size.should == 2
-      contact_message.errors[:phone_number].size.should == 2
-    end
     it "requires a phone number between 9 & 10 digits" do
       contact_message = FactoryGirl.build(:contact_message, :phone_number => "123")
       

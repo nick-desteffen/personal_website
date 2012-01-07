@@ -26,3 +26,9 @@ function add_fields(link, association, content) {
   var regexp = new RegExp("new_" + association, "g")
   $(link).parent().before(content.replace(regexp, new_id));
 }
+
+$(function(){
+  $("#markdown_link").click(function(){
+    $("#markdown_examples").slideToggle();
+  });
+});

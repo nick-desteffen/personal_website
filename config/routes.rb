@@ -20,10 +20,10 @@ PersonalWebsite::Application.routes.draw do
   get "blog/:post_id/edit" => "posts#edit", :as => "edit_post"
   put "blog/:post_id/edit" => "posts#update", :as => "update_post"
   get "blog/:post_id" => "posts#show", :as => "blog_post"
-  post "blog/:post_id/comments/create" => "posts#create_comment", :as => "create_comment"
-  post "comments/:comment_id/spam" => "posts#flag_spam", :as => "flag_spam"
   
   ## Comments
+  post "blog/:post_id/comments/create" => "comments#create", :as => "create_comment"
+  post "comments/:comment_id/spam" => "comments#flag_spam", :as => "flag_spam"
   get "blog/:post_id/comments/:comment_id/edit" => "comments#edit", :as => "edit_comment"
   put "blog/:post_id/comments/:comment_id/edit" => "comments#update", :as => "update_comment"
 

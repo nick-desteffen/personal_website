@@ -34,20 +34,21 @@ describe PostsHelper do
     end
   end
   
-  describe "flag_spam_link" do
+  describe "admin_comment_links" do
     it "returns noting unless there is a current_user" do
       helper.stubs(:current_user).returns(nil)
       comment = FactoryGirl.create(:comment)
       
-      helper.flag_spam_link(comment).should == nil
+      helper.admin_comment_links(comment).should == nil
     end
-    it "returns a link to flag the content as spam" do
+    it "returns a link to flag the content as spam and edit the comment" do
       user = FactoryGirl.create(:user)
       helper.stubs(:current_user).returns(user)
       
       comment = FactoryGirl.create(:comment)
       
-      helper.flag_spam_link(comment).should =~ /Flag Spam/
+      helper.admin_comment_links(comment).should =~ /Flag Spam/
+      helper.admin_comment_links(comment).should =~ /Edit/
     end
   end
   
