@@ -8,12 +8,12 @@ class Notifier < ActionMailer::Base
   def resume_download(whois, ip)
     @whois = whois
     @ip = ip
-    mail(:subject => "Resume downloaded!")
+    mail(subject: "Resume download")
   end
   
   def new_contact_message(contact_message)
     @contact_message = contact_message
-    mail(:subject => "New Contact Message!")
+    mail(subject: contact_message.subject)
   end
   
 end
