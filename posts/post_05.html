@@ -1,3 +1,4 @@
+<h4>Updated &ndash; 01/12/2012</h4>
 <p>
   I recently switched over to <a href="http://www.sublimetext.com/2" target="_blank">Sublime Text 2</a> for my primary development editor.  I was waiting to see what <a href="http://blog.macromates.com/2011/textmate-2-0-alpha/" target="_blank">TextMate 2</a> would be like, needless to say I didn't see much an improvement.  Sublime Text 2 has got some nifty features like multiple columns, rows, or even grid views.  After a few hours of having 2 files open side by side I was hooked.  Below are the things I had to do to get it customized enough for me to use every day. As I continue to customize and setup Sublime Text 2 I'll be updating this post.
 </p>
@@ -29,15 +30,20 @@ Change it to this (replacing nickd with your username) in order to use the rvm-a
 </div>
 
 <h2>Spacing and tabs</h2>
-You can set Sublime Text 2 to use spaces instead of tabs and adjust the indentation, however it seems to only change it for the current file your on, to make it global edit the File settings file.
-<div class='terminal'>$ subl ~/Library/Application\ Support/Sublime\ Text\ 2/Packages/Default/Base\ File.sublime-settings</div>
-There are a lot of settings you can adjust here, but look for the tab_size and translate_tabs_to_spaces and adjust accordingly.
+You can set Sublime Text 2 to use spaces instead of tabs and adjust the indentation, however it seems to only change it for the current file your on, to make it global edit the User Base File settings file. 
+<em><u>Update</u></em> &ndash; As Kevin Yank &amp; Dimitar Dimitrov point out in the comments, it is best to put any custom user settings in the User packages. This way updates won't overwrite them.
+<div class='terminal'>$ subl ~/Library/Application\ Support/Sublime\ Text\ 2/Packages/User/Base\ File.sublime-settings</div>
+Add the following settings to the hash of options.  You can take a peek at all the other package settings and put any customizations you want to retain here.
 <div class='terminal'>
   &nbsp;&nbsp;// The number of spaces a tab is considered equal to<br />
   &nbsp;&nbsp;"tab_size": 2,<br />
   <br />
   &nbsp;&nbsp;// Set to true to insert spaces when tab is pressed<br />
   &nbsp;&nbsp;"translate_tabs_to_spaces": true,<br />
+</div>
+To open all packages to see what's in them:
+<div class='terminal'>
+  $ subl ~/Library/Application\ Support/Sublime\ Text\ 2/Packages/
 </div>
 
 <h2>RSpec &amp; Test::Unit</h2>
@@ -46,16 +52,19 @@ I found this great plugin for running both RSpec and Test::Unit tests from withi
 <div class='terminal'>$ cd ~/Library/Application\ Support/Sublime\ Text\ 2/Packages/</div>
 <div class='terminal'>$ git clone https://github.com/maltize/sublime-text-2-ruby-tests.git</div>
 
+<h2>Sublime Package Control</h2>
+<em><u>Update</u></em> &ndash;
+I'd like to thank Dimitar Dimitrov &amp; Pablo Barrios for pointing out <a href='http://wbond.net/' target='_blank'>Will Bond's</a> Package Control.
+<a href='http://wbond.net/sublime_packages/package_control' target='_blank'>Sublime Package Control</a> is a great additon to Sublime's ecosystem. There are ton of useful packages and themes that you can add just by selecting them. Just follow the simple <a href='http://wbond.net/sublime_packages/package_control/installation' target='blank'>installation instructions</a> and you'll be good to go.<br />
+Press <b>cmd + shift + p</b> and type "Package Control" to find all the options for this add on.  You can also get to it under the <b>Preferences Menu</b>.
+
 <h2>CoffeeScript</h2>
-Sublime Text 2 supports TextMate bundles, to get CoffeeScript syntax highlighting just install the bundle.
-<div class='terminal'>$ cd ~/Library/Application\ Support/Sublime\ Text\ 2/Packages/</div>
-<div class='terminal'>$ git clone https://github.com/jashkenas/coffee-script-tmbundle.git</div>
+Sublime Text 2 supports TextMate bundles, to get CoffeeScript syntax highlighting just install the bundle through the package control.
 
 <h2>Haml &amp; Sass</h2>
 To get Haml &amp; Sass support clone <a href='https://github.com/n00ge/sublime-text-haml-sass' target='_blank'>this repository</a> and copy the Ruby Haml and SASS folders into the Packages folder.
 <div class='terminal'>$ git clone https://github.com/n00ge/sublime-text-haml-sass.git</div>
 <div class='terminal'>$ open ~/Library/Application\ Support/Sublime\ Text\ 2/Packages/</div>
-
 
 Sublime Text 2
 http://www.sublimetext.com/2
@@ -65,3 +74,6 @@ http://blog.macromates.com/2011/textmate-2-0-alpha/
 
 Sublime Text 2 Ruby Tests
 https://github.com/maltize/sublime-text-2-ruby-tests
+
+Sublime Package Control
+http://wbond.net/sublime_packages/package_control
