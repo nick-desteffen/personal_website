@@ -13,14 +13,14 @@ gem 'rakismet', '1.1.2'
 
 group :assets do
   gem 'sass-rails', "3.2.3"
-  gem 'coffee-rails', "3.2.0"
+  gem 'coffee-rails', "3.2.1"
   gem 'uglifier', "1.2.1"
 end
 
 group :development, :test do
-  gem "rspec-rails", "2.8.0.rc2"
+  gem "rspec-rails", "2.8.1"
   gem "mocha", "0.10.0"
-  gem "heroku", "2.17.0"
+  gem "heroku", "2.18.1"
   gem "taps", "0.3.23"
-  gem "factory_girl_rails", "1.4.0"
+  gem "factory_girl_rails", "1.5.0"
 end

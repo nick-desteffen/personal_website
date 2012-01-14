@@ -31,6 +31,13 @@ describe Comment do
       comment.errors.size.should == 1
       comment.errors[:url].size.should == 1
     end
+    it "should be invalid if it is flagged as spam" do
+      comment = FactoryGirl.build(:comment, :url => "google.com")
+      comment.stubs(:spam?).returns(true)
+
+      comment.valid?.should == false
+      comment.errors[:base].include?("Sorry, but this comment appears to be spam. If it is not spam please use the contact form.").should == true
+    end
   end
   
   describe "generate_gravatar_hash" do

@@ -18,7 +18,7 @@ class Comment < ActiveRecord::Base
   validates_format_of :url, :with => URI::regexp(%w(http https)), :allow_blank => true, :message => "should be fully qualified."
   validate :spam_check
   
-  scope :not_spam, where(:spam_flag => false)
+  scope :not_spam, where(spam_flag: false)
   
   def http_request=(http_request)
     request[:remote_ip] = http_request.remote_ip
