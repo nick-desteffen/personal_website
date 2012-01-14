@@ -7,7 +7,7 @@ class SessionsController < ApplicationController
   def create
     @session = Session.new(params[:session])
     if @session.valid? && @session.authenticated?
-      session[:user_id] = @session.user.id
+      login(@session.user)
       redirect_to root_path, :notice => "Logged in!"
     else
       flash.now.alert = "Invalid email or password"
@@ -16,7 +16,7 @@ class SessionsController < ApplicationController
   end
 
   def destroy
-    session[:user_id] = nil
+    logout
     redirect_to root_path, :notice => "Logged out!"
   end
   

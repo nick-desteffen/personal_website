@@ -50,7 +50,7 @@ describe CommentsController do
 
       assigns(:comment).should == comment
     end
-    it "requires a user be loged in" do
+    it "requires a user be logged in" do
       comment = FactoryGirl.create(:comment)
 
       get :edit, post_id: comment.post_id, comment_id: comment.id
