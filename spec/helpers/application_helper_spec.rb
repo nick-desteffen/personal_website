@@ -12,12 +12,19 @@ describe ApplicationHelper do
   end
   
   describe "error_messages_for" do
-    it "renders the error messages partial with the object" do
+    it "builds out error messages with the object" do
       contact_message = FactoryGirl.build(:contact_message, :name => nil)
-      
+      contact_message.valid?
+
       error_messages = helper.error_messages_for(contact_message)
       
       error_messages.should_not be_nil
+    end
+  end
+
+  describe "flash_messages" do
+    it "builds out flash messages" do
+      pending
     end
   end
   

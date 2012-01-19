@@ -1,9 +1,28 @@
 module ApplicationHelper
   
   def error_messages_for(object)
-    render :partial => "shared/error_messages", :object => object
+    return if object.nil? || object.errors.empty?
+    errors = object.errors
+    header_message = pluralize(errors.size, "error") + (errors.size > 1 ? " require" : " requires") + " your attention"
+    content_tag(:div, :class => "form_errors") do
+      concat(content_tag(:h2, header_message))
+      concat(content_tag(:ul) do
+        errors.each do |message|
+          concat(content_tag(:li, message))
+        end
+      end)
+    end
   end
-    
+
+  def flash_messages
+    return if flash.empty?
+    html = ""
+    flash.each do |key, value|
+      html += content_tag(:div, content_tag(:p, (content_tag(:span, value) + link_to(image_tag("icons/black/24x24/error.png"), "#", class: "close").html_safe), class: key), class:  "flash-messages #{key}")
+    end
+    return html.html_safe
+  end
+
   def format_timestamp(timestamp)
     return if timestamp.blank?
     timestamp.strftime("%m/%d/%Y %I:%M%p").downcase

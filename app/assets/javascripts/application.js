@@ -28,7 +28,14 @@ function add_fields(link, association, content) {
 }
 
 $(function(){
+  
   $("#markdown_link").click(function(){
     $("#markdown_examples").slideToggle();
   });
+
+  $("a.close").click(function(){
+    $(this).parents('.flash-messages').fadeOut(); 
+    return false;
+  });
+
 });
