@@ -23,8 +23,26 @@ describe ApplicationHelper do
   end
 
   describe "flash_messages" do
-    it "builds out flash messages" do
-      pending
+    it "returns nothing if there is no flash" do
+      helper.stubs(:flash).returns({})
+
+      helper.flash_messages.should == nil
+    end
+    it "builds out error flash messages with a close button and error class" do
+      flash_messages = {error: "Something went wrong"}
+      helper.stubs(:flash).returns(flash_messages)
+
+      helper.flash_messages.should =~ /error/
+      helper.flash_messages.should =~ /Something went wrong/
+      helper.flash_messages.should =~ /24x24\/error.png/
+    end
+    it "builds out error flash messages with a close button and error class" do
+      flash_messages = {notice: "Something went right"}
+      helper.stubs(:flash).returns(flash_messages)
+
+      helper.flash_messages.should =~ /notice/
+      helper.flash_messages.should =~ /Something went right/
+      helper.flash_messages.should =~ /24x24\/error.png/
     end
   end
   
