@@ -33,6 +33,10 @@ class CommentsController < ApplicationController
     @comment.flag_spam!
   end
 
+  def preview
+    @comment = Comment.preview(params[:comment])
+  end
+
   private
 
   def find_post

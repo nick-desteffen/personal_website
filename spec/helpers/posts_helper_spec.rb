@@ -41,7 +41,11 @@ describe PostsHelper do
       
       helper.admin_comment_links(comment).should == nil
     end
-    it "returns a link to flag the content as spam and edit the comment" do
+    it "returns nothing if the comment hasn't been saved" do
+      helper.stubs(:current_user).returns(nil)
+      helper.admin_comment_links(Comment.new).should == nil
+    end
+    it "returns a link to flag the comment as spam and edit the comment" do
       user = FactoryGirl.create(:user)
       helper.stubs(:current_user).returns(user)
       
@@ -49,6 +53,15 @@ describe PostsHelper do
       
       helper.admin_comment_links(comment).should =~ /Flag Spam/
       helper.admin_comment_links(comment).should =~ /Edit/
+    end
+  end
+
+  describe "format_comment" do
+    it "returns an empty string if the string passed in is nil" do
+      helper.format_comment(nil).should == ""
+    end
+    it "formats markdown" do
+      helper.format_comment("**Bold**").should == "<p><strong>Bold</strong></p>\n"
     end
   end
   

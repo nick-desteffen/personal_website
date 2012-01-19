@@ -73,4 +73,14 @@ describe CommentsController do
     end
   end
 
+  describe "preview" do
+    it "builds a comment to preview" do
+      post :preview, comment: {}, format: "js"
+
+      assigns(:comment).should_not be_nil
+      assigns(:comment).new_record?.should == true
+      response.should be_success
+    end
+  end
+
 end

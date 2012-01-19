@@ -17,13 +17,15 @@ module PostsHelper
   end
   
   def format_comment(comment)
+    return "" if comment.blank?
     MARKDOWN_RENDERER.render(comment).html_safe
   end
   
   def admin_comment_links(comment)
     return unless current_user
-    links = link_to "Flag Spam", flag_spam_path(comment), :remote => true, :method => :post, :class => "spam_link", :confirm => "Are you sure?"
-    links += link_to "Edit", edit_comment_path(comment.post, comment), :class => "spam_link"
+    return if comment.new_record?
+    links = link_to "Flag Spam", flag_spam_path(comment), :remote => true, :method => :post, :class => "admin_link", :confirm => "Are you sure?"
+    links += link_to "Edit", edit_comment_path(comment.post, comment), :class => "admin_link"
     links
   end
   

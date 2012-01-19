@@ -22,7 +22,7 @@ module ApplicationHelper
   
   def button(text, options={})
     type = options[:type] || :submit
-    content_tag(:button, text, :class => "button", :type => type)
+    content_tag(:button, text, :class => "button", :type => type, :id => options[:id])
   end
   
   def page_title

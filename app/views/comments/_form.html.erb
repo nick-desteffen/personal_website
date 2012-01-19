@@ -21,6 +21,8 @@
     <%= f.text_area :body %>
   </p>
   <p>
-    <%= button("Comment!") %>
+    <%= button("Comment") %>
+    <%= button("Preview", id: "preview-button") %>
   </p>
 </div>
+<div id="preview-container" style="display: none;"></div>

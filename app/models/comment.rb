@@ -29,6 +29,13 @@ class Comment < ActiveRecord::Base
   def flag_spam!
     update_attribute(:spam_flag, true)
   end
+
+  def self.preview(params)
+    comment = Comment.new(params)
+    comment.created_at = Time.now
+    comment.valid?
+    comment
+  end
   
   private
   

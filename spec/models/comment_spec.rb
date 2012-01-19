@@ -74,5 +74,17 @@ describe Comment do
       comments.include?(spam).should == false
     end
   end
+
+  describe "preview" do
+    it "builds a new comment record, sets the created_at and runs validations" do
+      params = {body: "**Message**", name: "Nick", email: "nick.desteffen@gmail.com"}
+
+      comment = Comment.preview(params)
+
+      comment.created_at.should_not be_nil
+      comment.gravatar_hash.should_not be_nil
+      comment.new_record?.should == true
+    end
+  end
     
 end
