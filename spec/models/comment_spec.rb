@@ -56,6 +56,7 @@ describe Comment do
   describe "flag_spam!" do
     it "flags a comment as spam" do
       comment = FactoryGirl.create(:comment)
+      comment.expects(:spam!).once
       
       comment.flag_spam!
       

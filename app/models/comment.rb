@@ -28,6 +28,7 @@ class Comment < ActiveRecord::Base
 
   def flag_spam!
     update_attribute(:spam_flag, true)
+    spam!
   end
 
   def self.preview(params)
