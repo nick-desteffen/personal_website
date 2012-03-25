@@ -1,0 +1,28 @@
+<div>
+  From time to time I see people write code and at the end of the line there will be: <em><strong>rescue nil</strong></em>. This is not good because it will rescue from <strong>any</strong> exception.
+  <br /><br />
+
+  I see people rescuing nil because they have a variable and they aren't sure if it is nil so they want to protect against 
+  running a method on it which would cause an error.
+  <br />
+  The two most common rescue nil scenarios I see people protect against are:
+  <ul>
+    <li>a parameter not being present</li>
+    <li>some method being called on a variable that may represent an object or may be nil</li>
+  </ul>
+
+  <p>
+    Below is an example of rescue nil that I see often.
+    The rescue nil on line 13 is there to protect against a category not being present.  
+    This rescue will also handle an exception due to the caching system not being available.  
+    If you have any notification systems in place such as <a href="http://www.airbrakeapp.com" target="_blank">Airbrake</a> or <a href="https://github.com/smartinez87/exception_notification" target="_blank">exception_notification</a> you aren't going to hear about your caching system system being down. 
+    If there is some other error in the <em>ask_question</em> method you also are not going to hear about it because rescue nil will eat everything up.
+  </p>
+  <script src="https://gist.github.com/2197335.js?file=rescue_nil_bad.rb"></script>
+  <p>
+    A better solution is to just check and see if the category is actually present before running a method on it.
+  </p>
+  <script src="https://gist.github.com/2197440.js?file=rescue_nil_bad_fixed.rb"></script>
+
+  <p>Thanks for reading, Let me know your thoughts.</p>
+</div>
