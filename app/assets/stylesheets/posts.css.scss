@@ -119,3 +119,26 @@ blockquote {
   float: right;
   font-size: 13px;
 }
+
+
+// Adds line numbers to gists
+.gist-highlight {
+  border-left: 3ex solid #eee;
+  position: relative;
+  
+  pre {
+    counter-reset: linenumbers;
+  
+    div:before {
+      color: #aaa;
+      content: counter(linenumbers);
+      counter-increment: linenumbers;
+      left: -3ex;
+      position: absolute;
+      text-align: right;
+      width: 2.5ex;
+    }
+  }
+}
+
+
