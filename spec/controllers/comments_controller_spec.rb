@@ -32,7 +32,7 @@ describe CommentsController do
       login_as user
       comment = FactoryGirl.create(:comment, :spam_flag => false)
       
-      post :flag_spam, :comment_id => comment.id, :format => "js"
+      xhr :post, :flag_spam, :comment_id => comment.id
       
       assigns(:comment).should == comment
       assigns(:comment).spam_flag?.should == true
@@ -80,6 +80,20 @@ describe CommentsController do
       assigns(:comment).should_not be_nil
       assigns(:comment).new_record?.should == true
       response.should be_success
+    end
+  end
+
+  describe "destroy" do
+    it "should remove the post" do
+      user = FactoryGirl.create(:user)
+      login_as user
+      post = FactoryGirl.create(:post)
+      comment = FactoryGirl.create(:comment, post: post)
+
+      xhr :delete, :destroy, post_id: post.id, comment_id: comment.id
+
+      response.should be_success
+      post.comments.size.should == 0
     end
   end
 

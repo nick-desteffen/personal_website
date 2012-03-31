@@ -45,7 +45,7 @@ describe PostsHelper do
       helper.stubs(:current_user).returns(nil)
       helper.admin_comment_links(Comment.new).should == nil
     end
-    it "returns a link to flag the comment as spam and edit the comment" do
+    it "returns a link to flag the comment as spam, edit the comment, and destroy the comment" do
       user = FactoryGirl.create(:user)
       helper.stubs(:current_user).returns(user)
       
@@ -53,6 +53,7 @@ describe PostsHelper do
       
       helper.admin_comment_links(comment).should =~ /Flag Spam/
       helper.admin_comment_links(comment).should =~ /Edit/
+      helper.admin_comment_links(comment).should =~ /Destroy/
     end
   end
 

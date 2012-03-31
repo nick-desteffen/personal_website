@@ -1,7 +1,7 @@
 class CommentsController < ApplicationController
 
-  before_filter :login_required, only: [:edit, :update, :flag_spam]
-  before_filter :find_post, only: [:edit, :update]
+  before_filter :login_required, only: [:edit, :update, :flag_spam, :destroy]
+  before_filter :find_post, only: [:edit, :update, :destroy]
   
   active_tab :blog
 
@@ -35,6 +35,11 @@ class CommentsController < ApplicationController
 
   def preview
     @comment = Comment.preview(params[:comment])
+  end
+
+  def destroy
+    @comment = Comment.find(params[:comment_id])
+    @comment.destroy
   end
 
   private
