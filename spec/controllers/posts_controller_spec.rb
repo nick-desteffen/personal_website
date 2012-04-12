@@ -44,8 +44,10 @@ describe PostsController do
   describe "create" do
     it "creates a new post" do
       login_as FactoryGirl.create(:user)
-      
-      post :create, :post => FactoryGirl.create(:post).attributes
+
+       expect{
+         post :create, :post => FactoryGirl.attributes_for(:post)
+       }.to change(Post, :count).by(1)
       
       flash.notice.should_not be_nil
       response.should redirect_to blog_post_path(assigns(:post))
@@ -55,7 +57,9 @@ describe PostsController do
       
       Post.any_instance.stubs(:save).returns(false)
       
-      post :create, :post => {}
+      expect{
+        post :create, :post => {}
+      }.to_not change(Post, :count)
       
       flash.now[:alert].should_not be_nil
       response.should render_template(:new)
