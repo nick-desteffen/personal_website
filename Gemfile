@@ -3,12 +3,12 @@ source :rubygems
 gem 'rails', '3.2.3'
 gem "pg", "0.13.2"
 gem 'jquery-rails', "2.0.2"
-gem 'friendly_id', "4.0.4"
+gem 'friendly_id', "4.0.5"
 gem 'bcrypt-ruby', '3.0.1'
 gem 'redcarpet', '2.1.1'
-gem 'exception_notification', '2.5.2'
+gem 'exception_notification', '2.6.1'
 gem 'thin', '1.3.1'
-gem 'rakismet', '1.1.2'
+gem 'rakismet', '1.2.1'
 
 group :assets do
   gem 'sass-rails', "3.2.5"
@@ -17,10 +17,10 @@ group :assets do
 end
 
 group :development, :test do
-  gem "rspec-rails", "2.9.0"
-  gem "mocha", "0.10.5"
+  gem "rspec-rails", "2.10.1"
+  gem "mocha", "0.11.4"
   gem "heroku"
   gem "taps"
-  gem "factory_girl_rails", "3.1.0"
+  gem "factory_girl_rails", "3.2.0"
   gem "debugger"
 end
