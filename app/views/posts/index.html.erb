@@ -2,7 +2,7 @@
   <div class="blog_post">
     <h1><%= post.title %></h1>
     <time><%= format_date(post.published_at) %></time>
-    <p><%= truncate(strip_tags(post.body), :length => 300, :omission => '...') %></p>
+    <p><%= teaser(post) %></p>
     <p><%= link_to "Read more", blog_post_path(post) %><span class="comment_count"><%= pluralize(post.comments.not_spam.size, "comment") %></span></p>
   </div>
 <% end %>

@@ -65,5 +65,11 @@ describe PostsHelper do
       helper.format_comment("**Bold**").should == "<p><strong>Bold</strong></p>\n"
     end
   end
+
+  describe "teaser" do
+    it "should description" do
+      pending
+    end
+  end
   
 end

@@ -29,5 +29,9 @@ module PostsHelper
     links += link_to "Destroy", destroy_comment_path(comment.post, comment), class: "admin_link", remote: true, method: :delete, confirm: "Are you sure?"
     links
   end
+
+  def teaser(post)
+    truncate(strip_tags(post.body).gsub("&ndash;", " - "), length: 300, omission: '...')
+  end
   
 end
