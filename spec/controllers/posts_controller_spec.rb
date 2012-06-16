@@ -1,7 +1,6 @@
 require 'spec_helper'
 
 describe PostsController do
-  render_views
     
   describe "index" do
     it "has only published posts" do
