@@ -21,6 +21,7 @@ group :development, :test do
   gem "mocha", "0.11.4"
   gem "heroku"
   gem "taps"
+  gem "sqlite3"
   gem "factory_girl_rails", "3.3.0"
   gem "debugger"
 end
