@@ -6,7 +6,7 @@
   </p>
   <p>
     <%= f.label :published_at %>
-    <%= f.date_select :published_at, :include_blank => true %>
+    <%= f.date_select :published_at, include_blank: true, start_year: 2011, end_year: Time.now.year + 1 %>
   </p>
   <p>
     <%= f.label :body %>
