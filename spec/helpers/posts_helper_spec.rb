@@ -67,8 +67,15 @@ describe PostsHelper do
   end
 
   describe "teaser" do
-    it "should description" do
-      pending
+    it "should strip all the html tags" do
+      post = Post.new(body: "<h1>Title</h1> <p>The quick brown fox jumped over the lazy dog</p>")
+
+      helper.teaser(post).should == "Title The quick brown fox jumped over the lazy dog"
+    end
+    it "should replace &ndash; with - " do
+      post = Post.new(body: "<h1>Title</h1> <p>The quick brown fox jumped over the lazy dog</p> <h2>Second Title &ndash; Welcome!</h2>")
+      
+      helper.teaser(post).should == "Title The quick brown fox jumped over the lazy dog Second Title  -  Welcome!"
     end
   end
   
