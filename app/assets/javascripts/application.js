@@ -5,8 +5,6 @@
 // the compiled file.
 //
 //= require jquery
-//= require jquery-ui
-//= require jquery_ujs
 //= require syntaxhighlighter_3.0.83/scripts/shCore
 //= require syntaxhighlighter_3.0.83/scripts/shBrushRuby
 //= require syntaxhighlighter_3.0.83/scripts/shBrushJScript
@@ -28,7 +26,6 @@ function add_fields(link, association, content) {
 }
 
 $(function(){
-  
   $("#markdown_link").click(function(){
     $("#markdown_examples").slideToggle();
   });
@@ -38,4 +35,8 @@ $(function(){
     return false;
   });
 
+  $("body").on("click", "a[data-destroy='true']", function(link){
+    remove_fields(link.currentTarget);
+    return false;
+  });
 });

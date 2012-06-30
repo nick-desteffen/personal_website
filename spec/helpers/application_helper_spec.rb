@@ -90,34 +90,6 @@ describe ApplicationHelper do
       helper.page_title.should == "Nick DeSteffen"
     end
   end
-    
-  describe "link_to_remove_fields" do
-    it "returns a hidden field with the _destroy paramter and a link that calls the remove_fields function" do
-      post = FactoryGirl.create(:post)
-      tag = FactoryGirl.create(:tag, :post => post)
-      link = ""
-      form_for(post, :url => update_post_path(post)) do |form|
-        form.fields_for :tags do |tag_fields|
-          link = helper.link_to_remove_fields("remove", tag_fields)
-        end
-      end
       
-      link.should == "<input id=\"post_tags_attributes_0__destroy\" name=\"post[tags_attributes][0][_destroy]\" type=\"hidden\" value=\"false\" /><a href=\"#\" onclick=\"remove_fields(this); return false;\">remove</a><input id=\"post_tags_attributes_0_id\" name=\"post[tags_attributes][0][id]\" type=\"hidden\" value=\"#{tag.id}\" />"
-    end
-  end
-  
-  describe "link_to_add_fields" do
-    it "returns a link that inserts a form fields for an association object" do
-      post = FactoryGirl.create(:post)
-      tag = FactoryGirl.create(:tag, :post => post)
-      link = ""
-      form_for(post, :url => update_post_path(post)) do |form|
-        link = helper.link_to_add_fields("Add tag", form, :tags)
-      end
-      
-      link.should == "<a href=\"#\" onclick=\"add_fields(this, &quot;tags&quot;, &quot;&lt;div class=\\&quot;fields\\&quot;&gt;\\n  &lt;label for=\\&quot;post_tags_attributes_new_tags_name\\&quot;&gt;Name&lt;\\/label&gt;\\n  &lt;input id=\\&quot;post_tags_attributes_new_tags_name\\&quot; name=\\&quot;post[tags_attributes][new_tags][name]\\&quot; size=\\&quot;30\\&quot; type=\\&quot;text\\&quot; /&gt;\\n  &lt;br /&gt;\\n  &lt;input id=\\&quot;post_tags_attributes_new_tags__destroy\\&quot; name=\\&quot;post[tags_attributes][new_tags][_destroy]\\&quot; type=\\&quot;hidden\\&quot; value=\\&quot;false\\&quot; /&gt;&lt;a href=\\&quot;#\\&quot; onclick=\\&quot;remove_fields(this); return false;\\&quot;&gt;remove&lt;\\/a&gt;\\n&lt;\\/div&gt;&quot;); return false;\">Add tag</a>"
-    end
-  end
-  
 end
 
