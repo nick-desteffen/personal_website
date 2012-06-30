@@ -24,9 +24,9 @@ module PostsHelper
   def admin_comment_links(comment)
     return unless current_user
     return if comment.new_record?
-    links = link_to "Flag Spam", flag_spam_path(comment.post, comment), remote: true, method: :post, class: "admin_link", confirm: "Are you sure?"
+    links = link_to "Flag Spam", flag_spam_path(comment.post, comment), remote: true, method: :post, class: "admin_link", data: {confirm: "Are you sure?"}
     links += link_to "Edit", edit_comment_path(comment.post, comment), class: "admin_link"
-    links += link_to "Destroy", destroy_comment_path(comment.post, comment), class: "admin_link", remote: true, method: :delete, confirm: "Are you sure?"
+    links += link_to "Destroy", destroy_comment_path(comment.post, comment), class: "admin_link", remote: true, method: :delete, data: {confirm: "Are you sure?"}
     links
   end
 

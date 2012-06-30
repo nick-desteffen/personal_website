@@ -39,4 +39,8 @@ $(function(){
     remove_fields(link.currentTarget);
     return false;
   });
+
+  SyntaxHighlighter.defaults['gutter'] = true;
+  SyntaxHighlighter.all();
+  
 });

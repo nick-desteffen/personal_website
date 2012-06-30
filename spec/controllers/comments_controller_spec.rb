@@ -32,7 +32,7 @@ describe CommentsController do
       login_as user
       comment = FactoryGirl.create(:comment, :spam_flag => false)
       
-      xhr :post, :flag_spam, :comment_id => comment.id
+      xhr :post, :flag_spam, :post_id => comment.post.id, :comment_id => comment.id
       
       assigns(:comment).should == comment
       assigns(:comment).spam_flag?.should == true
