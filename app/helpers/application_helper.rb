@@ -7,7 +7,7 @@ module ApplicationHelper
     content_tag(:div, :class => "form_errors") do
       concat(content_tag(:h2, header_message))
       concat(content_tag(:ul) do
-        errors.each do |message|
+        errors.full_messages.each do |message|
           concat(content_tag(:li, message))
         end
       end)
