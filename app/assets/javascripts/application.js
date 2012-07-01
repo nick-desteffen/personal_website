@@ -5,6 +5,7 @@
 // the compiled file.
 //
 //= require jquery
+//= require jquery_ujs
 //= require syntaxhighlighter_3.0.83/scripts/shCore
 //= require syntaxhighlighter_3.0.83/scripts/shBrushRuby
 //= require syntaxhighlighter_3.0.83/scripts/shBrushJScript
