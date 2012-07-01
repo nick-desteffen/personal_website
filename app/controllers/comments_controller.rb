@@ -1,6 +1,6 @@
 class CommentsController < ApplicationController
 
-  before_filter :login_required, only: [:edit, :update, :flag_spam, :destroy]
+  before_filter :login_required, except: [:create, :preview]
   before_filter :find_post, only: [:edit, :update, :destroy]
   
   active_tab :blog
