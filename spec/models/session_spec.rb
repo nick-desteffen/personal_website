@@ -1,6 +1,22 @@
 require 'spec_helper'
 
 describe Session do
+  include ActiveModel::Lint::Tests
+
+  def model
+    Session.new
+  end
+
+  describe "ActiveModel::Lint::Tests" do
+    it "should be an ActiveModel compliant object" do
+      test_to_key
+      test_to_param
+      test_to_partial_path
+      test_persisted?
+      test_model_naming
+      test_errors_aref
+    end
+  end
   
   describe "validations" do
     it "requires an email" do

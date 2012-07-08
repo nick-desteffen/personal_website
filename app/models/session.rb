@@ -1,6 +1,7 @@
 class Session
-  include ActiveModel::Conversion
   extend ActiveModel::Naming
+  extend ActiveModel::Translation
+  include ActiveModel::Conversion
   include ActiveModel::Validations
     
   attr_accessor :email, :password
