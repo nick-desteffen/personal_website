@@ -1,0 +1,79 @@
+<div>
+  <p>Using the HTML5 <a href='http://www.w3.org/TR/FileAPI/' target='_blank'>File API</a> to upload files over AJAX is a great way to to add file upload capabilities and not resort to using a flash based solution or iframe hacks.</p>
+  <p>It's easy to use and works with most modern browsers.  This example use the <a href='http://en.wikipedia.org/wiki/Data_URI_scheme' target='_blank'>Data URI Scheme</a> to transfer the file over AJAX.</p>
+  <p>The mime type and base64 encoded file are sent as a standard parameter on a POST request.  The server then decodes the image and saves it.</p>
+
+  <h2>Data URI Scheme</h2>
+  <div>
+    An image can be embedded in a HTML or CSS document using this method.  The example below is an encoded red dot image.  The browser is just reading the embedded image as it's <strong>src</strong> attribute <em>(scroll to see the entire URI)</em>.</p>
+    <div style="overflow-y: scroll; width: 650px;">data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAUAAAAFCAYAAACNbyblAAAAHElEQVQI12P4//8/w38GIAXDIBKE0DHxgljNBAAO9TXL0Y4OHwAAAABJRU5ErkJggg==</div>
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAUAAAAFCAYAAACNbyblAAAAHElEQVQI12P4//8/w38GIAXDIBKE0DHxgljNBAAO9TXL0Y4OHwAAAABJRU5ErkJggg==">
+  </div>
+
+  <h2>Client Side</h2>
+  <p>On the client side your going to need to bind a change event to the file attachment field.  The change event loops over all the files chosen, creates a <strong>FileReader</strong> object which uses the <strong>readAsDataURL</strong> method to encode the file using the Data URI Scheme.  An object containing the orignial filename and data is then added to an array.</p>
+  <p>When the form is submitted each file in the array is read and sent across in an AJAX call.</p>
+  <span class="file_path">Client side javascript</span>
+  <pre class="brush: javascript;">
+    var files = [];
+
+    $("input[type=file]").change(function(event) {
+      $.each(event.target.files, function(index, file) {
+        var reader = new FileReader();
+        reader.onload = function(event) {  
+          object = {};
+          object.filename = file.name;
+          object.data = event.target.result;
+          files.push(object);
+        };  
+        reader.readAsDataURL(file);
+      });
+    });
+
+    $("form").submit(function(form) {
+      $.each(files, function(index, file) {
+        $.ajax({url: "/ajax-upload",
+              type: 'POST',
+              data: {filename: file.filename, data: file.data},
+              success: function(data, status, xhr) {}
+        });      
+      });
+      files = [];
+      form.preventDefault();
+    });
+  </pre>
+
+  <h2>Server Side</h2>
+  <p>The AJAX endpoint on the server just has to read the data and reassemble the file. Since we only want the actual file data we need to cut away the mime type and encoding.  So we just look for <strong><em>base64,</em></strong> and take everything after it.</p>
+  <span class="file_path">Sinatra endpoint</span>
+  <pre class="brush: ruby;">
+    post "/ajax-upload" do
+      data = params[:data]
+      filename = params[:filename]
+
+      ## Decode the image
+      data_index = data.index('base64') + 7
+      filedata = data.slice(data_index, data.length)
+      decoded_image = Base64.decode64(filedata)
+      
+      ## Write the file to the system
+      file = File.new("public/uploads/#{filename}", "w+")
+      file.write(decoded_image)
+
+      "/uploads/#{filename}"
+    end
+  </pre>
+
+  <h2>Example Application</h2>
+  If you wanna just checkout a complete working example head on over to Github, clone the repo and run: 
+  <div class='terminal'>bundle install && bundle exec thin start</div>
+  <br />
+  <a href="https://github.com/nick-desteffen/html5_ajax_file_upload_demo" target="_blank">https://github.com/nick-desteffen/html5_ajax_file_upload_demo</a>
+  <br />
+</div>
+
+http://en.wikipedia.org/wiki/Data_URI_scheme
+http://www.w3.org/TR/FileAPI/
+http://www.html5rocks.com/en/tutorials/file/dndfiles/
+http://www.sinatrarb.com/
+https://github.com/nick-desteffen/html5_ajax_file_upload_demo
