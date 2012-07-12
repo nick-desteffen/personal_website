@@ -7,7 +7,7 @@ gem 'friendly_id', "4.0.7"
 gem 'bcrypt-ruby', '3.0.1'
 gem 'redcarpet', '2.1.1'
 gem 'exception_notification', '2.6.1'
-gem 'thin', '1.3.1'
+gem 'thin', '1.4.1'
 gem 'rakismet', '1.2.1'
 
 group :assets do
@@ -17,8 +17,8 @@ group :assets do
 end
 
 group :development, :test do
-  gem "rspec-rails", "2.10.1"
-  gem "mocha", "0.11.4"
+  gem "rspec-rails", "2.11.0"
+  gem "mocha", "0.12.0", require: false
   gem "heroku"
   gem "taps"
   gem "sqlite3"
