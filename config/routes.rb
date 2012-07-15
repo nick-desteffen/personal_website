@@ -13,7 +13,7 @@ PersonalWebsite::Application.routes.draw do
   get "resume" => "resume#index", :as => "resume_download"
   
   ## Blog
-  get "blog" => "posts#index", :as => "blog"
+  get "blog(/page/:page)" => "posts#index", :as => "blog"
   get "blog/admin" => "posts#admin_index", :as => "admin_index"
   get "blog/new" => "posts#new", :as => "new_post"
   post "blog/new" => "posts#create", :as => "create_post"

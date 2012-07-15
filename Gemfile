@@ -9,6 +9,7 @@ gem 'redcarpet', '2.1.1'
 gem 'exception_notification', '2.6.1'
 gem 'thin', '1.4.1'
 gem 'rakismet', '1.2.1'
+gem 'kaminari', '0.13.0'
 
 group :assets do
   gem 'sass-rails', "3.2.5"

@@ -5,7 +5,8 @@ class PostsController < ApplicationController
   active_tab :blog
   
   def index
-    @posts = Post.published
+    page = params[:page] || 1
+    @posts = Post.published.page(page)
   end
   
   def admin_index

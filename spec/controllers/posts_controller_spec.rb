@@ -13,6 +13,13 @@ describe PostsController do
       assigns(:posts).include?(published_post).should == true
       assigns(:posts).include?(unpublished_post).should_not == true
     end
+    it "paginates 5 per page" do
+      6.times { |i| FactoryGirl.create(:post, published_at: i.weeks.ago) }
+
+      get :index, page: 2
+
+      assigns(:posts).size.should == 1
+    end
   end
   
   describe "show" do

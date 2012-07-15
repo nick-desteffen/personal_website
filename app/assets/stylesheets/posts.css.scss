@@ -7,9 +7,29 @@
   time{
     font-size: 13px;
   }
-  a{
+  a.read-more{
     font-weight: bold;
+    text-decoration: none;
   }
+  a.read-more:hover{
+    text-decoration: underline;
+  }
+}
+
+.next-page{
+  display: block;
+  margin-top: 15px;
+  font-weight: bold;
+  font-size: 20px;
+  text-decoration: none;
+}
+
+.next-page:hover{
+  text-decoration: underline;
+}
+
+.paginate-top{
+  margin-top: 30px;
 }
 
 .comment_count{

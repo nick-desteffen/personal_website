@@ -3,8 +3,13 @@
     <h1><%= post.title %></h1>
     <time><%= format_date(post.published_at) %></time>
     <p><%= teaser(post) %></p>
-    <p><%= link_to "Read more", blog_post_path(post) %><span class="comment_count"><%= pluralize(post.comments.not_spam.size, "comment") %></span></p>
+    <p><%= link_to "Read more", blog_post_path(post), class: "read-more" %><span class="comment_count"><%= pluralize(post.comments.not_spam.size, "comment") %></span></p>
   </div>
+<% end %>
+
+<% unless @posts.last_page? %>
+  <hr class="paginate-top" />
+  <%= link_to_next_page @posts, '&larr; Older Posts'.html_safe, class: "next-page" %>
 <% end %>
 
 <% content_for :sidebar do %>
