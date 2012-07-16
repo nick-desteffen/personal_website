@@ -1,0 +1,101 @@
+<p>
+  Since I wrote my <a href="http://www.nickdesteffen.com/blog/switching-to-sublime-text-2">original post</a> on switching to <a href="http://www.sublimetext.com/">Sublime Text 2</a> a lot has changed.  
+  The final version was released just a few weeks ago.  I also got a new computer and had to reinstall it; what I had originally written is a bit out of date so here is an updated post.
+</p>
+
+<h2>Command line Tool</h2>
+To be able to open a file or folder from the command line from anywhere create a symlink to the <strong>subl</strong> command line tool.
+<div class='terminal'>ln -s "/Applications/Sublime Text 2.app/Contents/SharedSupport/bin/subl" /usr/bin/subl</div>
+
+<h2>RVM</h2>
+Edit Sublime Text's ruby settings file:
+<div class='terminal'>$ subl ~/Library/Application\ Support/Sublime\ Text\ 2/Packages/Ruby/Ruby.sublime-build</div>
+<br />
+It should look like this:
+<div class='terminal'>
+  { <br />    
+  &nbsp;&nbsp;"cmd": ["ruby", "$file"],<br />
+  &nbsp;&nbsp;"file_regex": "^(...*?):([0-9]*):?([0-9]*)",<br />
+  &nbsp;&nbsp;"selector": "source.ruby"<br />
+  }
+</div>
+<br />
+Change it to this (replacing nickd with your username) in order to use the rvm-auto-ruby binary:
+<div class='terminal'>
+  {<br />
+  &nbsp;&nbsp;"cmd": ["/Users/nickd/.rvm/bin/rvm-auto-ruby", "$file"],<br />
+  &nbsp;&nbsp;"file_regex": "^(...*?):([0-9]*):?([0-9]*)",<br />
+  &nbsp;&nbsp;"selector": "source.ruby"<br />
+  }
+</div>
+
+<h2>Preferences File</h2>
+Sublime Text 2 stores all settings and preferences in editable files with key/value pairs.  If you want to change any default settings edit the User Preferences settings file and place your changes there.  This will prevent them from being overridden in an upgrade.<br /><br />
+Edit the User Preferences file:
+<div class='terminal'>$ subl ~/Library/Application\ Support/Sublime\ Text\ 2/Packages/User/Preferences.sublime-settings</div>
+<p>You can also edit this file from within Sublime Text. Click the menu item: <strong>Sublime Text 2 => Preferences => Settings &ndash; User</strong>.
+I changed mine to use spaces instead of tabs and adjust the indentation globally.  
+I also turned off hot exit, word wrap, and a few other things.  
+If you just look at the default settings file you can get an idea of what's available to change.  
+Just copy the keys to your own user file and change the values.
+I recommend checking this file into <a href='http://github.com' target='_blank'>git</a> as well.
+<div class='terminal'>
+  {<br />
+  &nbsp;&nbsp;"tab_size": 2,<br />
+  &nbsp;&nbsp;"translate_tabs_to_spaces": true,<br />
+  &nbsp;&nbsp;"word_wrap": "auto",<br />
+  &nbsp;&nbsp;"hot_exit": false<br />
+  }
+</div>
+<br />
+To open all packages to see what's in them:
+<div class='terminal'>$ subl ~/Library/Application\ Support/Sublime\ Text\ 2/Packages/</div>
+
+<h2>Sublime Package Control</h2>
+<a href='http://wbond.net/sublime_packages/package_control' target='_blank'>Sublime Package Control</a> is a great addition to Sublime's ecosystem. There are ton of useful packages and themes that you can add just by selecting them. Just follow the simple <a href='http://wbond.net/sublime_packages/package_control/installation' target='blank'>installation instructions</a> and you'll be good to go.<br />
+Press <b>cmd + shift + p</b> and type "Package Control" to find all the options for this add on.  You can also get to it under the <b>Preferences Menu</b>.<br />
+<br />
+The packages you have installed are listed in another settings file.  Any changes you make to this file will be automatically picked up by the package manager.  It is easy to just add or remove packages here as well.
+<div class='terminal'>$ subl ~/Library/Application\ Support/Sublime\ Text\ 2/Packages/User/Package\ Control.sublime-settings</div>
+<br />
+Some useful ones I've installed are: <a href='https://github.com/jashkenas/coffee-script-tmbundle' target='_blank'>CoffeeScript</a>, <a href='https://github.com/radiosilence/dogs-colour-scheme' target='_blank'>Dogs Colour Scheme</a>, <a href='https://github.com/phuibonhoa/handcrafted-haml-textmate-bundle' target='_blank'>Haml</a>, <a href='https://github.com/SublimeText/RSpec' target='_blank'>RSpec</a>, <a href='https://github.com/maltize/sublime-text-2-ruby-tests' target='_blank'>RubyTest</a>, <a href='https://github.com/nathos/sass-textmate-bundle' target='_blank'>Sass</a>, and <a href='http://sass-lang.com/' target='_blank'>SCSS</a>.
+It's also a good idea to check this file into git.<br />
+
+<h2>Sublime Text 2 Ruby Tests Bundler Integration</h2>
+When you try running tests from within Sublime Text it will probably error out if you are using <a href="http://gembundler.com/" target="_blank">Bundler</a>.
+To fix this you need to override the command to execute the tests.  Open you User Preferences file again and add:<br />
+<div class="terminal">
+{<br />
+&nbsp;&nbsp;// RubyTest settings<br />
+&nbsp;&nbsp;"ruby_unit_exec": "bundle exec ruby",<br />
+&nbsp;&nbsp;"ruby_rspec_exec": "bundle exec rspec"<br />
+}
+</div>
+
+
+<h2>Sublime Text 2 Ruby Tests ANSI Color Fix</h2>
+When running RSpec test from within Sublime Text 2 you'll notice that the output contains ANSI color codes.  <br />
+<br />
+To fix this you can edit this file:
+<div class='terminal'>$ subl ~/Library/Application\ Support/Sublime\ Text\ 2/Packages/Theme\ -\ Default/Widget.sublime-settings</div>
+and comment out the color_scheme line and add the one listed below.  This doesn't break any highlighting and will cause the ANSI color codes to be interpreted correctly.
+<div class='terminal'>
+  {<br />
+  &nbsp;&nbsp;//"color_scheme": "Packages/Theme - Default/Widgets.stTheme"<br />
+  &nbsp;&nbsp;"color_scheme": "Packages/RubyTest/TestConsole.tmTheme"<br />
+  }
+</div>
+This fix was posted on the <a href="https://github.com/maltize/sublime-text-2-ruby-tests/issues/33#issuecomment-3553701" target="_blank">Github Issues page</a>
+
+<p>I hope this helps you out.  If you have any suggestions or tips please post a comment!</p>
+
+
+
+Sublime Text 2
+http://www.sublimetext.com/
+
+Sublime Text 2 Ruby Tests Color Fix
+https://github.com/maltize/sublime-text-2-ruby-tests/issues/33#issuecomment-3553701
+
+Sublime Package Control
+http://wbond.net/sublime_packages/package_control
