@@ -1,4 +1,5 @@
 source :rubygems
+ruby "1.9.3"
 
 gem 'rails', '3.2.7'
 gem "pg", "0.14.0"
