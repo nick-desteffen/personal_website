@@ -1,6 +1,6 @@
 source :rubygems
 
-gem 'rails', '3.2.6'
+gem 'rails', '3.2.7'
 gem "pg", "0.14.0"
 gem 'jquery-rails', "2.0.2"
 gem 'friendly_id', "4.0.7"
@@ -19,7 +19,7 @@ end
 
 group :development, :test do
   gem "rspec-rails", "2.11.0"
-  gem "mocha", "0.12.0", require: false
+  gem "mocha", "0.12.1", require: false
   gem "heroku"
   gem "taps"
   gem "sqlite3"

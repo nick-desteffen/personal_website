@@ -1,6 +1,8 @@
 require 'spec_helper'
 
 describe PostsController do
+
+  let(:user) { FactoryGirl.create(:user) }
     
   describe "index" do
     it "has only published posts" do
@@ -38,7 +40,7 @@ describe PostsController do
   
   describe "new" do
     it "has a post object" do
-      login_as FactoryGirl.create(:user)
+      login_as user
       
       get :new
       
@@ -49,7 +51,7 @@ describe PostsController do
   
   describe "create" do
     it "creates a new post" do
-      login_as FactoryGirl.create(:user)
+      login_as user
 
        expect{
          post :create, :post => FactoryGirl.attributes_for(:post)
@@ -74,7 +76,7 @@ describe PostsController do
   
   describe "edit" do
     it "has the post to edit" do
-      login_as FactoryGirl.create(:user)
+      login_as user
       post = FactoryGirl.create(:post)
       
       get :edit, :post_id => post
@@ -85,7 +87,7 @@ describe PostsController do
   
   describe "update" do
     it "updates the post" do
-      login_as FactoryGirl.create(:user)
+      login_as user
       post = FactoryGirl.create(:post)
       
       Post.any_instance.stubs(:update_attributes).returns(true)
@@ -96,7 +98,7 @@ describe PostsController do
       response.should redirect_to blog_post_path(post)
     end
     it "reloads the page if errors are present" do
-      login_as FactoryGirl.create(:user)
+      login_as user
       post = FactoryGirl.create(:post)
       
       Post.any_instance.stubs(:update_attributes).returns(false)
@@ -110,10 +112,9 @@ describe PostsController do
   
   describe "admin_index" do
     it "has a listing of all blog posts" do
+      login_as user
       published_post = FactoryGirl.create(:post)
       unpublished_post = FactoryGirl.create(:post, :published_at => nil)
-      user = FactoryGirl.create(:user)
-      login_as user
       
       get :admin_index
       

@@ -27,7 +27,8 @@ class Comment < ActiveRecord::Base
   end
 
   def flag_spam!
-    update_attribute(:spam_flag, true)
+    self.spam_flag = true
+    self.save
     spam!
   end
 
