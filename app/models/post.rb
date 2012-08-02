@@ -6,6 +6,8 @@ class Post < ActiveRecord::Base
   has_many :comments, :dependent => :destroy
   has_many :related_links, :dependent => :destroy
   has_many :tags, :dependent => :destroy
+
+  attr_accessible :title, :body
   
   validates_presence_of :title, :body
   

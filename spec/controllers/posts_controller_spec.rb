@@ -54,7 +54,7 @@ describe PostsController do
       login_as user
 
        expect{
-         post :create, :post => FactoryGirl.attributes_for(:post)
+         post :create, post: {title: "The Title", body: "The Body"}
        }.to change(Post, :count).by(1)
       
       flash.notice.should_not be_nil
