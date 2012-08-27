@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120105032247) do
+ActiveRecord::Schema.define(:version => 20120827011905) do
 
   create_table "comments", :force => true do |t|
     t.integer  "post_id"
@@ -22,8 +22,9 @@ ActiveRecord::Schema.define(:version => 20120105032247) do
     t.string   "gravatar_hash"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.boolean  "spam_flag",     :default => false
+    t.boolean  "spam_flag",                :default => false
     t.text     "request"
+    t.boolean  "new_comment_notification", :default => false
   end
 
   add_index "comments", ["post_id"], :name => "index_comments_on_post_id"

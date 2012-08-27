@@ -9,5 +9,10 @@ class Notifier < ActionMailer::Base
     @contact_message = contact_message
     mail(subject: contact_message.subject)
   end
+
+  def new_comment(comment)
+    @comment = comment
+    mail(to: comment.email, subject: "New comment posted on: #{comment.post.title}")
+  end
   
 end

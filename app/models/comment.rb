@@ -5,9 +5,10 @@ class Comment < ActiveRecord::Base
   
   belongs_to :post
   
-  attr_accessible :email, :name, :body, :url, :post_id
+  attr_accessible :email, :name, :body, :url, :post_id, :new_comment_notification
   
   before_validation :generate_gravatar_hash
+  after_create :notify_commenters
 
   store :request, accessors: [:remote_ip, :user_agent, :referrer]
 
@@ -19,6 +20,7 @@ class Comment < ActiveRecord::Base
   validate :spam_check
   
   scope :not_spam, where(spam_flag: false)
+  scope :notify, where(new_comment_notification: true)
   
   def http_request=(http_request)
     request[:remote_ip] = http_request.remote_ip
@@ -51,6 +53,12 @@ class Comment < ActiveRecord::Base
   def spam_check
     if spam?
       errors.add(:base, "Sorry, but this comment appears to be spam. If it is not spam please use the contact form.")
+    end
+  end
+
+  def notify_commenters
+    post.comments.notify.each do |comment|
+      Notifier.new_comment(comment).deliver unless comment == self
     end
   end
     

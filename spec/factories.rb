@@ -47,6 +47,7 @@ FactoryGirl.define do
     url "http://www.paytondog.com"
     gravatar_hash "400741f047e4a0e6d3c5d5b962dba6c5"
     spam_flag false
+    new_comment_notification false
     created_at { Time.now }
     updated_at { Time.now }
   end

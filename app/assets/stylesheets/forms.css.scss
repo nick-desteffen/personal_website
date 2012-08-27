@@ -11,6 +11,12 @@ input, textarea, select {
 input, textarea{
   width: 200px;  
 }
+
+input[type=checkbox] {
+  float: left;
+  width: 20px;
+  margin-top: 5px;
+}
   
 textarea {  
   width: 650px;  

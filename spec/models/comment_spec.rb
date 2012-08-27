@@ -87,5 +87,16 @@ describe Comment do
       comment.new_record?.should == true
     end
   end
+
+  describe "notify_commenters" do
+    it "should email any comment posters when a new comment is posted if they have requested to be notified" do
+      ActionMailer::Base.deliveries.clear
+      post = FactoryGirl.create(:post)
+      comment1 = FactoryGirl.create(:comment, post: post, new_comment_notification: true, email: "commenter@gmail.com")
+      comment2 = FactoryGirl.create(:comment, post: post, new_comment_notification: true)
+      
+      ActionMailer::Base.deliveries.size.should == 1
+    end
+  end
     
 end

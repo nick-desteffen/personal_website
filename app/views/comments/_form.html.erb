@@ -8,10 +8,13 @@
     <%= f.label :email, "Email <span class='tiny_sub_label'>(Needed for <a href='http://gravatar.com/' target='_blank'>Gravatar</a>, not published)</span>".html_safe %>
     <%= f.text_field :email %>
   </p>
-
   <p>
     <%= f.label :url %>
     <%= f.url_field :url %>
+  </p>
+  <p>
+    <%= f.check_box :new_comment_notification %>
+    <%= f.label :new_comment_notification, "Notify when new comments are posted" %>
   </p>
   <%= render :partial => "posts/markdown_examples" %>
   <p>
