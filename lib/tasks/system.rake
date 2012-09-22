@@ -23,3 +23,8 @@ desc "Restarts production server"
 task :restart do
   sh 'bundle exec heroku restart'
 end
+
+desc "Show config settings on Heroku"
+task :show_config do
+  sh 'bundle exec heroku config'
+end
