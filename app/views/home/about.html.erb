@@ -1,6 +1,6 @@
 <h1>Who is Nick?</h1>
 <p>Hi, I'm Nick. I live in Chicago, Illinois and I've been doing web development for nearly 10 years. I started out programming in Java/J2EE and moved into Ruby / Rails about 4 years ago. The last year and 1/2 I've put on a number of additional hats and started doing some systems administration as well as jQuery and CSS.</p>
-<p>I am currently working at <%= link_to "Benchprep", "http://benchprep.com", :target => "_blank" %> and am also a co-founder of <%= link_to "WisePatient", "https://www.wisepatient.com", :target => "_blank" %>.</p>
+<p>I am currently working at <%= link_to "BenchPrep", "http://benchprep.com", :target => "_blank" %> and am also a co-founder of <%= link_to "WisePatient", "https://www.wisepatient.com", :target => "_blank" %>.</p>
 
 <h3>Some of the sites I have worked on are:</h3>
 <div><%= link_to "CarePages", "http://www.carepages.com", :target => "_blank" %></div>
@@ -13,6 +13,5 @@
 <div><%= link_to "BenchPrep", "http://benchprep.com", :target => "_blank" %></div>
 
 <% content_for :sidebar do %>
-  <%= render :partial => "shared/social_media" %>
   <%= image_tag("nick-d.jpg", :width => "250px") %>
 <% end %>

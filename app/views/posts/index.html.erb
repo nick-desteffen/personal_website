@@ -11,7 +11,3 @@
   <hr class="paginate-top" />
   <%= link_to_next_page @posts, '&larr; Older Posts'.html_safe, class: "next-page" %>
 <% end %>
-
-<% content_for :sidebar do %>
-  <%= render :partial => "shared/social_media" %>
-<% end %>

@@ -31,6 +31,7 @@
               Currently logged in as: <%= current_user.full_name %> (<%= link_to "Logout", destroy_session_path, :method => :delete %>)
             </div>
           <% end %>
+          <%= render partial: "shared/social_media" %>
           <%= content_for :sidebar %>
         </div>
       </div>
