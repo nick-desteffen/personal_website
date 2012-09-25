@@ -8,6 +8,7 @@ class Comment < ActiveRecord::Base
   attr_accessible :email, :name, :body, :url, :post_id, :new_comment_notification
   
   before_validation :generate_gravatar_hash
+  after_create :notify_me
   after_create :notify_commenters
 
   store :request, accessors: [:remote_ip, :user_agent, :referrer]
@@ -60,6 +61,10 @@ class Comment < ActiveRecord::Base
     post.comments.notify.each do |comment|
       Notifier.new_comment(comment).deliver unless comment == self
     end
+  end
+
+  def notify_me
+    Notifier.new_comment(self, recipient_email_address: "nick.desteffen@gmail.com").deliver
   end
     
 end

@@ -95,7 +95,10 @@ describe Comment do
       comment1 = FactoryGirl.create(:comment, post: post, new_comment_notification: true, email: "commenter@gmail.com")
       comment2 = FactoryGirl.create(:comment, post: post, new_comment_notification: true)
       
-      ActionMailer::Base.deliveries.size.should == 1
+      ActionMailer::Base.deliveries.size.should == 3
+      recipients = ActionMailer::Base.deliveries.map(&:to).flatten
+
+      recipients.sort.should == ["commenter@gmail.com", "nick.desteffen@gmail.com", "nick.desteffen@gmail.com"]
     end
   end
     
