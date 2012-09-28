@@ -342,20 +342,26 @@
       private 
 
       def zencode(args)
-        zencoder_response = Zencoder::Job.create({:input => "cf://rackspace_username:rackspace_api_key@blog.uploads/uploads/video/attachment/#{@model.id}/video.mp4",
-                                                  :output => [{:base_url => "cf://rackspace_username:rackspace_api_key@blog.uploads/uploads/video/attachment/#{@model.id}",
-                                                               :filename => "video.mp4",
-                                                               :label => "web",
-                                                               :notifications => [zencoder_callback_url(:protocol => 'http')],
-                                                               :video_codec => "h264",
-                                                               :audio_codec => "aac",
-                                                               :quality => 3,
-                                                               :width => 854,
-                                                               :height => 480,
-                                                               :format => "mp4",
-                                                               :aspect_mode => "preserve",
-                                                               :public => 1}]
-                                                  })
+        input = "cf://rackspace_username:rackspace_api_key@blog.uploads/uploads/video/attachment/#{@model.id}/video.mp4"
+        base_url = "cf://rackspace_username:rackspace_api_key@blog.uploads/uploads/video/attachment/#{@model.id}"
+        
+        zencoder_response = Zencoder::Job.create({
+          :input => input,
+          :output => [{
+            :base_url => base_url,
+            :filename => "video.mp4",
+            :label => "web",
+            :notifications => [zencoder_callback_url(:protocol => 'http')],
+            :video_codec => "h264",
+            :audio_codec => "aac",
+            :quality => 3,
+            :width => 854,
+            :height => 480,
+            :format => "mp4",
+            :aspect_mode => "preserve",
+            :public => 1
+          }]
+        })
 
         zencoder_response.body["outputs"].each do |output|
           if output["label"] == "web"

@@ -7,7 +7,7 @@ class Post < ActiveRecord::Base
   has_many :related_links, :dependent => :destroy
   has_many :tags, :dependent => :destroy
 
-  attr_accessible :title, :body
+  attr_accessible :title, :body, :published_at, :related_links_attributes, :tags_attributes
   
   validates_presence_of :title, :body
   
