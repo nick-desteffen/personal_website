@@ -11,6 +11,7 @@ gem 'exception_notification', '2.6.1'
 gem 'thin', '1.5.0'
 gem 'rakismet', '1.3.0'
 gem 'kaminari', '0.14.1'
+gem 'pg_search', "0.5.7"
 
 group :assets do
   gem 'sass-rails', "3.2.5"
@@ -21,7 +22,7 @@ end
 group :development, :test do
   gem "rspec-rails", "2.11.0"
   gem "factory_girl_rails", "4.1.0"
-  gem "mocha", "0.12.4", require: false
+  gem "mocha", "0.12.6", require: false
   gem "debugger", require: false
 end
 

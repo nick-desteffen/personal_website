@@ -1,6 +1,7 @@
 class Comment < ActiveRecord::Base
   include Rakismet::Model
-  
+  include PgSearch
+    
   default_scope :order => "created_at ASC"
   
   belongs_to :post
@@ -22,6 +23,8 @@ class Comment < ActiveRecord::Base
   
   scope :not_spam, where(spam_flag: false)
   scope :notify, where(new_comment_notification: true)
+
+  pg_search_scope :search, against: [:body, :name], using: {tsearch: {dictionary: "english"}}
   
   def http_request=(http_request)
     request[:remote_ip] = http_request.remote_ip

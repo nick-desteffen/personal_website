@@ -1,6 +1,7 @@
 class Post < ActiveRecord::Base
   extend FriendlyId
-  
+  include PgSearch
+
   default_scope :order => "published_at DESC"
   
   has_many :comments, :dependent => :destroy
@@ -16,6 +17,8 @@ class Post < ActiveRecord::Base
   friendly_id :title, :use => :slugged
   
   scope :published, lambda { where('posts.published_at < ?', Time.now) }
+
+  pg_search_scope :search, against: [:body, :title], using: {tsearch: {dictionary: "english"}}
   
   def tags_joined
     tags.alphabetized.map(&:name).join(", ")
