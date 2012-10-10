@@ -24,7 +24,8 @@ class Comment < ActiveRecord::Base
   scope :not_spam, where(spam_flag: false)
   scope :notify, where(new_comment_notification: true)
 
-  pg_search_scope :search, against: [:body, :name], using: {tsearch: {dictionary: "english"}}
+  pg_search_scope :search, against: [:body, :name], using: {tsearch: {dictionary: "english", prefix: true}}
+  multisearchable against: [:name, :body]
   
   def http_request=(http_request)
     request[:remote_ip] = http_request.remote_ip

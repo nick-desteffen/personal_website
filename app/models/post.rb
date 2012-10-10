@@ -18,10 +18,15 @@ class Post < ActiveRecord::Base
   
   scope :published, lambda { where('posts.published_at < ?', Time.now) }
 
-  pg_search_scope :search, against: [:body, :title], using: {tsearch: {dictionary: "english"}}
+  pg_search_scope :search, against: [:body, :title], using: {tsearch: {dictionary: "english", prefix: true}}
+  multisearchable against: [:title, :body]
   
   def tags_joined
     tags.alphabetized.map(&:name).join(", ")
+  end
+
+  def post
+    self
   end
   
 end
