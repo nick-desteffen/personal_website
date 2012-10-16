@@ -22,7 +22,7 @@ class Comment < ActiveRecord::Base
   validate :spam_check
   
   scope :not_spam, where(spam_flag: false)
-  scope :notify, where(new_comment_notification: true)
+  scope :notify, where(new_comment_notification: true).where("comments.email is not NULL")
 
   pg_search_scope :search, against: [:body, :name], using: {tsearch: {dictionary: "english", prefix: true}}
   multisearchable against: [:name, :body]

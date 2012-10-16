@@ -101,5 +101,11 @@ describe Comment do
       recipients.sort.should == ["commenter@gmail.com", "nick.desteffen@gmail.com", "nick.desteffen@gmail.com"]
     end
   end
+
+  describe "notify" do
+    it "should return any comments where new_comment_notification is true and email is present" do
+      pending
+    end
+  end
     
 end
