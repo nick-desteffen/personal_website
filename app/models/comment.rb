@@ -22,7 +22,7 @@ class Comment < ActiveRecord::Base
   validate :spam_check
   
   scope :not_spam, where(spam_flag: false)
-  scope :notify, where(new_comment_notification: true).where("comments.email is not NULL")
+  scope :notify, where(new_comment_notification: true)
 
   pg_search_scope :search, against: [:body, :name], using: {tsearch: {dictionary: "english", prefix: true}}
   multisearchable against: [:name, :body]
@@ -63,7 +63,7 @@ class Comment < ActiveRecord::Base
 
   def notify_commenters
     post.comments.notify.each do |comment|
-      Notifier.new_comment(comment).deliver unless comment == self
+      Notifier.new_comment(comment).deliver if comment != self && comment.email.present?
     end
   end
 

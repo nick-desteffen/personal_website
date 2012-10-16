@@ -100,6 +100,9 @@ describe Comment do
 
       recipients.sort.should == ["commenter@gmail.com", "nick.desteffen@gmail.com", "nick.desteffen@gmail.com"]
     end
+    it "should not send a person more than 1 email" do
+      pending
+    end
   end
 
   describe "notify" do
