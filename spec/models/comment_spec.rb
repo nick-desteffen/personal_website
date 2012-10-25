@@ -89,25 +89,51 @@ describe Comment do
   end
 
   describe "notify_commenters" do
+    let(:post) { FactoryGirl.create(:post) }
     it "should email any comment posters when a new comment is posted if they have requested to be notified" do
-      ActionMailer::Base.deliveries.clear
-      post = FactoryGirl.create(:post)
       comment1 = FactoryGirl.create(:comment, post: post, new_comment_notification: true, email: "commenter@gmail.com")
+      ActionMailer::Base.deliveries.clear
       comment2 = FactoryGirl.create(:comment, post: post, new_comment_notification: true)
       
-      ActionMailer::Base.deliveries.size.should == 3
+      ActionMailer::Base.deliveries.size.should == 2
       recipients = ActionMailer::Base.deliveries.map(&:to).flatten
 
-      recipients.sort.should == ["commenter@gmail.com", "nick.desteffen@gmail.com", "nick.desteffen@gmail.com"]
+      recipients.sort.should == ["commenter@gmail.com", "nick.desteffen@gmail.com"]
     end
     it "should not send a person more than 1 email" do
-      pending
+      comment1 = FactoryGirl.create(:comment, post: post, new_comment_notification: true, email: "commenter@gmail.com")
+      comment2 = FactoryGirl.create(:comment, post: post, new_comment_notification: true, email: "commenter@gmail.com")
+      
+      ActionMailer::Base.deliveries.clear
+      comment3 = FactoryGirl.create(:comment, post: post, new_comment_notification: true, email: "commenter@gmail.com")
+
+      ActionMailer::Base.deliveries.size.should == 2
+      recipients = ActionMailer::Base.deliveries.map(&:to).flatten
+
+      recipients.sort.should == ["commenter@gmail.com", "nick.desteffen@gmail.com"]
+    end
+    it "should work with a comment that has a blank email address field" do
+      comment1 = FactoryGirl.create(:comment, post: post, new_comment_notification: true, email: "")
+      ActionMailer::Base.deliveries.clear
+
+      comment2 = FactoryGirl.create(:comment, post: post)
+
+      ActionMailer::Base.deliveries.size.should == 1
+      recipients = ActionMailer::Base.deliveries.map(&:to).flatten
+      recipients.sort.should == ["nick.desteffen@gmail.com"]
     end
   end
 
   describe "notify" do
-    it "should return any comments where new_comment_notification is true and email is present" do
-      pending
+    it "should return any comments where new_comment_notification is true" do
+      comment1 = FactoryGirl.create(:comment, new_comment_notification: true)
+      comment2 = FactoryGirl.create(:comment, new_comment_notification: false)
+
+      notifications = Comment.notify
+
+      notifications.size.should == 1
+      notifications.include?(comment1).should == true
+      notifications.include?(comment2).should == false
     end
   end
     

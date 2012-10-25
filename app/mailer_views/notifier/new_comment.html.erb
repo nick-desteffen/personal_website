@@ -1,7 +1,5 @@
-<p>Greetings <%= @comment.name %>,</p>
-<p>A new comment has been posted on the blog post <%= link_to @comment.post.title, blog_post_url(@comment.post) %>.</p>
-<br />
-<p><%= blog_post_url(@comment.post) %></p>
-<br />
+<p>Greetings <%= @recipient_name %>,</p>
+<p>A new comment has been posted on the blog post <%= link_to @post.title, blog_post_url(@post) %>.</p>
+<p><%= blog_post_url(@post) %></p>
 <p>Thanks,</p>
 <p>Nick</p>

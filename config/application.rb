@@ -24,7 +24,6 @@ module PersonalWebsite
     # Custom directories with classes and modules you want to be autoloadable.
     config.autoload_paths += %W(#{config.root}/lib)
     config.autoload_paths += %W(#{Rails.root}/app/modules)
-    config.autoload_paths += %W(#{Rails.root}/app/middleware)
 
     # Activate observers that should always be running.
     # config.active_record.observers = :cacher, :garbage_collector, :forum_observer

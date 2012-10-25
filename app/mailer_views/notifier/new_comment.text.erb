@@ -1,7 +1,7 @@
-Greetings <%= @comment.name %>,
-A new comment has been posted on the blog post <%= @comment.post.title %>.
+Greetings <%= @recipient_name %>,
+A new comment has been posted on the blog post <%= @post.title %>.
 
-<%= blog_post_url(@comment.post) %>
+<%= blog_post_url(@post) %>
 
 Thanks,
 Nick

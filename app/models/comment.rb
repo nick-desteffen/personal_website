@@ -62,13 +62,20 @@ class Comment < ActiveRecord::Base
   end
 
   def notify_commenters
+    recipients = []
     post.comments.notify.each do |comment|
-      Notifier.new_comment(comment).deliver if comment != self && comment.email.present?
+      if comment != self && comment.email.present? && !recipients.detect{|recipient| recipient[:email] == comment.email}
+        recipients << {name: comment.name, email: comment.email} 
+      end
+    end
+
+    recipients.each do |recipient|
+      Notifier.new_comment(post, recipient[:email], recipient[:name]).deliver
     end
   end
 
   def notify_me
-    Notifier.new_comment(self, recipient_email_address: "nick.desteffen@gmail.com").deliver
+    Notifier.new_comment(self.post, "nick.desteffen@gmail.com", "Nick").deliver
   end
     
 end

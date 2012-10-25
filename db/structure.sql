@@ -384,20 +384,6 @@ ALTER TABLE ONLY users
 
 
 --
--- Name: comments_text_search_body; Type: INDEX; Schema: public; Owner: -; Tablespace: 
---
-
-CREATE INDEX comments_text_search_body ON comments USING gin (to_tsvector('english'::regconfig, body));
-
-
---
--- Name: comments_text_search_name; Type: INDEX; Schema: public; Owner: -; Tablespace: 
---
-
-CREATE INDEX comments_text_search_name ON comments USING gin (to_tsvector('english'::regconfig, (name)::text));
-
-
---
 -- Name: index_comments_on_post_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -430,20 +416,6 @@ CREATE INDEX index_tags_on_post_id ON tags USING btree (post_id);
 --
 
 CREATE INDEX index_users_on_email ON users USING btree (email);
-
-
---
--- Name: posts_text_search_body; Type: INDEX; Schema: public; Owner: -; Tablespace: 
---
-
-CREATE INDEX posts_text_search_body ON posts USING gin (to_tsvector('english'::regconfig, body));
-
-
---
--- Name: posts_text_search_title; Type: INDEX; Schema: public; Owner: -; Tablespace: 
---
-
-CREATE INDEX posts_text_search_title ON posts USING gin (to_tsvector('english'::regconfig, (title)::text));
 
 
 --

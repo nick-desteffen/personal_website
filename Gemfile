@@ -6,8 +6,8 @@ gem "pg", "0.14.1"
 gem 'jquery-rails', "2.1.3"
 gem 'friendly_id', "4.0.8"
 gem 'bcrypt-ruby', '3.0.1'
-gem 'redcarpet', '2.1.1'
-gem 'exception_notification', '2.6.1'
+gem 'redcarpet', '2.2.2'
+gem 'exception_notification', '3.0.0'
 gem 'thin', '1.5.0'
 gem 'rakismet', '1.3.0'
 gem 'kaminari', '0.14.1'
@@ -20,9 +20,9 @@ group :assets do
 end
 
 group :development, :test do
-  gem "rspec-rails", "2.11.0"
+  gem "rspec-rails", "2.11.4"
   gem "factory_girl_rails", "4.1.0"
-  gem "mocha", "0.12.6", require: false
+  gem "mocha", "0.12.7", require: false
   gem "debugger", require: false
 end
 

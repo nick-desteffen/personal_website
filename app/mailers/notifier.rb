@@ -10,10 +10,10 @@ class Notifier < ActionMailer::Base
     mail(subject: contact_message.subject)
   end
 
-  def new_comment(comment, options={})
-    @comment = comment
-    recipient_email_address = options.fetch(:recipient_email_address, comment.email)
-    mail(to: recipient_email_address, subject: "New comment posted on: #{comment.post.title}")
+  def new_comment(post, recipient_email_address, recipient_name)
+    @post = post
+    @recipient_name = recipient_name
+    mail(to: recipient_email_address, subject: "New comment posted on: #{post.title}")
   end
   
 end
