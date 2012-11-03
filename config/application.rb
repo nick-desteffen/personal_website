@@ -7,6 +7,7 @@ require "action_mailer/railtie"
 require "active_resource/railtie"
 require "sprockets/railtie"
 # require "rails/test_unit/railtie"
+require "bcrypt"
 
 if defined?(Bundler)
   # If you precompile assets before deploying to production, use this line
@@ -75,6 +76,8 @@ module PersonalWebsite
       :password       => ENV['SENDGRID_PASSWORD'],
       :domain         => ENV['SENDGRID_DOMAIN']
     }
+
+    config.password_cost = BCrypt::Engine::DEFAULT_COST
     
   end
 end
