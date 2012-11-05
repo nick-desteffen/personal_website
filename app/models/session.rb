@@ -3,7 +3,7 @@ class Session
   extend ActiveModel::Translation
   include ActiveModel::Conversion
   include ActiveModel::Validations
-    
+  
   attr_accessor :email, :password
   
   validates_presence_of :email

@@ -1,4 +1,5 @@
 class Post < ActiveRecord::Base
+  include ActiveModel::ForbiddenAttributesProtection
   extend FriendlyId
   include PgSearch
 
@@ -7,8 +8,6 @@ class Post < ActiveRecord::Base
   has_many :comments, :dependent => :destroy
   has_many :related_links, :dependent => :destroy
   has_many :tags, :dependent => :destroy
-
-  attr_accessible :title, :body, :published_at, :related_links_attributes, :tags_attributes
   
   validates_presence_of :title, :body
   

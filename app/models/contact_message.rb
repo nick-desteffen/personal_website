@@ -1,6 +1,5 @@
 class ContactMessage < ActiveRecord::Base
-  
-  attr_accessible :email, :name, :phone_number, :subject, :message
+  include ActiveModel::ForbiddenAttributesProtection
   
   validates_presence_of :email, :name, :message
   validates_length_of :phone_number, :within => (10..11), :allow_blank => true

@@ -1,6 +1,6 @@
 class PostsController < ApplicationController
   
-  before_filter :login_required, :only => [:new, :create, :edit, :update, :admin_index, :destroy]
+  before_filter :login_required, only: [:new, :create, :edit, :update, :admin_index, :destroy]
   
   active_tab :blog
   
@@ -25,12 +25,12 @@ class PostsController < ApplicationController
   end
   
   def create
-    @post = Post.new(params[:post])
+    @post = Post.new(post_params)
     if @post.save
-      redirect_to blog_post_path(@post), :notice => "New blog post created!"
+      redirect_to blog_post_path(@post), notice: "New blog post created!"
     else
       flash.now.alert = "There was an error creating the new blog post."
-      render :action => :new
+      render action: :new
     end
   end
 
@@ -40,12 +40,18 @@ class PostsController < ApplicationController
   
   def update
     @post = Post.find(params[:post_id])
-    if @post.update_attributes(params[:post])
-      redirect_to blog_post_path(@post), :notice => "Updated blog post"
+    if @post.update_attributes(post_params)
+      redirect_to blog_post_path(@post), notice: "Updated blog post"
     else
       flash.now.alert = "There was an error updating the blog post."
-      render :action => :edit
+      render action: :edit
     end
+  end
+
+  private
+
+  def post_params
+    params.require(:post).permit(:title, :body, :published_at, related_links_attributes: [:url, :title], tags_attributes: [:name])
   end
       
 end

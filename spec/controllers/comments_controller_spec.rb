@@ -5,20 +5,18 @@ describe CommentsController do
   describe "create" do
     it "creates a new comment" do
       existing_post = FactoryGirl.create(:post)
-      existing_comment = FactoryGirl.create(:comment, :post => existing_post)
-      Comment.any_instance.stubs(:save).returns(true)
+      existing_comment = FactoryGirl.create(:comment, post: existing_post)
       
-      post :create, :post_id => existing_post.id, :comment => {}
+      post :create, post_id: existing_post.id, comment: FactoryGirl.attributes_for(:comment)
       
       flash[:notice].should_not be_nil
       response.should redirect_to(blog_post_path(existing_post))
     end
     it "reloads the page if errors are present" do
       existing_post = FactoryGirl.create(:post)
-      existing_comment = FactoryGirl.create(:comment, :post => existing_post)
-      Comment.any_instance.stubs(:save).returns(false)
+      existing_comment = FactoryGirl.create(:comment, post: existing_post)
       
-      post :create, :post_id => existing_post, :comment => {}
+      post :create, post_id: existing_post, comment: {body: ""}
       
       assigns(:comments).size.should == 1
       flash.now[:alert].should_not be_nil
@@ -75,7 +73,7 @@ describe CommentsController do
 
   describe "preview" do
     it "builds a comment to preview" do
-      post :preview, comment: {}, format: "js"
+      post :preview, comment: {body: "Body"}, format: "js"
 
       assigns(:comment).should_not be_nil
       assigns(:comment).new_record?.should == true

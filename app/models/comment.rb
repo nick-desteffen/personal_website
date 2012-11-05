@@ -1,12 +1,11 @@
 class Comment < ActiveRecord::Base
+  include ActiveModel::ForbiddenAttributesProtection
   include Rakismet::Model
   include PgSearch
     
   default_scope :order => "created_at ASC"
   
   belongs_to :post
-  
-  attr_accessible :email, :name, :body, :url, :post_id, :new_comment_notification
   
   before_validation :generate_gravatar_hash
   after_create :notify_me

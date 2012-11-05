@@ -54,19 +54,19 @@ describe PostsController do
       login_as user
 
        expect{
-         post :create, post: {title: "The Title", body: "The Body"}
+         post :create, post: {title: "The Title", body: "The Body", related_links_attributes: {"0" => {url: "http://www.google.com", title: "Google"}}, tags_attributes: {"0" => {name: "Foo"}}}
        }.to change(Post, :count).by(1)
       
+      assigns(:post).related_links.count.should == 1
+      assigns(:post).tags.count.should == 1
       flash.notice.should_not be_nil
       response.should redirect_to blog_post_path(assigns(:post))
     end
     it "reloads the page if errors are present" do
       login_as FactoryGirl.create(:user)
       
-      Post.any_instance.stubs(:save).returns(false)
-      
       expect{
-        post :create, :post => {}
+        post :create, post: {body: ""}
       }.to_not change(Post, :count)
       
       flash.now[:alert].should_not be_nil
@@ -90,9 +90,7 @@ describe PostsController do
       login_as user
       post = FactoryGirl.create(:post)
       
-      Post.any_instance.stubs(:update_attributes).returns(true)
-      
-      put :update, :post_id => post, :post => {}
+      put :update, post_id: post, post: {body: "Updated body"}
       
       flash[:notice].should_not be_nil
       response.should redirect_to blog_post_path(post)
@@ -101,9 +99,7 @@ describe PostsController do
       login_as user
       post = FactoryGirl.create(:post)
       
-      Post.any_instance.stubs(:update_attributes).returns(false)
-      
-      put :update, :post_id => post, :post => {}
+      put :update, post_id: post, post: {body: ""}
       
       flash.now[:alert].should_not be_nil
       response.should render_template(:edit)

@@ -7,7 +7,7 @@ class ContactMessagesController < ApplicationController
   end
 
   def create
-    @contact_message = ContactMessage.new(params[:contact_message])
+    @contact_message = ContactMessage.new(contact_message_params)
     @contact_message.user_agent = request.user_agent
     
     if @contact_message.save
@@ -16,6 +16,12 @@ class ContactMessagesController < ApplicationController
       flash.now.alert = "Please correct the highlighted fields and resubmit."
       render :action => :new
     end
+  end
+
+  private
+
+  def contact_message_params
+    params.require(:contact_message).permit(:email, :name, :phone_number, :subject, :message)
   end
   
 end
