@@ -1,18 +1,18 @@
 class PostsController < ApplicationController
-  
+
   before_filter :login_required, only: [:new, :create, :edit, :update, :admin_index, :destroy]
-  
+
   active_tab :blog
-  
+
   def index
     page = params[:page] || 1
     @posts = Post.published.page(page)
   end
-  
+
   def admin_index
     @posts = Post.order(:created_at).all
   end
-  
+
   def show
     @post = Post.find(params[:post_id])
     @comments = @post.comments.not_spam
@@ -23,7 +23,7 @@ class PostsController < ApplicationController
   def new
     @post = Post.new
   end
-  
+
   def create
     @post = Post.new(post_params)
     if @post.save
@@ -37,7 +37,7 @@ class PostsController < ApplicationController
   def edit
     @post = Post.find(params[:post_id])
   end
-  
+
   def update
     @post = Post.find(params[:post_id])
     if @post.update_attributes(post_params)
@@ -53,5 +53,5 @@ class PostsController < ApplicationController
   def post_params
     params.require(:post).permit(:title, :body, :published_at, related_links_attributes: [:url, :title], tags_attributes: [:name])
   end
-      
+
 end

@@ -1,7 +1,7 @@
 source :rubygems
 ruby "1.9.3"
 
-gem 'rails', '3.2.8'
+gem 'rails', '3.2.9'
 gem "pg", "0.14.1"
 gem 'jquery-rails', "2.1.3"
 gem 'friendly_id', "4.0.9"
@@ -21,9 +21,8 @@ group :assets do
 end
 
 group :development, :test do
-  gem "rspec-rails", "2.11.4"
+  gem "rspec-rails", "2.12.0"
   gem "factory_girl_rails", "4.1.0"
-  gem "mocha", "0.12.7", require: false
   gem "debugger", require: false
 end
 

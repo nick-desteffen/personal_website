@@ -12,7 +12,7 @@ describe NestedAttributesHelper do
           link = helper.link_to_remove_fields("remove", tag_fields)
         end
       end
-      
+
       link.should == "<input id=\"post_tags_attributes_0__destroy\" name=\"post[tags_attributes][0][_destroy]\" type=\"hidden\" value=\"false\" /><a href=\"#\" data-destroy=\"true\">remove</a><input id=\"post_tags_attributes_0_id\" name=\"post[tags_attributes][0][id]\" type=\"hidden\" value=\"#{tag.id}\" />"
     end
   end
@@ -22,7 +22,7 @@ describe NestedAttributesHelper do
       post = FactoryGirl.create(:post)
       tag = FactoryGirl.create(:tag, :post => post)
       link = ""
-      helper.expects(:content_for).with(:javascript)
+      helper.should_receive(:content_for).with(:javascript)
 
       form_for(post, :url => update_post_path(post)) do |form|
         form.fields_for :tags do |tag_fields|
@@ -32,7 +32,7 @@ describe NestedAttributesHelper do
       link.should == "<a href=\"#\" data-add-tags=\"true\">My Link</a><input id=\"post_tags_attributes_0_id\" name=\"post[tags_attributes][0][id]\" type=\"hidden\" value=\"#{tag.id}\" />"
     end
   end
-  
+
   describe "nested_attributes_form_template" do
     it "returns the nested attribute form template" do
       post = FactoryGirl.create(:post)
@@ -43,7 +43,7 @@ describe NestedAttributesHelper do
           template = helper.send(:nested_attributes_form_template, :tags, form)
         end
       end
-      
+
       template.should == "<div class=\\\"fields\\\">\\n  <label for=\\\"post_tags_attributes_new_tags_name\\\">Name<\\/label>\\n  <input id=\\\"post_tags_attributes_new_tags_name\\\" name=\\\"post[tags_attributes][new_tags][name]\\\" size=\\\"30\\\" type=\\\"text\\\" />\\n  <br />\\n  <input id=\\\"post_tags_attributes_new_tags__destroy\\\" name=\\\"post[tags_attributes][new_tags][_destroy]\\\" type=\\\"hidden\\\" value=\\\"false\\\" /><a href=\\\"#\\\" data-destroy=\\\"true\\\">remove<\\/a>\\n<\\/div><input id=\"post_tags_attributes_0_id\" name=\"post[tags_attributes][0][id]\" type=\"hidden\" value=\"#{tag.id}\" />"
     end
   end
