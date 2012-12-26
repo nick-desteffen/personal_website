@@ -1,5 +1,5 @@
 module PostsHelper
-  
+
   def gravatar_image(gravatar_hash, options={})
     return if gravatar_hash.blank?
     size = options[:size] || 75
@@ -7,7 +7,7 @@ module PostsHelper
     title = options[:title] || ""
     image_tag("http://www.gravatar.com/avatar/#{gravatar_hash}?size=#{size}", :alt => alt, :title => title)
   end
-  
+
   def comment_name(comment)
     if comment.url.present?
       link_to comment.name, comment.url, :target => "_blank"
@@ -15,12 +15,13 @@ module PostsHelper
       comment.name
     end
   end
-  
+
   def format_comment(comment)
     return "" if comment.blank?
-    MARKDOWN_RENDERER.render(comment).html_safe
+    markdown_renderer = Redcarpet::Markdown.new(Redcarpet::Render::HTML, autolink: true, space_after_headers: true)
+    markdown_renderer.render(comment).html_safe
   end
-  
+
   def admin_comment_links(comment)
     return unless current_user
     return if comment.new_record?
@@ -33,5 +34,5 @@ module PostsHelper
   def teaser(post)
     truncate(strip_tags(post.body).gsub("&ndash;", " - "), length: 300, omission: '...')
   end
-  
+
 end
