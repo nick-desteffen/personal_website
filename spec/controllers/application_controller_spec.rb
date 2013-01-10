@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 describe ApplicationController do
-  
+
   let(:user) { FactoryGirl.create(:user) }
 
   describe "current_user" do
@@ -42,16 +42,19 @@ describe ApplicationController do
     end
 
     it "redirects to the homepage, stores the original destination and has an alert message if there is no user" do
+      routes.draw { get "index" => "anonymous#index" }
+      controller.stub(:root_path).and_return("/")
+
       get :index
 
       response.should redirect_to root_path
       session[:return_to_path].should_not be_nil
-      flash[:alert].should_not == nil      
+      flash[:alert].should_not == nil
     end
   end
 
   describe "redirect_back_or_default" do
-    
+
     controller do
       def index
         redirect_back_or_default(root_path)
@@ -59,6 +62,8 @@ describe ApplicationController do
     end
 
     it "redirects back to where the user was coming from" do
+      routes.draw { get "index" => "anonymous#index" }
+      controller.stub(:root_path).and_return("/")
       session[:return_to_path] = "/blog"
 
       get :index
@@ -66,6 +71,9 @@ describe ApplicationController do
       response.should redirect_to "/blog"
     end
     it "redirects to a default place if no destination was set" do
+      routes.draw { get "index" => "anonymous#index" }
+      controller.stub(:root_path).and_return("/")
+
       session[:return_to_path] = nil
 
       get :index
