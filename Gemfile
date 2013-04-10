@@ -25,9 +25,3 @@ group :development, :test do
   gem "factory_girl_rails", "4.2.1"
   gem "debugger", require: false
 end
-
-#group :development do
-  gem "heroku", require: false
-  gem "taps", require: false
-  gem "sqlite3", require: false
-#end
