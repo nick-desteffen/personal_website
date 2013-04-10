@@ -2,13 +2,12 @@ namespace :db do
 
   desc "Retrieves the database from production and updates locally"
   task fetch: [:environment] do
-    user = ActiveRecord::Base.connection_config[:username]
+    user     = ActiveRecord::Base.connection_config[:username]
     database = ActiveRecord::Base.connection_config[:database]
-    hostname = ActiveRecord::Base.connection_config[:hostname]
+    host     = ActiveRecord::Base.connection_config[:host]
     sh "heroku pgbackups:capture"
     sh "curl -o latest.dump `heroku pgbackups:url`"
-    #sh "pg_restore --verbose --clean --no-acl --no-owner -h #{hostname} -U #{user} -d #{database} latest.dump"
-    sh "pg_restore --verbose --clean --no-acl --no-owner -h localhost -U nickd -d personal_website_development latest.dump"
+    sh "pg_restore --verbose --clean --no-acl --no-owner -h #{host} -U #{user} -d #{database} latest.dump"
   end
 
 end
