@@ -6,9 +6,14 @@
   padding: 20px;
   border: 1px solid $grey;
   background-color: lighten($grey, 28%);
-  
+
   address{
     font-size: 13px;
     font-style: normal;
   }
+}
+
+.coderwall{
+  clear: both;
+  margin-top: 10px;
 }
