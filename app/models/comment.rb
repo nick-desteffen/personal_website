@@ -20,8 +20,8 @@ class Comment < ActiveRecord::Base
   validates_format_of :url, :with => URI::regexp(%w(http https)), :allow_blank => true, :message => "should be fully qualified."
   validate :spam_check
 
-  scope :not_spam, where(spam_flag: false)
-  scope :notify, where(new_comment_notification: true)
+  scope :not_spam, -> { where(spam_flag: false) }
+  scope :notify,   -> { where(new_comment_notification: true) }
 
   pg_search_scope :search, against: [:body, :name], using: {tsearch: {dictionary: "english", prefix: true}}
   multisearchable against: [:name, :body]
