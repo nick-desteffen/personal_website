@@ -1,1 +1,2 @@
-web: bundle exec rails server thin -p $PORT
+web: script/rails server -p $PORT
+console: script/rails console
