@@ -1,6 +1,7 @@
 class PostsController < ApplicationController
 
   before_filter :login_required, only: [:new, :create, :edit, :update, :admin_index, :destroy]
+  before_filter :find_post, only: [:show, :edit, :update]
 
   active_tab :blog
 
@@ -10,11 +11,10 @@ class PostsController < ApplicationController
   end
 
   def admin_index
-    @posts = Post.order(:created_at).all
+    @posts = Post.order(:created_at).load
   end
 
   def show
-    @post = Post.find(params[:post_id])
     @comments = @post.comments.not_spam
     @comment = Comment.new
     @page_title = @post.title
@@ -35,11 +35,9 @@ class PostsController < ApplicationController
   end
 
   def edit
-    @post = Post.find(params[:post_id])
   end
 
   def update
-    @post = Post.find(params[:post_id])
     if @post.update_attributes(post_params)
       redirect_to blog_post_path(@post), notice: "Updated blog post"
     else
@@ -48,10 +46,14 @@ class PostsController < ApplicationController
     end
   end
 
-  private
+private
+
+  def find_post
+    @post = Post.friendly.find(params[:post_id])
+  end
 
   def post_params
-    params.require(:post).permit(:title, :body, :published_at, related_links_attributes: [:url, :title], tags_attributes: [:name])
+    params.require(:post).permit(:title, :body, :published_at, related_links_attributes: [:url, :title, :_destroy], tags_attributes: [:name, :_destroy])
   end
 
 end

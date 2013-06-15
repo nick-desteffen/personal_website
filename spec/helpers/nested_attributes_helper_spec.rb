@@ -13,7 +13,7 @@ describe NestedAttributesHelper do
         end
       end
 
-      link.should == "<input id=\"post_tags_attributes_0__destroy\" name=\"post[tags_attributes][0][_destroy]\" type=\"hidden\" value=\"false\" /><a href=\"#\" data-destroy=\"true\">remove</a><input id=\"post_tags_attributes_0_id\" name=\"post[tags_attributes][0][id]\" type=\"hidden\" value=\"#{tag.id}\" />"
+      link.should == "<input id=\"post_tags_attributes_0__destroy\" name=\"post[tags_attributes][0][_destroy]\" type=\"hidden\" value=\"false\" /><a data-destroy=\"true\" href=\"#\">remove</a><input id=\"post_tags_attributes_0_id\" name=\"post[tags_attributes][0][id]\" type=\"hidden\" value=\"#{tag.id}\" />"
     end
   end
 
@@ -29,7 +29,7 @@ describe NestedAttributesHelper do
           link = helper.link_to_add_fields("My Link", :tags, form)
         end
       end
-      link.should == "<a href=\"#\" data-add-tags=\"true\">My Link</a><input id=\"post_tags_attributes_0_id\" name=\"post[tags_attributes][0][id]\" type=\"hidden\" value=\"#{tag.id}\" />"
+      link.should == "<a data-add-tags=\"true\" href=\"#\">My Link</a><input id=\"post_tags_attributes_0_id\" name=\"post[tags_attributes][0][id]\" type=\"hidden\" value=\"#{tag.id}\" />"
     end
   end
 
@@ -44,7 +44,7 @@ describe NestedAttributesHelper do
         end
       end
 
-      template.should == "<div class=\\\"fields\\\">\\n  <label for=\\\"post_tags_attributes_new_tags_name\\\">Name<\\/label>\\n  <input id=\\\"post_tags_attributes_new_tags_name\\\" name=\\\"post[tags_attributes][new_tags][name]\\\" size=\\\"30\\\" type=\\\"text\\\" />\\n  <br />\\n  <input id=\\\"post_tags_attributes_new_tags__destroy\\\" name=\\\"post[tags_attributes][new_tags][_destroy]\\\" type=\\\"hidden\\\" value=\\\"false\\\" /><a href=\\\"#\\\" data-destroy=\\\"true\\\">remove<\\/a>\\n<\\/div><input id=\"post_tags_attributes_0_id\" name=\"post[tags_attributes][0][id]\" type=\"hidden\" value=\"#{tag.id}\" />"
+      template.should == "<div class=\\\"fields\\\">\\n  <label for=\\\"post_tags_attributes_new_tags_name\\\">Name<\\/label>\\n  <input id=\\\"post_tags_attributes_new_tags_name\\\" name=\\\"post[tags_attributes][new_tags][name]\\\" type=\\\"text\\\" />\\n  <br />\\n  <input id=\\\"post_tags_attributes_new_tags__destroy\\\" name=\\\"post[tags_attributes][new_tags][_destroy]\\\" type=\\\"hidden\\\" value=\\\"false\\\" /><a data-destroy=\\\"true\\\" href=\\\"#\\\">remove<\\/a>\\n<\\/div><input id=\"post_tags_attributes_0_id\" name=\"post[tags_attributes][0][id]\" type=\"hidden\" value=\"#{tag.id}\" />"
     end
   end
 

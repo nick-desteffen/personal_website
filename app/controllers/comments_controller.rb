@@ -1,13 +1,12 @@
 class CommentsController < ApplicationController
 
   before_filter :login_required, except: [:create, :preview]
-  before_filter :find_post, only: [:edit, :update, :destroy]
-  
+  before_filter :find_post, only: [:create, :edit, :update, :destroy]
+
   active_tab :blog
 
   def create
-    @post = Post.find(params[:post_id])
-    @comments = @post.comments.not_spam.all
+    @comments = @post.comments.not_spam.load
     @comment = @post.comments.build(comment_params)
     @comment.http_request = request
     if @comment.save
@@ -45,7 +44,7 @@ class CommentsController < ApplicationController
   private
 
   def find_post
-    @post = Post.find(params[:post_id])
+    @post = Post.friendly.find(params[:post_id])
   end
 
   def comment_params

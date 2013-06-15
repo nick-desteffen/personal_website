@@ -1,5 +1,5 @@
 module ApplicationHelper
-  
+
   def error_messages_for(object)
     return if object.nil? || object.errors.empty?
     errors = object.errors
@@ -27,23 +27,23 @@ module ApplicationHelper
     return if timestamp.blank?
     timestamp.strftime("%m/%d/%Y %I:%M%p").downcase
   end
-  
+
   def format_date(timestamp)
     return if timestamp.blank?
     timestamp.strftime("%m/%d/%Y").downcase
   end
-  
+
   def navigation_link(title, path, key)
     style_class = ""
     style_class = "active" if key == controller.active_tab
     link_to(title, path, :class => style_class)
   end
-  
+
   def button(text, options={})
-    type = options[:type] || :submit
+    type = options.fetch(:type, :submit)
     content_tag(:button, text, :class => "button", :type => type, :id => options[:id])
   end
-  
+
   def page_title
     return "#{@page_title} | Nick DeSteffen" if defined?(@page_title)
     title = controller.active_tab.present? ? controller.active_tab.capitalize : nil

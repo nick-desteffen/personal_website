@@ -53,14 +53,14 @@ describe ApplicationHelper do
     it "has no class if the active_tab key doesn't match the key passed in" do
       link = helper.navigation_link("Contact", root_path, :contact)
 
-      link.should == "<a href=\"/\" class=\"\">Contact</a>"
+      link.should == "<a class=\"\" href=\"/\">Contact</a>"
     end
     it "has the active class if the active_tab key matches the key passed in" do
       helper.controller.stub(:active_tab).and_return(:contact)
 
       link = helper.navigation_link("Contact", root_path, :contact)
 
-      link.should == "<a href=\"/\" class=\"active\">Contact</a>"
+      link.should == "<a class=\"active\" href=\"/\">Contact</a>"
     end
   end
 

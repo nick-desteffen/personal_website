@@ -3,14 +3,14 @@ require 'spec_helper'
 describe PostsController do
 
   let(:user) { FactoryGirl.create(:user) }
-    
+
   describe "index" do
     it "has only published posts" do
       published_post = FactoryGirl.create(:post, :published_at => 1.week.ago)
       unpublished_post = FactoryGirl.create(:post, :published_at => nil)
-      
+
       get :index
-      
+
       assigns(:posts).size.should == 1
       assigns(:posts).include?(published_post).should == true
       assigns(:posts).include?(unpublished_post).should_not == true
@@ -23,32 +23,32 @@ describe PostsController do
       assigns(:posts).size.should == 1
     end
   end
-  
+
   describe "show" do
     it "has the requested post, a new comment, the comments for the post, and the overridden page title" do
       post = FactoryGirl.create(:post)
       comment = FactoryGirl.create(:comment, :post => post)
-      
+
       get :show, :post_id => post
-      
+
       assigns(:post).should == post
       assigns(:comments).size.should == 1
       assigns(:comment).should_not be_nil
       assigns(:page_title).should == assigns(:post).title
     end
   end
-  
+
   describe "new" do
     it "has a post object" do
       login_as user
-      
+
       get :new
-      
+
       assigns(:post).should_not be_nil
       response.should be_success
     end
   end
-  
+
   describe "create" do
     it "creates a new post" do
       login_as user
@@ -56,7 +56,7 @@ describe PostsController do
        expect{
          post :create, post: {title: "The Title", body: "The Body", related_links_attributes: {"0" => {url: "http://www.google.com", title: "Google"}}, tags_attributes: {"0" => {name: "Foo"}}}
        }.to change(Post, :count).by(1)
-      
+
       assigns(:post).related_links.count.should == 1
       assigns(:post).tags.count.should == 1
       flash.notice.should_not be_nil
@@ -64,59 +64,59 @@ describe PostsController do
     end
     it "reloads the page if errors are present" do
       login_as FactoryGirl.create(:user)
-      
+
       expect{
         post :create, post: {body: ""}
       }.to_not change(Post, :count)
-      
+
       flash.now[:alert].should_not be_nil
       response.should render_template(:new)
     end
   end
-  
+
   describe "edit" do
     it "has the post to edit" do
       login_as user
       post = FactoryGirl.create(:post)
-      
+
       get :edit, :post_id => post
-      
+
       assigns(:post).should == post
     end
   end
-  
+
   describe "update" do
     it "updates the post" do
       login_as user
       post = FactoryGirl.create(:post)
-      
+
       put :update, post_id: post, post: {body: "Updated body"}
-      
+
       flash[:notice].should_not be_nil
       response.should redirect_to blog_post_path(post)
     end
     it "reloads the page if errors are present" do
       login_as user
       post = FactoryGirl.create(:post)
-      
+
       put :update, post_id: post, post: {body: ""}
-      
+
       flash.now[:alert].should_not be_nil
       response.should render_template(:edit)
     end
   end
-  
+
   describe "admin_index" do
     it "has a listing of all blog posts" do
       login_as user
       published_post = FactoryGirl.create(:post)
       unpublished_post = FactoryGirl.create(:post, :published_at => nil)
-      
+
       get :admin_index
-      
+
       assigns(:posts).size.should == 2
       assigns(:posts).include?(unpublished_post).should == true
     end
   end
-      
+
 end

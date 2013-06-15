@@ -1,1 +1,2 @@
 PersonalWebsite::Application.config.secret_token = ENV['PERSONAL_WEBSITE_SECRET_TOKEN']
+PersonalWebsite::Application.config.secret_key_base = "c5057890c3992406b54b375baaababacd69426fdda9ae94e84149bddca21954e9f58d1e43011900142714b5cb77142466a4bab19c2e2664a0b84a14cc54c34d9"

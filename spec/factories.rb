@@ -16,6 +16,7 @@ FactoryGirl.define do
     last_name "DeSteffen"
     email
     password "secret1"
+    password_confirmation "secret1"
     created_at { Time.now }
     updated_at { Time.now }
   end
@@ -30,7 +31,7 @@ FactoryGirl.define do
     created_at { Time.now }
     updated_at { Time.now }
   end
-  
+
   factory :post do
     title
     body "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis dolor tortor, tincidunt non tincidunt a, pellentesque non eros. Aenean condimentum molestie tristique. Sed convallis pulvinar nulla, auctor vestibulum tellus iaculis eu. Mauris consequat laoreet eros eget interdum. Suspendisse potenti."
@@ -38,7 +39,7 @@ FactoryGirl.define do
     created_at { Time.now }
     updated_at { Time.now }
   end
-  
+
   factory :comment do
     post
     name "Payton Dog"
@@ -51,14 +52,14 @@ FactoryGirl.define do
     created_at { Time.now }
     updated_at { Time.now }
   end
-  
+
   factory :tag do
     post
     name "rails"
     created_at { Time.now }
     updated_at { Time.now }
   end
-  
+
   factory :related_link do
     post
     title "Google"
@@ -66,5 +67,5 @@ FactoryGirl.define do
     created_at { Time.now }
     updated_at { Time.now }
   end
-  
+
 end

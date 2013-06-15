@@ -1,5 +1,4 @@
 class Tag < ActiveRecord::Base
-  include ActiveModel::ForbiddenAttributesProtection
 
   belongs_to :post
 

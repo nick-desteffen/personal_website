@@ -1,5 +1,4 @@
 class Post < ActiveRecord::Base
-  include ActiveModel::ForbiddenAttributesProtection
   extend FriendlyId
   include PgSearch
 

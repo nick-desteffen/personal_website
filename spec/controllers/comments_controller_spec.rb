@@ -6,18 +6,18 @@ describe CommentsController do
     it "creates a new comment" do
       existing_post = FactoryGirl.create(:post)
       existing_comment = FactoryGirl.create(:comment, post: existing_post)
-      
+
       post :create, post_id: existing_post.id, comment: FactoryGirl.attributes_for(:comment)
-      
+
       flash[:notice].should_not be_nil
       response.should redirect_to(blog_post_path(existing_post))
     end
     it "reloads the page if errors are present" do
       existing_post = FactoryGirl.create(:post)
       existing_comment = FactoryGirl.create(:comment, post: existing_post)
-      
+
       post :create, post_id: existing_post, comment: {body: ""}
-      
+
       assigns(:comments).size.should == 1
       flash.now[:alert].should_not be_nil
       response.should render_template("posts/show")
@@ -29,9 +29,9 @@ describe CommentsController do
       user = FactoryGirl.create(:user)
       login_as user
       comment = FactoryGirl.create(:comment, :spam_flag => false)
-      
+
       xhr :post, :flag_spam, :post_id => comment.post.id, :comment_id => comment.id
-      
+
       assigns(:comment).should == comment
       assigns(:comment).spam_flag?.should == true
       response.should be_success
@@ -64,7 +64,7 @@ describe CommentsController do
       login_as user
       comment = FactoryGirl.create(:comment, body: "Old Body")
 
-      put :update, post_id: comment.post_id, comment_id: comment.id, comment: {body: "New Body"}
+      patch :update, post_id: comment.post_id, comment_id: comment.id, comment: {body: "New Body"}
 
       assigns(:comment).body.should == "New Body"
       response.should redirect_to blog_post_path(comment.post)

@@ -1,9 +1,8 @@
 class Comment < ActiveRecord::Base
-  include ActiveModel::ForbiddenAttributesProtection
   include Rakismet::Model
   include PgSearch
 
-  default_scope :order => "created_at ASC"
+  default_scope -> { order("created_at ASC") }
 
   belongs_to :post
 
