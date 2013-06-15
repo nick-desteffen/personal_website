@@ -23,5 +23,5 @@ group :development, :test do
 end
 
 group :production do
-  gem 'exception_notification', '3.0.1'
+  gem 'exception_notification', git: "git://github.com/smartinez87/exception_notification.git"
 end
