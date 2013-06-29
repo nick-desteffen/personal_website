@@ -3,9 +3,11 @@ require 'spec_helper'
 describe ResumeController do
 
   describe "index" do
-    it "send the resume file and sends an email" do
+    it "send the resume file from Github" do
       controller.stub(:render)
-      controller.should_receive(:send_file).with("#{Rails.root}/public/nicholas_desteffen_resume.pdf", :type => "application/pdf").once
+      resume = mock(:resume, body: "Nicholas DeSteffen Resume")
+      Net::HTTP.stub(:get_response).and_return(resume)
+      controller.should_receive(:send_data).once
 
       get :index
 
