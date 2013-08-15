@@ -18,9 +18,11 @@ end
 
 desc "Deploys to Heroku"
 task :deploy do
-  sh 'git push heroku master'
-  sh 'heroku run rake db:migrate'
-  sh 'heroku restart'
+  Bundler.with_clean_env do
+    sh 'git push heroku master'
+    sh 'heroku run rake db:migrate'
+    sh 'heroku restart'
+  end
 end
 
 desc "Sets application up for deployment in Heroku"

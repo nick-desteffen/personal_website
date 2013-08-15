@@ -1,7 +1,7 @@
 @import "variables";
 
 /*******************************/
-/******** Main Layout **********/ 
+/******** Main Layout **********/
 /*******************************/
 body{
   font-family: 'Istok Web', sans-serif;
@@ -9,15 +9,15 @@ body{
   background: -moz-linear-gradient(top, $dark_teal, $light_grey) no-repeat $light_grey;
   background: -webkit-gradient(linear, left top, left bottom, from($dark_teal), to($light_grey)) no-repeat $light_grey;
   background: -o-linear-gradient($dark_teal, $light_grey) no-repeat $light_grey;
-  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#{$dark_teal}', endColorstr='#{$light_grey}') no-repeat $light_grey; /* IE6 & IE7 */  
-  -ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorstr='#{$dark_teal}', endColorstr='#{$light_grey}')" no-repeat $light_grey; /* IE8+ */  
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#{$dark_teal}', endColorstr='#{$light_grey}') no-repeat $light_grey; /* IE6 & IE7 */
+  -ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorstr='#{$dark_teal}', endColorstr='#{$light_grey}')" no-repeat $light_grey; /* IE8+ */
   padding: 0;
   margin: 0;
 }
 
 #header{
-  position: relative; 
-  width: 944px; 
+  position: relative;
+  width: 944px;
   margin: 40px auto;
 }
 
@@ -29,26 +29,26 @@ body{
   padding: 45px;
   background-color: #fff;
   min-height: 600px;
-    
+
   background-image: image-url('background/furley_bg_@2X.png');
   background-size: 600px 600px;
 
   border-radius: 20px;
   -moz-border-radius: 20px;
   -webkit-border-radius: 20px;
-  
+
   -moz-box-shadow: 3px 3px 3px #666;
   -webkit-box-shadow: 3px 3px 3px #666;
   box-shadow: 3px 3px 3px #666;
 }
 
 #title{
-  float: left;  
+  float: left;
   .headline{
     text-decoration: none;
   }
   h1{
-    color: $yellow; 
+    color: $yellow;
     margin: 0;
     font-size: 40px;
     text-shadow: rgba(0,0,0,0.5) -2px 2px, rgba(0,0,0,0.3) 0 -2px, rgba(255,255,255,0.5) 0 -1px, rgba(0,0,0,0.3) -2px -4px;
@@ -71,7 +71,7 @@ body{
     li{
       float: left;
       margin: 10px 0;
-      
+
       a{
         padding: 15px 20px;
         text-decoration: none;
@@ -79,12 +79,12 @@ body{
         background: -moz-linear-gradient(top,  $grey,  darken($grey, 40%));
         background: -webkit-gradient(linear, left top, left bottom, from($grey), to(darken($grey, 40%))) no-repeat darken($grey, 30%);
         background: -o-linear-gradient($grey, darken($grey, 40%));
-        
+
         color: #fff;
         display: inline;
         font-size: 20px;
         border-right: 1px solid rgba(0, 0, 0, 0.2);
-        &:hover, &.active{ 
+        &:hover, &.active{
           color: #fff;
           background: $light_teal;
           background: -moz-linear-gradient(top,  $light_teal,  darken($light_teal, 20%));
@@ -92,7 +92,7 @@ body{
           background: -o-linear-gradient($light_teal, darken($light_teal, 30%));
         }
       }
-    }    
+    }
     li:first-child a, {
       padding-left: 40px;
       border-radius: $nav_radius 0 0 $nav_radius;
@@ -105,14 +105,14 @@ body{
       -moz-border-radius: 0 $nav_radius $nav_radius 0;
       -webkit-border-radius: 0 $nav_radius $nav_radius 0;
     }
-    
+
   }
 }
 
 #main{
   display: inline-block;
   min-height: 515px;
-   
+
   .right-col{
     float: right;
     width: 260px;
@@ -130,7 +130,7 @@ body{
 #footer{
   margin-top: 25px;
   text-align: center;
-  
+
   .hr{
     border-bottom: 1px dotted black;
     margin: 10px 100px;
@@ -144,13 +144,10 @@ body{
 .social_media{
   float: left;
   margin-bottom: 20px;
-  img{
-    margin: 3px;
-  }
 }
 
 /*******************************/
-/****** General Styles *********/ 
+/****** General Styles *********/
 /*******************************/
 h1{
   color: $light_teal;
@@ -200,12 +197,12 @@ a{
   padding: 20px;
   border: 1px solid $red;
   background-color: lighten($red, 45%);
-  
+
   h2{
     margin: 0;
     color: $red;
   }
-  
+
   ul{
     margin: 0;
     font-size: 14px;
@@ -213,7 +210,7 @@ a{
 }
 
 /*******************************/
-/******* Flash Messages ********/ 
+/******* Flash Messages ********/
 /*******************************/
 .flash-messages {
   width: 100%;
