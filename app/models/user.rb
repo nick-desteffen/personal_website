@@ -11,11 +11,4 @@ class User < ActiveRecord::Base
     "#{first_name} #{last_name}"
   end
 
-  def password=(unencrypted_password)
-    @password = unencrypted_password
-    unless unencrypted_password.blank?
-      self.password_digest = BCrypt::Password.create(unencrypted_password, cost: Rails.configuration.password_cost)
-    end
-  end
-
 end

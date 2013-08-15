@@ -41,7 +41,5 @@ module PersonalWebsite
       :domain         => ENV['SENDGRID_DOMAIN']
     }
 
-    config.password_cost = BCrypt::Engine::DEFAULT_COST
-
   end
 end

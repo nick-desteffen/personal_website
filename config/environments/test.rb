@@ -10,5 +10,4 @@ PersonalWebsite::Application.configure do
   config.action_mailer.delivery_method = :test
   config.action_mailer.default_url_options = { host: 'localhost:3000' }
   config.active_support.deprecation = :stderr
-  config.password_cost = BCrypt::Engine::MIN_COST
 end

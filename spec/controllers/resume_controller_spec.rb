@@ -5,7 +5,7 @@ describe ResumeController do
   describe "index" do
     it "send the resume file from Github" do
       controller.stub(:render)
-      resume = mock(:resume, body: "Nicholas DeSteffen Resume")
+      resume = double(:resume, body: "Nicholas DeSteffen Resume")
       Net::HTTP.stub(:get_response).and_return(resume)
       controller.should_receive(:send_data).once
 

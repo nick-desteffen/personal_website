@@ -59,7 +59,7 @@ describe PostsHelper do
 
   describe "format_comment" do
     it "returns an empty string if the string passed in is nil" do
-      helper.format_comment(nil).should == ""
+      helper.format_comment(nil).should == nil
     end
     it "formats markdown" do
       helper.format_comment("**Bold**").should == "<p><strong>Bold</strong></p>\n"

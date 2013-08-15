@@ -2,10 +2,10 @@ module PostsHelper
 
   def gravatar_image(gravatar_hash, options={})
     return if gravatar_hash.blank?
-    size = options[:size] || 75
-    alt = options[:alt] || ""
-    title = options[:title] || ""
-    image_tag("http://www.gravatar.com/avatar/#{gravatar_hash}?size=#{size}", :alt => alt, :title => title)
+    size  = options.fetch(:size, 75)
+    alt   = options.fetch(:alt, "")
+    title = options.fetch(:title, "")
+    image_tag("http://www.gravatar.com/avatar/#{gravatar_hash}?size=#{size}", alt: alt, title: title)
   end
 
   def comment_name(comment)
@@ -17,7 +17,7 @@ module PostsHelper
   end
 
   def format_comment(comment)
-    return "" if comment.blank?
+    return if comment.blank?
     markdown_renderer = Redcarpet::Markdown.new(Redcarpet::Render::HTML, autolink: true, space_after_headers: true)
     markdown_renderer.render(comment).html_safe
   end
