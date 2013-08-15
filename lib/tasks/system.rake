@@ -2,12 +2,16 @@ namespace :db do
 
   desc "Retrieves the database from production and updates locally"
   task fetch: [:environment] do
-    user     = ActiveRecord::Base.connection_config[:username]
-    database = ActiveRecord::Base.connection_config[:database]
-    host     = ActiveRecord::Base.connection_config[:host]
-    sh "heroku pgbackups:capture"
-    sh "curl -o latest.dump `heroku pgbackups:url`"
-    sh "pg_restore --verbose --clean --no-acl --no-owner -h #{host} -U #{user} -d #{database} latest.dump"
+    Bundler.with_clean_env do
+      user     = ActiveRecord::Base.connection_config[:username]
+      database = ActiveRecord::Base.connection_config[:database]
+      host     = ActiveRecord::Base.connection_config[:host]
+      Rake::Task["db:drop"].invoke
+      Rake::Task["db:create"].invoke
+      sh "heroku pgbackups:capture"
+      sh "curl -o latest.dump `heroku pgbackups:url`"
+      sh "pg_restore --verbose --clean --no-acl --no-owner -h #{host} -U #{user} -d #{database} latest.dump"
+    end
   end
 
 end
