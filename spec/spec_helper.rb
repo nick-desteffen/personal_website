@@ -14,6 +14,7 @@ RSpec.configure do |config|
 
   config.before do
     Comment.any_instance.stub(:spam?).and_return(false)
+    Comment.any_instance.stub(:spam!).and_return(true)
   end
 
 end

@@ -1,0 +1,102 @@
+<p>
+  This post will discuss building a backend API wrapper using
+  <a href="https://github.com/typhoeus/typhoeus" target="_blank">Typhoeus</a> and
+  <a href="https://github.com/solnic/virtus" target="_blank">Virtus</a>.  As a project gets more complex
+  service oriented architecture allows you to split out your application into more managanable components.
+  This makes deployment simpler however it becomes more difficult to work with your data.  Javascript front
+  end frameworks like Backbone.js and Ember.js are designed to consume REST APIs easily, this is great if you are
+  building a Javascript application.  If you need to connect via Ruby you are going to want an easy way of working with your data.
+
+  By following conventions you can build a simple mixin and you'll be set.    By including the Virtus module in a basic ruby class you can define attributes using it's DSL and
+  you'll get automatic type cohersion when you instantiate a new object.
+</p>
+
+1.) Virtus object example
+2.) Basic wrapper
+3.) ActiveModelSerializers
+4.) Integrate ActiveModel
+5.) Hashie as basic alternative for show & index
+6.) Link to applications
+<a href="https://github.com/solnic/virtus" target="_blank">Virtus</a>
+<a href="https://github.com/typhoeus/typhoeus" target="_blank">Typhoeus</a>
+
+<h2>Virtus</h2>
+<p>
+  <a href="https://github.com/solnic/virtus" target="_blank">https://github.com/solnic/virtus</a>
+  Virtus is a gem that was extracted from the <a href='http://datamapper.org/' target="_blank">DataMapper</a> gem. It provides the ability to define attributes on a
+  class with automatic type coersion.
+
+  <pre class="brush: ruby;">
+    class User
+      include Virtus.model
+
+      attribute :id,        Integer
+      attribute :name,      String
+      attribute :email,     String
+      attribute :age,       Integer
+      attribute :addresses, Array[Address]
+    end
+
+    class Address
+      include Virtus.model
+
+      attribute :id,       Integer
+      attribute :street,   String
+      attribute :city,     String
+      attribute :state,    String
+      attribute :zip_code, String
+    end
+  </pre>
+  <pre class="brush: ruby;">
+    data = {
+      id: 1,
+      name: "Nick",
+      email: "nick@gmail.com",
+      age: 33,
+      addresses: [{
+        id: 1,
+        street: "1234 Main St.",
+        city: "Chicago",
+        state: "IL",
+        zip_code: "60640"
+      }, {
+        id: 2,
+        street: "555 Park Ave.",
+        city: "New York",
+        state: "NY",
+        zip_code: "10103"
+      }]
+    }
+
+    user = User.new(data)
+  </pre>
+</p>
+
+<h2>ActiveModel::Serializers</h2>
+<p>
+  <a href="https://github.com/rails-api/active_model_serializers" target="_blank">https://github.com/rails-api/active_model_serializers</a>
+  <pre class="brush: ruby;">
+    class UserSerializer < ActiveModel::Serializer
+
+      attributes :id, :first_name, :last_name, :email, :auth_token
+
+      has_many :addresses
+
+    end
+  </pre>
+</p>
+
+<h2>Typhoeus</h2>
+<p>
+  <a href="https://github.com/typhoeus/typhoeus" target="_blank">https://github.com/typhoeus/typhoeus</a>
+  When building your API you don't have to use Typhoeus, however it is very easy to work with.
+
+  Faraday, net/http
+  <pre class="brush: ruby;">
+  </pre>
+</p>
+
+<h2>Hashie</h2>
+<p>
+  <a href="https://github.com/intridea/hashie" target="_blank">https://github.com/intridea/hashie</a>
+</p>
