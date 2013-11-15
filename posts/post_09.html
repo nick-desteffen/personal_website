@@ -1,30 +1,36 @@
 <p>
-  This post will discuss building a backend API wrapper using
+  This post will outline the process of building a backend API wrapper using
   <a href="https://github.com/typhoeus/typhoeus" target="_blank">Typhoeus</a> and
   <a href="https://github.com/solnic/virtus" target="_blank">Virtus</a>.  As a project gets more complex
-  service oriented architecture allows you to split out your application into more managanable components.
+  a service oriented architecture allows you to split out your application into more managanable components.
   This makes deployment simpler however it becomes more difficult to work with your data.  Javascript front
-  end frameworks like Backbone.js and Ember.js are designed to consume REST APIs easily, this is great if you are
-  building a Javascript application.  If you need to connect via Ruby you are going to want an easy way of working with your data.
-
-  By following conventions you can build a simple mixin and you'll be set.    By including the Virtus module in a basic ruby class you can define attributes using it's DSL and
-  you'll get automatic type cohersion when you instantiate a new object.
+  end frameworks like Backbone.js and Ember.js are designed to consume dat from REST APIs easily, this is great
+  if you are building a Javascript application.  If you need to connect via Ruby you are going to want an easy way of
+  working with your data.  By following some simple conventions you can build a mixin to add to your objects and
+  you'll be set.
 </p>
 
-1.) Virtus object example
-2.) Basic wrapper
-3.) ActiveModelSerializers
-4.) Integrate ActiveModel
-5.) Hashie as basic alternative for show & index
-6.) Link to applications
+1.) Virtus Objects
+2.) Building the API
+3.) Getting data from the API
+
+4.) Basic CRUD API Wrapper
+5.) Integrate ActiveModel
+6.) Using Hashie as simple alternative
+7.) Demo Applications
+
 <a href="https://github.com/solnic/virtus" target="_blank">Virtus</a>
 <a href="https://github.com/typhoeus/typhoeus" target="_blank">Typhoeus</a>
 
-<h2>Virtus</h2>
+<h2>Virtus Objects</h2>
 <p>
   <a href="https://github.com/solnic/virtus" target="_blank">https://github.com/solnic/virtus</a>
-  Virtus is a gem that was extracted from the <a href='http://datamapper.org/' target="_blank">DataMapper</a> gem. It provides the ability to define attributes on a
-  class with automatic type coersion.
+  Virtus is a gem that was extracted from the <a href='http://datamapper.org/' target="_blank">DataMapper</a> gem.
+  It provides the ability to define attributes and their type on a class.  Instantiating a new object will cause it's
+  attributes to be automatically coeresed into your definition.
+
+  You can define your attributes as simple types such as Strings and Integers, or even more complex object types such
+  as Arrays which contain a specific type of object.
 
   <pre class="brush: ruby;">
     class User
@@ -47,6 +53,10 @@
       attribute :zip_code, String
     end
   </pre>
+
+  The User object above contains an array of Address objects.  Passing in the hash structure of data to the constructor will
+  build out the object automatically.
+
   <pre class="brush: ruby;">
     data = {
       id: 1,
@@ -67,36 +77,102 @@
         zip_code: "10103"
       }]
     }
-
-    user = User.new(data)
   </pre>
+
+  <div class='terminal'>
+    2.0.0p247 :001 > user = User.new(data)
+    => #<User:0x007f9a7a496418 @id=1, @email="nick@gmail.com", @addresses=[#<Address:0x007f9a7a4956f8 @id=1, @city="Chicago", @state="IL", @zip_code="60640", @street1=nil, @street2=nil>, #<Address:0x007f9a79baa098 @id=2, @city="New York", @state="NY", @zip_code="10103", @street1=nil, @street2=nil>], @first_name=nil, @last_name=nil, @auth_token=nil>
+  </div>
+  <div class='terminal'>
+    2.0.0p247 :002 > user.addresses
+    => [#<Address:0x007f9a7a4956f8 @id=1, @city="Chicago", @state="IL", @zip_code="60640", @street1=nil, @street2=nil>, #<Address:0x007f9a79baa098 @id=2, @city="New York", @state="NY", @zip_code="10103", @street1=nil, @street2=nil>]
+  </div>
+
 </p>
 
-<h2>ActiveModel::Serializers</h2>
+<h2>Building the API</h2>
 <p>
   <a href="https://github.com/rails-api/active_model_serializers" target="_blank">https://github.com/rails-api/active_model_serializers</a>
+  Now that you have your client objects build out, how do you build out the data from your API?
+
+  I prefer to use ActiveModel::Serializers to build out the structure.  The DSL they provide is very similar to
+  ActiveRecord.  You just define what attributes you want to be returned when a model is serialized.  When you include
+  an association it's serializer is automatically brought in to build out the JSON.
+
   <pre class="brush: ruby;">
     class UserSerializer < ActiveModel::Serializer
 
-      attributes :id, :first_name, :last_name, :email, :auth_token
+      attributes :id, :name, :email, :age
 
       has_many :addresses
 
     end
+
+    class AddressSerializer < ActiveModel::Serializer
+
+      attributes :id, :street, :city, :state, :zip_code
+
+    end
+
+    class UsersController < ApplicationController
+
+      respond_to :json
+
+      def show
+        user = User.find(params[:id])
+        respond_with(user, root: false)
+      end
+
+    end
   </pre>
+  The serializers defined above are used to build out the same structure our Virtus objects need.  If the API
+  send additional attributes they are simply ignored by Virtus.
+  <br>
+  The respond_with method will lookup the serializer to use based off the type of object being returned, overriding
+  it isn't difficult to do.
+  <br>
+  If you aren't a fan of ActiveModel Serializers you can take a look at Jbuilder. It provides an alternative syntax
+  for building out JSON responses.
 </p>
 
-<h2>Typhoeus</h2>
+<h2>Getting data from the API</h2>
 <p>
   <a href="https://github.com/typhoeus/typhoeus" target="_blank">https://github.com/typhoeus/typhoeus</a>
-  When building your API you don't have to use Typhoeus, however it is very easy to work with.
+  Now that the API is setup and is returning data how do we get it?  There are a number of HTTP client gems out there such
+  as Typhoeus, Faraday and httparty.  The Ruby Standard Library also includes Net::HTTP, however it's not very
+  straightforward to use.  I prefer Typhoeus, it works the way you would expect it to and is quite flexible.  All HTTP verbs
+  work in the same manner.
 
-  Faraday, net/http
+  Getting data from the API endpoint defined above (users/show) can be done with 1 line.
+
   <pre class="brush: ruby;">
+    response = Typhoeus.get("http://localhost:3001/users/1", headers: {"Accept" => "application/json"})
+    data     = JSON.parse(response.body)
   </pre>
+
+  We can now feed the data from the response into a new Virtus object to do with as we please.
+  <pre class="brush: ruby;">
+    user = User.new(data)
+  </pre>
+  <div class='terminal'>
+    2.0.0p247 :001 > user.first_name
+    => "Nick"
+  </div>
 </p>
 
-<h2>Hashie</h2>
+<h2>Basic CRUD API Wrapper</h2>
+<p></p>
+
+<h2>Adding ActiveModel</h2>
+<p></p>
+
+<h2>Using Hashie as simple alternative</h2>
 <p>
   <a href="https://github.com/intridea/hashie" target="_blank">https://github.com/intridea/hashie</a>
+</p>
+
+<h2>Demo Applications</h2>
+<p>
+https://github.com/nick-desteffen/api-demo
+https://github.com/nick-desteffen/api-client-demo
 </p>
