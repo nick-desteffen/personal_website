@@ -18,7 +18,7 @@ PersonalWebsite::Application.routes.draw do
   get "blog/new" => "posts#new", :as => "new_post"
   post "blog/new" => "posts#create", :as => "create_post"
   get "blog/:post_id/edit" => "posts#edit", :as => "edit_post"
-  put "blog/:post_id/edit" => "posts#update", :as => "update_post"
+  patch "blog/:post_id/edit" => "posts#update", :as => "update_post"
   get "blog/:post_id" => "posts#show", :as => "blog_post"
 
   ## Comments
