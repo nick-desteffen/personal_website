@@ -6,13 +6,19 @@ class CommentsController < ApplicationController
   active_tab :blog
 
   def create
-    @comments = @post.comments.not_spam.load
-    @comment = @post.comments.build(comment_params)
-    @comment.http_request = request
-    if @comment.save
-      redirect_to blog_post_path(@post), notice: "Thanks for commenting!"
-    else
-      flash.now.alert = "There was an error with your comment. Please verify all the fields are correct."
+    begin
+      @comments = @post.comments.not_spam.load
+      @comment = @post.comments.build(comment_params)
+      @comment.http_request = request
+      if @comment.save
+        redirect_to blog_post_path(@post), notice: "Thanks for commenting!"
+      else
+        flash.now.alert = "There was an error with your comment. Please verify all the fields are correct."
+        render template: "posts/show"
+      end
+    rescue ArgumentError => exception
+      @comment = @post.comments.build
+      flash.now.alert = "Sorry, but you appear to be posting some spam."
       render template: "posts/show"
     end
   end

@@ -2,19 +2,22 @@ require 'spec_helper'
 
 describe CommentsController do
 
-  describe "create" do
-    it "creates a new comment" do
-      existing_post = FactoryGirl.create(:post)
-      existing_comment = FactoryGirl.create(:comment, post: existing_post)
+  let(:user) { FactoryGirl.create(:user) }
 
-      post :create, post_id: existing_post.id, comment: FactoryGirl.attributes_for(:comment)
+  describe "create" do
+
+    let!(:existing_post) { FactoryGirl.create(:post) }
+
+    it "creates a new comment" do
+      expect{
+        post :create, post_id: existing_post.id, comment: FactoryGirl.attributes_for(:comment)
+      }.to change(Comment, :count).by(1)
 
       flash[:notice].should_not be_nil
       response.should redirect_to(blog_post_path(existing_post))
     end
     it "reloads the page if errors are present" do
-      existing_post = FactoryGirl.create(:post)
-      existing_comment = FactoryGirl.create(:comment, post: existing_post)
+      FactoryGirl.create(:comment, post: existing_post)
 
       post :create, post_id: existing_post, comment: {body: ""}
 
@@ -22,11 +25,19 @@ describe CommentsController do
       flash.now[:alert].should_not be_nil
       response.should render_template("posts/show")
     end
+    it "shouldn't throw an exeption for invalid byte sequence errors" do
+      body = "nike japan\r\n\xA5ʥ\xA4\xA5\xADֱ\x86ӵ\xEA"
+
+      post :create, post_id: existing_post, comment: FactoryGirl.attributes_for(:comment, body: body)
+
+      response.should be_success
+      flash.now[:alert].should_not be_nil
+      response.should render_template("posts/show")
+    end
   end
 
   describe "flag_spam" do
     it "should update a comment's spam flag" do
-      user = FactoryGirl.create(:user)
       login_as user
       comment = FactoryGirl.create(:comment, :spam_flag => false)
 
@@ -40,7 +51,6 @@ describe CommentsController do
 
   describe "edit" do
     it "has the requested comment" do
-      user = FactoryGirl.create(:user)
       login_as user
       comment = FactoryGirl.create(:comment)
 
@@ -60,7 +70,6 @@ describe CommentsController do
 
   describe "update" do
     it "updates the comment" do
-      user = FactoryGirl.create(:user)
       login_as user
       comment = FactoryGirl.create(:comment, body: "Old Body")
 
@@ -83,7 +92,6 @@ describe CommentsController do
 
   describe "destroy" do
     it "should remove the post" do
-      user = FactoryGirl.create(:user)
       login_as user
       post = FactoryGirl.create(:post)
       comment = FactoryGirl.create(:comment, post: post)
