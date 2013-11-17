@@ -1,35 +1,22 @@
 <p>
-  This post will outline the process of building a backend API wrapper using
+  This post will outline the process of building a Ruby backed API wrapper using
   <a href="https://github.com/typhoeus/typhoeus" target="_blank">Typhoeus</a> and
-  <a href="https://github.com/solnic/virtus" target="_blank">Virtus</a>.  As a project gets more complex
-  a service oriented architecture allows you to split out your application into more managanable components.
-  This makes deployment simpler however it becomes more difficult to work with your data.  Javascript front
-  end frameworks like Backbone.js and Ember.js are designed to consume dat from REST APIs easily, this is great
-  if you are building a Javascript application.  If you need to connect via Ruby you are going to want an easy way of
-  working with your data.  By following some simple conventions you can build a mixin to add to your objects and
-  you'll be set.
+  <a href="https://github.com/solnic/virtus" target="_blank">Virtus</a>.<br><br>
+
+  As a project gets larger and more complex it makes sense to migrate to a <a href="http://en.wikipedia.org/wiki/Service-oriented_architecture" target="_blank">service oriented architecture (SOA)</a>.
+  This allows you to split out your application into smallermore manageable components.  Deployment is simpler however
+  it becomes more difficult to work with your data. Javascript front end frameworks like <a href="http://backbonejs.org/" target="_blank">Backbone.js</a> and <a href="http://emberjs.com/" target="_blank">Ember.js</a> are
+  designed to consume data from <a href="http://en.wikipedia.org/wiki/Representational_state_transfer" target="_blank">REST</a> APIs easily, this is great if you are building a Javascript application.
+  If you need to connect via Ruby you are going to want an easy way of working with your data.
+  By following some simple conventions you can build a mixin to add to your client side objects and you'll be set.
 </p>
 
-1.) Virtus Objects
-2.) Building the API
-3.) Getting data from the API
-
-4.) Basic CRUD API Wrapper
-5.) Integrate ActiveModel
-6.) Using Hashie as simple alternative
-7.) Demo Applications
-
-<a href="https://github.com/solnic/virtus" target="_blank">Virtus</a>
-<a href="https://github.com/typhoeus/typhoeus" target="_blank">Typhoeus</a>
-
 <h2>Virtus Objects</h2>
-<p>
-  <a href="https://github.com/solnic/virtus" target="_blank">https://github.com/solnic/virtus</a>
-  Virtus is a gem that was extracted from the <a href='http://datamapper.org/' target="_blank">DataMapper</a> gem.
+<div class="post-section">
+  <a href="https://github.com/solnic/virtus" target="_blank">Virtus</a> is a gem that was extracted from the
+  <a href="http://datamapper.org/" target="_blank">DataMapper</a> gem.
   It provides the ability to define attributes and their type on a class.  Instantiating a new object will cause it's
-  attributes to be automatically coeresed into your definition.
-
-  You can define your attributes as simple types such as Strings and Integers, or even more complex object types such
+  attributes to be automatically coeresed into your definition.  You can define your attributes as simple types such as Strings and Integers, or even more complex object types such
   as Arrays which contain a specific type of object.
 
   <pre class="brush: ruby;">
@@ -54,7 +41,7 @@
     end
   </pre>
 
-  The User object above contains an array of Address objects.  Passing in the hash structure of data to the constructor will
+  The User object above contains an array of Address objects.  Passing in a hash of data to the constructor will
   build out the object automatically.
 
   <pre class="brush: ruby;">
@@ -79,25 +66,23 @@
     }
   </pre>
 
-  <div class='terminal'>
-    2.0.0p247 :001 > user = User.new(data)
-    => #<User:0x007f9a7a496418 @id=1, @email="nick@gmail.com", @addresses=[#<Address:0x007f9a7a4956f8 @id=1, @city="Chicago", @state="IL", @zip_code="60640", @street1=nil, @street2=nil>, #<Address:0x007f9a79baa098 @id=2, @city="New York", @state="NY", @zip_code="10103", @street1=nil, @street2=nil>], @first_name=nil, @last_name=nil, @auth_token=nil>
-  </div>
-  <div class='terminal'>
-    2.0.0p247 :002 > user.addresses
-    => [#<Address:0x007f9a7a4956f8 @id=1, @city="Chicago", @state="IL", @zip_code="60640", @street1=nil, @street2=nil>, #<Address:0x007f9a79baa098 @id=2, @city="New York", @state="NY", @zip_code="10103", @street1=nil, @street2=nil>]
-  </div>
+  <pre class="brush: ruby;">
+    2.0.0p247 :001 &gt; user = User.new(data)
+    => #&lt;User:0x007f9a7a496418 @id=1, @email="nick@gmail.com", @name="Nick", @age=1, @addresses=[#&lt;Address:0x007f9a7a4956f8 @id=1, @city="Chicago", @state="IL", @zip_code="60640", @street="1234 Main St.">, #&lt;Address:0x007f9a79baa098 @id=2, @city="New York", @state="NY", @zip_code="10103", @street1=nil, @street2=nil&gt;]&gt;
+    2.0.0p247 :002 &gt; user.addresses
+    => [#&lt;Address:0x007f9a7a4956f8 @id=1, @city="Chicago", @state="IL", @zip_code="60640", @street="1234 Main St."&gt;, #&lt;Address:0x007f9a79baa098 @id=2, @city="New York", @state="NY", @zip_code="10103", @street="555 Park Ave."&gt;]
+  </pre>
 
-</p>
+</div>
 
 <h2>Building the API</h2>
-<p>
-  <a href="https://github.com/rails-api/active_model_serializers" target="_blank">https://github.com/rails-api/active_model_serializers</a>
+<div class="post-section">
   Now that you have your client objects build out, how do you build out the data from your API?
 
-  I prefer to use ActiveModel::Serializers to build out the structure.  The DSL they provide is very similar to
+  I prefer to use <a href="https://github.com/rails-api/active_model_serializers" target="_blank">ActiveModel::Serializers</a>
+  to build out the structure.  The DSL provided by the gem is very similar to
   ActiveRecord.  You just define what attributes you want to be returned when a model is serialized.  When you include
-  an association it's serializer is automatically brought in to build out the JSON.
+  an association it's own serializer is automatically brought in to build out the JSON.
 
   <pre class="brush: ruby;">
     class UserSerializer < ActiveModel::Serializer
@@ -113,7 +98,8 @@
       attributes :id, :street, :city, :state, :zip_code
 
     end
-
+  </pre>
+  <pre class="brush: ruby;">
     class UsersController < ApplicationController
 
       respond_to :json
@@ -126,53 +112,327 @@
     end
   </pre>
   The serializers defined above are used to build out the same structure our Virtus objects need.  If the API
-  send additional attributes they are simply ignored by Virtus.
-  <br>
-  The respond_with method will lookup the serializer to use based off the type of object being returned, overriding
-  it isn't difficult to do.
-  <br>
-  If you aren't a fan of ActiveModel Serializers you can take a look at Jbuilder. It provides an alternative syntax
-  for building out JSON responses.
-</p>
+  sends additional attributes they are simply ignored by Virtus. The <strong>respond_with</strong> method will
+  lookup the serializer to use based off the type of object being returned, overriding it isn't difficult to
+  do. If you aren't a fan of ActiveModel Serializers you can take a look at <a href="https://github.com/rails/jbuilder" target="_blank">Jbuilder</a>.
+  It provides an alternative syntax for building out JSON responses.
+</div>
 
 <h2>Getting data from the API</h2>
-<p>
-  <a href="https://github.com/typhoeus/typhoeus" target="_blank">https://github.com/typhoeus/typhoeus</a>
+<div class="post-section">
   Now that the API is setup and is returning data how do we get it?  There are a number of HTTP client gems out there such
-  as Typhoeus, Faraday and httparty.  The Ruby Standard Library also includes Net::HTTP, however it's not very
-  straightforward to use.  I prefer Typhoeus, it works the way you would expect it to and is quite flexible.  All HTTP verbs
-  work in the same manner.
+  as <a href="https://github.com/typhoeus/typhoeus" target="_blank">Typhoeus</a>,
+  <a href="https://github.com/lostisland/faraday" target="_blank">Faraday</a> and
+  <a href="https://github.com/jnunemaker/httparty" target="_blank">httparty</a>.  The Ruby Standard Library also includes
+  <a href="http://ruby-doc.org/stdlib-2.0.0/libdoc/net/http/rdoc/Net/HTTP.html" target="_blank">Net::HTTP</a>, however it isn't very
+  straightforward to use.  I prefer Typhoeus, it is easy to use, has a great interface and is quite flexible.  All HTTP verbs
+  work in the same manner with some minor tweaks.
 
-  Getting data from the API endpoint defined above (users/show) can be done with 1 line.
+  Getting data from the API endpoint defined above <strong>(users#show)</strong> can be done with 1 line.
 
   <pre class="brush: ruby;">
     response = Typhoeus.get("http://localhost:3001/users/1", headers: {"Accept" => "application/json"})
     data     = JSON.parse(response.body)
   </pre>
 
-  We can now feed the data from the response into a new Virtus object to do with as we please.
+  We can now feed the data from the response into a new Virtus object and read attributes from it like a standard ActiveRecord model.
   <pre class="brush: ruby;">
     user = User.new(data)
   </pre>
-  <div class='terminal'>
-    2.0.0p247 :001 > user.first_name
+  <pre class="brush: ruby;">
+    2.0.0p247 :001 > user.name
     => "Nick"
-  </div>
-</p>
+  </pre>
+</div>
 
-<h2>Basic CRUD API Wrapper</h2>
-<p></p>
+<h2>Basic CRUD Wrapper</h2>
+<div class="post-section">
+  Reading your data is great, however to be really useful to be able to make updates in addition to creating new records and removing old records.
+  Typhoeus works with POST requests almost exactly the same as GET requests. Consistency is one the things I like about it.
+  <pre class="brush: ruby;">
+    user_attributes = {
+      email: 'dog@example.com',
+      name:  'Payton',
+      age:    12
+    }
+    response = Typhoeus::Request.post("http://localhost:3001/users", body: {user: user_attributes}, headers: {"content-type" => "application/x-www-form-urlencoded"})
+    data = JSON.parse(response.body)
+    user = User.new(data)
+  </pre>
+  After parsing the response and passing it into a new object we can see that the database successfully created a new record.
+  <pre class="brush: ruby;">
+    2.0.0p247 :001 > user.name
+    => "Payton"
+    2.0.0p247 :002 > user.id
+    => 2
+  </pre>
+
+  To make things a bit more "Rails" like we can create add a few class methods to the User class.
+  <pre class="brush: ruby;">
+    def self.find(id)
+      response = Typhoeus.get("http://localhost:3001/#{id}", headers: {"Accept" => "application/json"})
+      data = JSON.parse(response.body)
+      return User.new(data)
+    end
+
+    def self.create(attributes={})
+      response = Typhoeus::Request.post("http://localhost:3001/users", body: {user: attributes}, headers: {"content-type" => "application/x-www-form-urlencoded"})
+      data = JSON.parse(response.body)
+      return User.new(data)
+    end
+
+    def self.update(id, attributes={})
+      user = User.new(attributes.merge(id: id))
+      response = Typhoeus::Request.put("http://localhost:3001/users/#{id}", body: {user: attributes}, headers: {"content-type" => "application/x-www-form-urlencoded"})
+      return user
+    end
+
+    def self.destroy(id)
+      response = Typhoeus::Request.delete("http://localhost:3001/users/#{id}")
+      return response.success?
+    end
+  </pre>
+
+  <pre class="brush: ruby;">
+    2.0.0p247 :001 > User.find(2)
+    => #&lt;User:0x007fecfacb2e08 @id=2, @name="Payton", @email="dog@example.com", @age=12&gt;
+    2.0.0p247 :002 > User.create(name: "Jack", email: "jack@example.com", age: 8)
+    => #&lt;User:0x007fecfcc97930 @id=3, @name="Jack", @email="jack@example.com", @age=8&gt;
+  </pre>
+
+  The methods aren't a 100% match to Rails <strong>update_attributes</strong> and <strong>destroy</strong> however it is still an external call,
+  so we want to minimize the number of requests.  Instead of finding the user, then updating it we are doing it in one call.
+</div>
 
 <h2>Adding ActiveModel</h2>
-<p></p>
+<div class="post-section">
+  Now that we have a User class that handles all the basic CRUD operations we can toss in a bit of ActiveModel to make it work
+  with standard Rails forms.  The <strong>respond_with</strong> method that returns JSON from the API will also return any validation errors.
+  By mixing in <strong>ActiveModel::Validations</strong> we get access to the errors object. If the response status is <strong>422</strong> we can take it
+  and build out the errors on our local object.
 
-<h2>Using Hashie as simple alternative</h2>
-<p>
-  <a href="https://github.com/intridea/hashie" target="_blank">https://github.com/intridea/hashie</a>
-</p>
+  <pre class="brush: ruby;">
+    class User
+      include Virtus.model
+      extend  ActiveModel::Naming
+      extend  ActiveModel::Translation
+      include ActiveModel::Conversion
+      include ActiveModel::Validations
+
+      attribute :id,    Integer
+      attribute :name,  String
+      attribute :email, String
+      attribute :age,   Integer
+
+      def persisted?
+        id.present?
+      end
+
+      def self.create(attributes={})
+        response = Typhoeus::Request.post("http://localhost:3001/users", body: {user: attributes}, headers: {"content-type" => "application/x-www-form-urlencoded"})
+        if response.success?
+          data = JSON.parse(response.body)
+          user = User.new(data)
+        else
+          user = User.new(attributes)
+          if response.response_code == 422
+            data = JSON.parse(response.body)
+            user.assign_errors(data)
+          end
+        end
+        return user
+      end
+
+      def assign_errors(error_data)
+        error_data["errors"].each do |attribute, attribute_errors|
+          attribute_errors.each do |error|
+            self.errors.add(attribute, error)
+          end
+        end
+      end
+
+    end
+  </pre>
+
+  <pre class="brush: ruby;">
+    2.0.0p247 :001 > user = User.create(email: "")
+    => #&lt;User:0x007f8f7a4d64b0 @email="", @id=nil, @name=nil, @age=nil, @addresses=[], @errors=#&lt;ActiveModel::Errors:0x007f8f7b4cd490 @base=#&lt;User:0x007f8f7a4d64b0 ...>, @messages={:name=>["can't be blank"], :email=>["can't be blank"]}&gt;&gt;
+    2.0.0p247 :002 > user.errors[:email]
+    => ["can't be blank"]
+  </pre>
+
+  Since we are using the same interface ActiveRecord uses, our forms will behave just like everything was connected
+  directly to our database.
+</div>
+
+<h2>Abstracting for Reuse</h2>
+<div class="post-section">
+  So now we have a user class that works like ActiveRecord, but goes through a REST API instead.  If your application
+  has a bunch of classes that connect to the same API things are going to get very repititive.  You can create a
+  mixin to include on all your objects.  The one below has everything used in this post, plus basic search and listing <strong>(where / all)</strong>.
+  <pre class="brush: ruby;">
+    module ApiBase
+      extend ActiveSupport::Concern
+
+      included do
+        require "addressable/uri"
+        include Virtus.model
+        extend  ActiveModel::Naming
+        extend  ActiveModel::Translation
+        include ActiveModel::Conversion
+        include ActiveModel::Validations
+      end
+
+      def persisted?
+        id.present?
+      end
+
+      def assign_errors(error_data)
+        error_data[:errors].each do |attribute, attribute_errors|
+          attribute_errors.each do |error|
+            self.errors.add(attribute, error)
+          end
+        end
+      end
+
+      module ClassMethods
+
+        def find(id)
+          response = Typhoeus.get("#{base_url}/#{id}", headers: {"Accept" => "application/json"})
+          if response.success?
+            data = JSON.parse(response.body, symbolize_names: true)
+            return self.new(data)
+          else
+            return nil
+          end
+        end
+
+        def where(parameters={})
+          parameters.reject!{ |key, value| value.blank? }
+          querystring = Addressable::URI.new.tap do |uri|
+            uri.query_values = parameters
+          end.query
+
+          response = Typhoeus.get("#{base_url}?#{querystring}", headers: {"Accept" => "application/json"})
+          if response.success?
+            data = JSON.parse(response.body, symbolize_names: true)
+            return data.map{ |record| self.new(record) }
+          else
+            return nil
+          end
+        end
+
+        alias_method :all, :where
+
+        def create(attributes={})
+          response = Typhoeus::Request.post(base_url, body: envelope(attributes), headers: {"content-type" => "application/x-www-form-urlencoded"})
+          data = JSON.parse(response.body, symbolize_names: true)
+          if response.success?
+            object = self.new(data)
+          else
+            object = self.new(attributes)
+            object.assign_errors(data) if response.response_code == 422
+          end
+          return object
+        end
+
+        def update(id, attributes={})
+          object = self.new(attributes.merge(id: id))
+          response = Typhoeus::Request.put("#{base_url}/#{id}", body: envelope(attributes), headers: {"content-type" => "application/x-www-form-urlencoded"})
+          if response.response_code == 422
+            data = JSON.parse(response.body, symbolize_names: true)
+            object.assign_errors(data)
+          end
+          return object
+        end
+
+        def destroy(id)
+          response = Typhoeus::Request.delete("#{base_url}/#{id}")
+          return response.success?
+        end
+
+      private
+
+        def envelope(attributes)
+          envelope = {}
+          envelope[self.name.to_s.underscore.downcase] = attributes
+          return envelope
+        end
+
+        def base_url
+          Rails.configuration.api_endpoint + "/" + self.name.to_s.underscore.downcase.pluralize
+        end
+
+      end
+
+    end
+  </pre>
+  The User class now has the all functionality it had before, yet it can be added to make other class just as functional.
+  <pre class="brush: ruby;">
+    class User
+      include ApiBase
+
+      attribute :id,        Integer
+      attribute :name,      String
+      attribute :email,     String
+      attribute :addresses, Array[Address]
+    end
+  </pre>
+</div>
+
+<h2>Using Hashie as an alternative</h2>
+<div class="post-section">
+  If you don't need full CRUD or a lot of complexity you can also just use <a href="https://github.com/intridea/hashie" target="_blank">Hashie</a>.  It will take a hash and construct a simple object with accessors.
+  <pre class="brush: ruby;">
+    2.0.0p247 :01 > data = JSON.parse(Typhoeus.get("http://localhost:3001/users/1", headers: {"Accept" => "application/json"}).body)
+    => {"id"=>3, "name"=>"Nick", "email"=>"nick@gmail.com", "age"=>"33", "addresses"=>[{"id"=>1, "street"=>"1234 Main St.", "city"=>"Chicago", "state"=>"IL", "zip_code"=>"60640"}, {"id"=>2, "street"=>"555 Park Ave.", "city"=>"New York", "state"=>"NY", "zip_code"=>"10103"}]}
+    2.0.0p247 :02 > user = Hashie::Mash.new(data)
+    => #&lt;Hashie::Mash addresses=[#&lt;Hashie::Mash city="Chicago" id=1 state="Il" street="1234 Main St." zip_code="60640"&gt;, #&lt;Hashie::Mash city="New York" id=2 state="NY" street="555 Park Ave." zip_code="10103"&gt;] email="nick@gmail.com" name="Nick" id=1 age=33&gt;
+    2.0.0p247 :03 > user.email
+    => "nick@gmail.com"
+  </pre>
+</div>
 
 <h2>Demo Applications</h2>
-<p>
-https://github.com/nick-desteffen/api-demo
-https://github.com/nick-desteffen/api-client-demo
-</p>
+<div class="post-section">
+  <a href="https://github.com/nick-desteffen/virtus-typhoeus-api-demo" target="_blank">https://github.com/nick-desteffen/virtus-typhoeus-api-demo</a><br>
+  I made a couple of demo applications. To get up and running just clone the repo and fire up both applications.<br><br>
+  To start the API:
+  <div class="terminal">
+    $ cd api<br>
+    $ bundle install<br>
+    $ bundle exec rails s -p 3001
+  </div>
+  To start the client:
+  <div class="terminal">
+    $ cd client<br>
+    $ bundle install<br>
+    $ bundle exec rails s
+  </div>
+  Now visit: <a href="http://localhost:3000" target="_blank">http://localhost:3000</a>
+  <br>
+  <br>
+  The API wrapper mixin is located at:<br>
+  <a href="https://github.com/nick-desteffen/virtus-typhoeus-api-demo/blob/master/client/lib/api/base.rb" target="_blank">https://github.com/nick-desteffen/virtus-typhoeus-api-demo/blob/master/client/lib/api/base.rb</a>
+</div>
+
+
+
+
+https://github.com/typhoeus/typhoeus
+https://github.com/solnic/virtus
+https://github.com/intridea/hashie
+http://datamapper.org
+http://backbonejs.org
+http://emberjs.com
+https://github.com/rails-api/active_model_serializers
+https://github.com/nick-desteffen/virtus-typhoeus-api-demo
+
+https://github.com/lostisland/faraday
+https://github.com/jnunemaker/httparty
+http://ruby-doc.org/stdlib-2.0.0/libdoc/net/http/rdoc/Net/HTTP.html
+https://github.com/rails/jbuilder
+http://en.wikipedia.org/wiki/Service-oriented_architecture
+http://en.wikipedia.org/wiki/Representational_state_transfer
+
+Ruby, Virtus, Typhoeus, Hashie, REST, API, SOA, ActiveModel::Serializers, Rails

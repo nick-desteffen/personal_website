@@ -14,7 +14,7 @@ gem 'pg_search', "0.7.0"
 
 gem 'sass-rails', "4.0.1"
 gem 'coffee-rails', "4.0.1"
-gem 'uglifier', "2.3.0"
+gem 'uglifier', "2.3.1"
 
 group :development, :test do
   gem "rspec-rails", "2.14.0"

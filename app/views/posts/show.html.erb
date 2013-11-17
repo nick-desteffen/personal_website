@@ -1,7 +1,7 @@
 <div class="blog_post">
   <h1><%= link_to @post.title, blog_post_path(@post) %></h1>
   <time><%= format_date(@post.published_at) %></time>
-  <p><%= @post.body.html_safe %></p>
+  <div class="post-body"><%= @post.body.html_safe %></div>
   <div>
     <%= render :partial => "shared/facebook_like_button" %>
     <%= render :partial => "shared/twitter_tweet_button" %>

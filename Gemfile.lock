@@ -44,7 +44,7 @@ GEM
       debugger-ruby_core_source (~> 1.2.3)
     debugger-linecache (1.2.0)
     debugger-ruby_core_source (1.2.3)
-    diff-lcs (1.2.4)
+    diff-lcs (1.2.5)
     erubis (2.7.0)
     eventmachine (1.0.3)
     exception_notification (4.0.1)
@@ -140,7 +140,7 @@ GEM
       polyglot
       polyglot (>= 0.3.1)
     tzinfo (0.3.38)
-    uglifier (2.3.0)
+    uglifier (2.3.1)
       execjs (>= 0.3.0)
       json (>= 1.8.0)
 
@@ -165,4 +165,4 @@ DEPENDENCIES
   rspec-rails (= 2.14.0)
   sass-rails (= 4.0.1)
   thin (= 1.6.1)
-  uglifier (= 2.3.0)
+  uglifier (= 2.3.1)
