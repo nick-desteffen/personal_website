@@ -1,10 +1,10 @@
 <p>
-  This post will outline the process of building a Ruby backed API wrapper using
+  This post will outline the process of building a backend Ruby API wrapper using
   <a href="https://github.com/typhoeus/typhoeus" target="_blank">Typhoeus</a> and
   <a href="https://github.com/solnic/virtus" target="_blank">Virtus</a>.<br><br>
 
   As a project gets larger and more complex it makes sense to migrate to a <a href="http://en.wikipedia.org/wiki/Service-oriented_architecture" target="_blank">service oriented architecture (SOA)</a>.
-  This allows you to split out your application into smallermore manageable components.  Deployment is simpler however
+  This allows you to split out your application into smaller more manageable components.  Deployment is simpler however
   it becomes more difficult to work with your data. Javascript front end frameworks like <a href="http://backbonejs.org/" target="_blank">Backbone.js</a> and <a href="http://emberjs.com/" target="_blank">Ember.js</a> are
   designed to consume data from <a href="http://en.wikipedia.org/wiki/Representational_state_transfer" target="_blank">REST</a> APIs easily, this is great if you are building a Javascript application.
   If you need to connect via Ruby you are going to want an easy way of working with your data.
@@ -16,7 +16,7 @@
   <a href="https://github.com/solnic/virtus" target="_blank">Virtus</a> is a gem that was extracted from the
   <a href="http://datamapper.org/" target="_blank">DataMapper</a> gem.
   It provides the ability to define attributes and their type on a class.  Instantiating a new object will cause it's
-  attributes to be automatically coeresed into your definition.  You can define your attributes as simple types such as Strings and Integers, or even more complex object types such
+  attributes to be automatically coerced into your definition.  You can define your attributes as simple types such as Strings and Integers, or even more complex object types such
   as Arrays which contain a specific type of object.
 
   <pre class="brush: ruby;">
@@ -268,7 +268,7 @@
 <h2>Abstracting for Reuse</h2>
 <div class="post-section">
   So now we have a user class that works like ActiveRecord, but goes through a REST API instead.  If your application
-  has a bunch of classes that connect to the same API things are going to get very repititive.  You can create a
+  has a bunch of classes that connect to the same API things are going to get very repetitive.  You can create a
   mixin to include on all your objects.  The one below has everything used in this post, plus basic search and listing <strong>(where / all)</strong>.
   <pre class="brush: ruby;">
     module ApiBase
@@ -415,24 +415,3 @@
   The API wrapper mixin is located at:<br>
   <a href="https://github.com/nick-desteffen/virtus-typhoeus-api-demo/blob/master/client/lib/api/base.rb" target="_blank">https://github.com/nick-desteffen/virtus-typhoeus-api-demo/blob/master/client/lib/api/base.rb</a>
 </div>
-
-
-
-
-https://github.com/typhoeus/typhoeus
-https://github.com/solnic/virtus
-https://github.com/intridea/hashie
-http://datamapper.org
-http://backbonejs.org
-http://emberjs.com
-https://github.com/rails-api/active_model_serializers
-https://github.com/nick-desteffen/virtus-typhoeus-api-demo
-
-https://github.com/lostisland/faraday
-https://github.com/jnunemaker/httparty
-http://ruby-doc.org/stdlib-2.0.0/libdoc/net/http/rdoc/Net/HTTP.html
-https://github.com/rails/jbuilder
-http://en.wikipedia.org/wiki/Service-oriented_architecture
-http://en.wikipedia.org/wiki/Representational_state_transfer
-
-Ruby, Virtus, Typhoeus, Hashie, REST, API, SOA, ActiveModel::Serializers, Rails
