@@ -18,7 +18,7 @@ module PostsHelper
 
   def format_comment(comment)
     return if comment.blank?
-    markdown_renderer = Redcarpet::Markdown.new(Redcarpet::Render::HTML, autolink: true, space_after_headers: true)
+    markdown_renderer = Redcarpet::Markdown.new(PygmentizeHTML, autolink: true, space_after_headers: true, fenced_code_blocks: true)
     markdown_renderer.render(comment).html_safe
   end
 

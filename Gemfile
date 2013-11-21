@@ -7,10 +7,11 @@ gem 'jquery-rails', "3.0.4"
 gem 'friendly_id', '5.0.1'
 gem 'bcrypt-ruby', '3.1.2'
 gem 'redcarpet', '3.0.0'
+gem 'pygmentize', '0.0.3'
 gem 'thin', '1.6.1'
 gem 'rakismet', '1.4.0'
 gem 'kaminari', '0.14.1'
-gem 'pg_search', "0.7.0"
+gem 'pg_search', "0.7.2"
 
 gem 'sass-rails', "4.0.1"
 gem 'coffee-rails', "4.0.1"
