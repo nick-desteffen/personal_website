@@ -53,7 +53,7 @@ private
   end
 
   def post_params
-    params.require(:post).permit(:title, :body, :published_at, related_links_attributes: [:url, :title, :_destroy, :id], tags_attributes: [:name, :_destroy, :id])
+    params.require(:post).permit(:title, :body, :published_at, {tags: []}, related_links_attributes: [:url, :title, :_destroy, :id])
   end
 
 end

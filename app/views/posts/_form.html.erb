@@ -12,6 +12,10 @@
     <%= f.label :body %>
     <%= f.text_area :body %>
   </p>
+  <p>
+    <%= f.label :tags %>
+    <%= f.text_field :tags, name: "post[tags][]", value: tags(@post) %>
+  </p>
 
   <h2>Related Links</h2>
   <div id="related-links">
@@ -19,14 +23,6 @@
       <%= render :partial => "posts/related_link_fields", :locals => {:form => related_link_fields} %>
     <% end %>
     <%= link_to_add_fields "Add Related Link", :related_link, f %>
-  </div>
-
-  <h2>Tags</h2>
-  <div id="related-tags">
-    <%= f.fields_for :tags do |tag_fields| %>
-      <%= render :partial => "posts/tag_fields", :locals => {:form => tag_fields} %>
-    <% end %>
-    <%= link_to_add_fields "Add Tag", :tag, f %>
   </div>
 
   <p>

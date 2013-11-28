@@ -35,4 +35,8 @@ module PostsHelper
     truncate(strip_tags(post.body).gsub("&ndash;", " - "), length: 300, omission: '...')
   end
 
+  def tags(post)
+    post.tags.sort.join(", ")
+  end
+
 end

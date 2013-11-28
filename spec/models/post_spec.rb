@@ -34,14 +34,4 @@ describe Post do
     end
   end
 
-  describe "tags_joined" do
-    it "combines all tags name columns" do
-      post = FactoryGirl.create(:post)
-      rails_tag = FactoryGirl.create(:tag, :post => post, :name => "Rails")
-      ruby_tag = FactoryGirl.create(:tag, :post => post, :name => "Ruby")
-
-      post.tags_joined.should == "Rails, Ruby"
-    end
-  end
-
 end

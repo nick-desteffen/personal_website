@@ -36,6 +36,7 @@ FactoryGirl.define do
     title
     body "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis dolor tortor, tincidunt non tincidunt a, pellentesque non eros. Aenean condimentum molestie tristique. Sed convallis pulvinar nulla, auctor vestibulum tellus iaculis eu. Mauris consequat laoreet eros eget interdum. Suspendisse potenti."
     published_at { 1.week.ago }
+    tags ["rails", "ruby"]
     created_at { Time.now }
     updated_at { Time.now }
   end

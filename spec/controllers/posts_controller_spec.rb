@@ -54,11 +54,11 @@ describe PostsController do
       login_as user
 
        expect{
-         post :create, post: {title: "The Title", body: "The Body", related_links_attributes: {"0" => {url: "http://www.google.com", title: "Google"}}, tags_attributes: {"0" => {name: "Foo"}}}
+         post :create, post: {title: "The Title", body: "The Body", tags: ["a", "b", "c"], related_links_attributes: {"0" => {url: "http://www.google.com", title: "Google"}}}
        }.to change(Post, :count).by(1)
 
       assigns(:post).related_links.count.should == 1
-      assigns(:post).tags.count.should == 1
+      assigns(:post).tags.size.should == 3
       flash.notice.should_not be_nil
       response.should redirect_to blog_post_path(assigns(:post))
     end

@@ -79,4 +79,12 @@ describe PostsHelper do
     end
   end
 
+  describe "tags" do
+    it "should return the tags on the post sorted and joined" do
+      post = FactoryGirl.build(:post, tags: ["ruby", "array", "rails", "postgres"])
+
+      helper.tags(post).should == "array, postgres, rails, ruby"
+    end
+  end
+
 end

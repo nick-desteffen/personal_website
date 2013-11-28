@@ -147,7 +147,8 @@ CREATE TABLE posts (
     published_at timestamp without time zone,
     created_at timestamp without time zone,
     updated_at timestamp without time zone,
-    slug character varying(255)
+    slug character varying(255),
+    tags character varying(255)[] DEFAULT '{}'::character varying[]
 );
 
 
@@ -412,6 +413,13 @@ CREATE UNIQUE INDEX index_posts_on_slug ON posts USING btree (slug);
 
 
 --
+-- Name: index_posts_on_tags; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX index_posts_on_tags ON posts USING gin (tags);
+
+
+--
 -- Name: index_related_links_on_post_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -457,6 +465,8 @@ CREATE UNIQUE INDEX unique_schema_migrations ON schema_migrations USING btree (v
 -- PostgreSQL database dump complete
 --
 
+SET search_path TO "$user",public;
+
 INSERT INTO schema_migrations (version) VALUES ('20110811030121');
 
 INSERT INTO schema_migrations (version) VALUES ('20110812121332');
@@ -490,3 +500,5 @@ INSERT INTO schema_migrations (version) VALUES ('20120827011905');
 INSERT INTO schema_migrations (version) VALUES ('20121004030802');
 
 INSERT INTO schema_migrations (version) VALUES ('20121010094309');
+
+INSERT INTO schema_migrations (version) VALUES ('20131128035020');
