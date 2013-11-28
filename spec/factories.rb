@@ -54,13 +54,6 @@ FactoryGirl.define do
     updated_at { Time.now }
   end
 
-  factory :tag do
-    post
-    name "rails"
-    created_at { Time.now }
-    updated_at { Time.now }
-  end
-
   factory :related_link do
     post
     title "Google"

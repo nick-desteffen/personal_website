@@ -39,12 +39,3 @@ desc "Show config settings on Heroku"
 task :show_config do
   sh 'heroku config'
 end
-
-desc "populates tags"
-task populate_tags: :environment do
-  Post.all.each do |post|
-    tags = Tag.where(post_id: post.id)
-    post.tags = tags.map(&:name)
-    post.save
-  end
-end
