@@ -5,6 +5,8 @@ class PostsController < ApplicationController
 
   active_tab :blog
 
+  layout "one_column"
+
   def index
     page = params[:page] || 1
     @posts = Post.published.page(page)

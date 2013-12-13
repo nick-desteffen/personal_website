@@ -95,6 +95,9 @@ blockquote {
 
 .comment_form {
   margin: 20px 0;
+  textarea{
+    width: 935px
+  }
 }
 
 .related_links{
@@ -179,5 +182,5 @@ blockquote {
 }
 
 .syntaxhighlighter{
-  max-width: 635px;
+  max-width: 925px;
 }

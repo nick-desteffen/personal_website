@@ -1,15 +1,15 @@
 @import "variables";
 
-input, textarea, select {  
-  padding: 5px;  
-  border: solid 1px $grey;  
-  outline: 0;  
+input, textarea, select {
+  padding: 5px;
+  border: solid 1px $grey;
+  outline: 0;
   font: normal 13px/100% 'Istok Web', sans-serif;
-  background: #FFFFFF;  
-}  
+  background: #FFFFFF;
+}
 
 input, textarea{
-  width: 200px;  
+  width: 200px;
 }
 
 input[type=checkbox] {
@@ -17,23 +17,23 @@ input[type=checkbox] {
   width: 20px;
   margin-top: 5px;
 }
-  
-textarea {  
-  width: 650px;  
-  max-width: 800px;  
-  height: 150px;  
-  line-height: 150%;  
-}  
-  
-input:hover, textarea:hover, input:focus, textarea:focus, select:hover, select:focus {  
-  border-color: $light_teal; 
+
+textarea {
+  width: 650px;
+  max-width: 935px;
+  height: 150px;
+  line-height: 150%;
+}
+
+input:hover, textarea:hover, input:focus, textarea:focus, select:hover, select:focus {
+  border-color: $light_teal;
   -webkit-box-shadow: 0 0 6px $light_teal;
   -moz-box-shadow: 0 0 6px $light_teal;
   box-shadow: 0 0 6px $light_teal;
-}  
-  
-form label {  
-  margin-left: 5px;  
+}
+
+form label {
+  margin-left: 5px;
   display: block;
 }
 
@@ -46,31 +46,31 @@ label .tiny_sub_label{
 form p{
   margin: 5px 0 0 0;
 }
-  
-.button {  
+
+.button {
   margin-top: 10px;
-  width: auto;  
-  padding: 9px 15px;  
+  width: auto;
+  padding: 9px 15px;
   background: $grey;
   background: -moz-linear-gradient(top,  $grey,  darken($grey, 20%));
   background: -webkit-gradient(linear, left top, left bottom, from($grey), to(darken($grey, 30%))) no-repeat darken($grey, 30%);
   background: -o-linear-gradient($grey, darken($grey, 30%));
-  border: 0;  
-  font-size: 14px;  
+  border: 0;
+  font-size: 14px;
   color: #FFFFFF;
-  cursor: pointer;   
+  cursor: pointer;
   border-radius: $nav_radius;
   -moz-border-radius: $nav_radius;
   -webkit-border-radius: $nav_radius;
-   
+
 }
 
 .button:hover {
   background: $light_teal;
   background: -moz-linear-gradient(top,  $light_teal,  darken($light_teal, 20%));
   background: -webkit-gradient(linear, left top, left bottom, from($light_teal), to(darken($light_teal, 30%))) no-repeat darken($light_teal, 30%);
-  background: -o-linear-gradient($light_teal, darken($light_teal, 30%));  
-  
+  background: -o-linear-gradient($light_teal, darken($light_teal, 30%));
+
 }
 
 .button:active {

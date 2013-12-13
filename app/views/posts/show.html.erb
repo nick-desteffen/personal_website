@@ -5,27 +5,24 @@
   <h1><%= link_to @post.title, blog_post_path(@post) %></h1>
   <time><%= format_date(@post.published_at) %></time>
   <div class="post-body"><%= @post.body.html_safe %></div>
+  <h2>Related Links</h2>
+  <ul>
+    <% @post.related_links.each do |link| %>
+      <li><%= link_to link.title, link.url, :target => "_blank" %></li>
+    <% end %>
+  </ul>
   <div>
-    <%= render :partial => "shared/facebook_like_button" %>
-    <%= render :partial => "shared/twitter_tweet_button" %>
-    <%= render :partial => "shared/google_plus_one_button" %>
+    <%= render partial: "shared/facebook_like_button" %>
+    <%= render partial: "shared/twitter_tweet_button" %>
+    <%= render partial: "shared/google_plus_one_button" %>
   </div>
   <h2>Comments</h2>
   <% if @comments.size > 0 %>
-    <%= render :partial => "posts/comment", :collection => @comments %>
+    <%= render partial: "posts/comment", :collection => @comments %>
   <% else %>
     <p>There are no comments.  Be the first to post!</p>
   <% end %>
-  <%= form_for @comment, :url => create_comment_path(@post) do |f| %>
+  <%= form_for @comment, url: create_comment_path(@post) do |f| %>
     <%= render partial: "comments/form", locals: {:f => f} %>
   <% end %>
 </div>
-
-<% content_for :sidebar do %>
-  <div class="related_links">
-    <h3>Related Links</h3>
-    <% @post.related_links.each do |link| %>
-      <p><%= link_to link.title, link.url, :target => "_blank" %></p>
-    <% end %>
-  </div>
-<% end %>
