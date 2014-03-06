@@ -6,7 +6,7 @@ require 'action_mailer/railtie'
 require 'sprockets/railtie'
 require "bcrypt"
 
-Bundler.require(:default, Rails.env)
+Bundler.require(*Rails.groups)
 
 module PersonalWebsite
   class Application < Rails::Application

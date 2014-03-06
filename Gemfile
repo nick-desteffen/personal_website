@@ -1,7 +1,7 @@
 source "https://rubygems.org"
 ruby "2.1.1"
 
-gem 'rails', '4.0.2'
+gem 'rails', '4.1.0.rc1'
 gem "pg", "0.17.1"
 gem 'jquery-rails', "3.1.0"
 gem 'friendly_id', '5.0.3'
@@ -21,6 +21,7 @@ group :development, :test do
   gem "rspec-rails", "2.14.1"
   gem "factory_girl_rails", "4.4.1"
   gem "debugger"
+  gem "spring", "~> 1.1.2"
 end
 
 group :production do
