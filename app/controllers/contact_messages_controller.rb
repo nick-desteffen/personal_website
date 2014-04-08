@@ -1,5 +1,5 @@
 class ContactMessagesController < ApplicationController
-  
+
   active_tab :contact
 
   def new
@@ -7,14 +7,20 @@ class ContactMessagesController < ApplicationController
   end
 
   def create
-    @contact_message = ContactMessage.new(contact_message_params)
-    @contact_message.user_agent = request.user_agent
-    
-    if @contact_message.save
-      redirect_to root_path, :notice => "Thanks! I'll be in touch soon!"
-    else
-      flash.now.alert = "Please correct the highlighted fields and resubmit."
-      render :action => :new
+    begin
+      @contact_message = ContactMessage.new(contact_message_params)
+      @contact_message.user_agent = request.user_agent
+
+      if @contact_message.save
+        redirect_to root_path, notice: "Thanks! I'll be in touch soon!"
+      else
+        flash.now.alert = "Please correct the highlighted fields and resubmit."
+        render action: :new
+      end
+    rescue ArgumentError => exception
+      @contact_message = ContactMessage.new
+      flash.now.alert = "Sorry, but you appear to be posting some spam."
+      render action: :new
     end
   end
 
@@ -23,5 +29,5 @@ class ContactMessagesController < ApplicationController
   def contact_message_params
     params.require(:contact_message).permit(:email, :name, :phone_number, :subject, :message)
   end
-  
+
 end
