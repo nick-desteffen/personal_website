@@ -1,7 +1,7 @@
 source "https://rubygems.org"
 ruby "2.1.1"
 
-gem 'rails', '4.1.0.rc1'
+gem 'rails', '4.1.0.rc2'
 gem "pg", "0.17.1"
 gem 'jquery-rails', "3.1.0"
 gem 'friendly_id', '5.0.3'
@@ -13,12 +13,12 @@ gem 'rakismet', '1.5.0'
 gem 'kaminari', '0.15.1'
 gem 'pg_search', "0.7.3"
 
-gem 'sass-rails', "4.0.1"
+gem 'sass-rails', "4.0.2"
 gem 'coffee-rails', "4.0.1"
-gem 'uglifier', "2.4.0"
+gem 'uglifier', "2.5.0"
 
 group :development, :test do
-  gem "rspec-rails", "2.14.1"
+  gem "rspec-rails", "2.14.2"
   gem "factory_girl_rails", "4.4.1"
   gem "debugger"
   gem "spring", "~> 1.1.2"

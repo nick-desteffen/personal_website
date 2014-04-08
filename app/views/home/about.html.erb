@@ -1,17 +1,17 @@
 <h1>Who is Nick?</h1>
 <p>Hi, I'm Nick. I live in Chicago, Illinois and I've been doing web development for over 10 years. I started out programming in Java/J2EE and moved into Ruby / Rails about 5 years ago. The last couple of years I've put on a number of additional hats and started doing some systems administration as well as jQuery, Backbone.js, and CSS.</p>
-<p>I am currently working at <%= link_to "BenchPrep", "https://benchprep.com", :target => "_blank" %> and am also a co-founder and lead developer of <%= link_to "WisePatient", "https://www.wisepatient.com", :target => "_blank" %> which was acquired by <%= link_to "Sharecare Inc.", "http://www.sharecare.com", target: "_blank" %> in early 2012.</p>
+<p>I am currently working at <%= link_to "BenchPrep", "https://benchprep.com", :target => "_blank" %> and am also a co-founder and lead developer of <%= link_to "WisePatient", wisepatient_path %> which was acquired by <%= link_to "Sharecare Inc.", "http://www.sharecare.com", target: "_blank" %> in early 2012.</p>
 <p>Some of my hobbies include Camping &amp; Hiking, Astronomy, Board Games, Biking, Computer Gaming, and Homebrewing.</p>
 
-<h3>Some of the sites I have worked on are:</h3>
+<!-- <h3>Some of the sites I have worked on are:</h3>
 <div><%= link_to "CarePages", "http://www.carepages.com", :target => "_blank" %></div>
 <div><%= link_to "My Health and Money", "https://www.myhealthandmoney.com", :target => "_blank" %></div>
-<div><%= link_to "WisePatient", "https://www.wisepatient.com", :target => "_blank" %></div>
+<div><%= link_to "WisePatient", wisepatient_path %></div>
 <div><%= link_to "Splash Surveys", "https://www.splashsurveys.com", :target => "_blank" %></div>
 <div><%= link_to "BenchPrep", "https://benchprep.com", :target => "_blank" %></div>
 <div><%= link_to "Risk2210.net", "http://risk2210.net", :target => "_blank" %></div>
 <div><%= link_to "AstronomyPics.net", "http://astronomypics.net", :target => "_blank" %></div>
-
+ -->
 <% content_for :sidebar do %>
   <%= image_tag("nick-d.jpg", :width => "250px") %>
   <%#= link_to image_tag("social_media_icons/untappd_icon.png"), "https://untappd.com/user/nick-desteffen", :target => "_blank" %>

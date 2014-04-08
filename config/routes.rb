@@ -27,11 +27,16 @@ PersonalWebsite::Application.routes.draw do
   get "blog/:post_id/comments/:comment_id/edit" => "comments#edit", :as => "edit_comment"
   patch "blog/:post_id/comments/:comment_id/edit" => "comments#update", :as => "update_comment"
   post "blog/comments/preview" => "comments#preview", :as => "preview_comment"
-  delete "blog/:post_id/comments/:comment_id/destroy" => "comments#destroy", as: :destroy_comment
+  delete "blog/:post_id/comments/:comment_id/destroy" => "comments#destroy", as: "destroy_comment"
 
   ## Home
   get "/about" => "home#about", :as => "about"
   get "/home" => "home#index", :as => "home"
+
+  ## Projects
+  get "/projects" => "projects#index", :as => "projects"
+  get "/projects/wisepatient" => "projects#wisepatient", :as => "wisepatient"
+  get "/projects/splash-surveys" => "projects#splash_surveys", :as => "splash_surveys"
 
   ## Root
   root :to => 'posts#index'

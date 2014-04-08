@@ -1,0 +1,52 @@
+<h1>WisePatient</h1>
+<p>
+  WisePatient is a web based communication and collaboration platform for healthcare consumers and providers.
+  As Co-Founder and Lead Developer I was responsible for end-to-end development from Javascript &amp; CSS to
+  our custom PMS (practice management system) integration API.
+  I was in charge of all architectural decisions and had several other developers reporting to me.
+  <br><br>
+  WisePatint was sold to <a href='https://www.sharecare.com' target="_blank">ShareCare Inc.</a> in early 2012.
+</p>
+
+<h2>Tools, Libraries, &amp; Services</h2>
+<ul>
+  <li>Ruby on Rails 2.3</li>
+  <li>Ruby 1.8.7</li>
+  <li>MySQL</li>
+  <li>Sphinx</li>
+  <li>Memcached</li>
+  <li><a href='https://www.engineyard.com/' target='_blank'>Engine Yard</a></li>
+  <li><a href='http://sendgrid.com/' target='_blank'>SendGrid</a></li>
+  <li>jQuery</li>
+  <li>RSpec</li>
+  <li>Facebook Integration (FbGraph)</li>
+  <li><a href='http://www.authorize.net/' target='_blank'>Authorize.net</a></li>
+  <li>Rake</li>
+  <li>Delayed::Job</li>
+  <li><a href='http://www.mozeo.com/' target='_blank'>Mozeo</a> Text Messaging Service</li>
+</ul>
+
+<h2>Screenshots</h2>
+<div id="wisepatient" class="owl-carousel">
+  <div class="item"><%= image_tag "project_screenshots/wisepatient/activity_feed.jpg" %></div>
+  <div class="item"><%= image_tag "project_screenshots/wisepatient/booking.jpg" %></div>
+  <div class="item"><%= image_tag "project_screenshots/wisepatient/doctor_search.jpg" %></div>
+  <div class="item"><%= image_tag "project_screenshots/wisepatient/homepage.jpg" %></div>
+  <div class="item"><%= image_tag "project_screenshots/wisepatient/patient_dashboard.jpg" %></div>
+  <div class="item"><%= image_tag "project_screenshots/wisepatient/reschedule.jpg" %></div>
+  <div class="item"><%= image_tag "project_screenshots/wisepatient/upcoming_appointments.jpg" %></div>
+</div>
+
+<% content_for :javascript do %>
+  <script type="text/javascript">
+    $(function() {
+      $("#wisepatient").owlCarousel({
+          autoPlay: 10000,
+          navigation: true,
+          slideSpeed: 1000,
+          paginationSpeed: 1000,
+          singleItem: true
+      });
+    });
+  </script>
+<% end %>

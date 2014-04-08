@@ -4,6 +4,8 @@
  *= require syntaxhighlighter_3.0.83/styles/shCoreMidnight
  *= require syntaxhighlighter_3.0.83/styles/shThemeMidnight
  *= require pygments/github
+ *= require owl.carousel
+ *= require owl.theme
 */
 
 @import url(http://fonts.googleapis.com/css?family=Istok+Web);

@@ -5,12 +5,13 @@
 //= require syntaxhighlighter_3.0.83/scripts/shBrushJScript
 //= require syntaxhighlighter_3.0.83/scripts/shBrushCss
 //= require syntaxhighlighter_3.0.83/scripts/shBrushXml
+//= require owl.carousel.min
 //= require_tree .
 
 function remove_fields(link) {
   if(confirm("Are you sure?")){
     $(link).prev("input[type=hidden]").val("1");
-    $(link).closest(".fields").hide();    
+    $(link).closest(".fields").hide();
   }
 }
 
@@ -26,7 +27,7 @@ $(function(){
   });
 
   $("a.close").click(function(){
-    $(this).parents('.flash-messages').fadeOut(); 
+    $(this).parents('.flash-messages').fadeOut();
     return false;
   });
 
@@ -37,5 +38,5 @@ $(function(){
 
   SyntaxHighlighter.defaults['gutter'] = true;
   SyntaxHighlighter.all();
-  
+
 });
