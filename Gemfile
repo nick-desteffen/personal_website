@@ -13,7 +13,7 @@ gem 'rakismet', '1.5.0'
 gem 'kaminari', '0.15.1'
 gem 'pg_search', "0.7.3"
 
-gem 'sass-rails', "4.0.2"
+gem 'sass-rails', "4.0.3"
 gem 'coffee-rails', "4.0.1"
 gem 'uglifier', "2.5.0"
 
