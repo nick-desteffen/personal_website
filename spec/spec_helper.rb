@@ -17,8 +17,9 @@ RSpec.configure do |config|
   config.before do
     Comment.any_instance.stub(:spam?).and_return(false)
     Comment.any_instance.stub(:spam!).and_return(true)
+    ContactMessage.any_instance.stub(:spam?).and_return(false)
+    ContactMessage.any_instance.stub(:spam!).and_return(true)
   end
-
 end
 
 def login_as(user)

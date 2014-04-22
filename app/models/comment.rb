@@ -1,5 +1,5 @@
 class Comment < ActiveRecord::Base
-  include Rakismet::Model
+  include Spam
   include PgSearch
 
   default_scope -> { order("created_at ASC") }
@@ -10,32 +10,16 @@ class Comment < ActiveRecord::Base
   after_create :notify_me
   after_create :notify_commenters
 
-  store :request, accessors: [:remote_ip, :user_agent, :referrer]
-
   rakismet_attrs author: :name, author_email: :email, author_url: :url, content: :body, user_ip: :remote_ip, user_agent: :user_agent, referrer: :referrer
 
   validates_presence_of :body, :name
-  validates_format_of :email, :with => EmailAddressValidation::EMAIL_ADDRESS_EXACT_PATTERN, :allow_blank => true
-  validates_format_of :url, :with => URI::regexp(%w(http https)), :allow_blank => true, :message => "should be fully qualified."
-  validate :spam_check
+  validates_format_of :email, with: EmailAddressValidation::EMAIL_ADDRESS_EXACT_PATTERN, allow_blank: true
+  validates_format_of :url, with: URI::regexp(%w(http https)), allow_blank: true, message: "should be fully qualified."
 
-  scope :not_spam, -> { where(spam_flag: false) }
-  scope :notify,   -> { where(new_comment_notification: true) }
+  scope :notify, -> { where(new_comment_notification: true) }
 
   pg_search_scope :search, against: [:body, :name], using: {tsearch: {dictionary: "english", prefix: true}}
   multisearchable against: [:name, :body]
-
-  def http_request=(http_request)
-    request[:remote_ip] = http_request.remote_ip
-    request[:user_agent] = http_request.env['HTTP_USER_AGENT']
-    request[:referrer] = http_request.env['HTTP_REFERER']
-  end
-
-  def flag_spam!
-    self.spam_flag = true
-    self.save
-    spam!
-  end
 
   def self.preview(params)
     comment = Comment.new(params)
@@ -44,18 +28,12 @@ class Comment < ActiveRecord::Base
     comment
   end
 
-  private
+private
 
   def generate_gravatar_hash
     if email.present?
       hash = Digest::MD5.hexdigest(email)
       write_attribute(:gravatar_hash, hash)
-    end
-  end
-
-  def spam_check
-    if spam?
-      errors.add(:base, "Sorry, but this comment appears to be spam. If it is not spam please use the contact form.")
     end
   end
 

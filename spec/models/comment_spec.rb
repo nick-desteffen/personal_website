@@ -36,7 +36,7 @@ describe Comment do
       comment.stub(:spam?).and_return(true)
 
       comment.valid?.should == false
-      comment.errors[:base].include?("Sorry, but this comment appears to be spam. If it is not spam please use the contact form.").should == true
+      expect(comment.errors[:base].size).to eq(1)
     end
   end
 

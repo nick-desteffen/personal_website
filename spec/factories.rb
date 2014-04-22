@@ -30,6 +30,7 @@ FactoryGirl.define do
     phone_number "3129142323"
     created_at { Time.now }
     updated_at { Time.now }
+    spam_flag false
   end
 
   factory :post do

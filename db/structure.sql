@@ -80,7 +80,9 @@ CREATE TABLE contact_messages (
     subject character varying(255),
     phone_number character varying(255),
     created_at timestamp without time zone,
-    updated_at timestamp without time zone
+    updated_at timestamp without time zone,
+    spam_flag boolean DEFAULT false,
+    request text
 );
 
 
@@ -450,3 +452,6 @@ INSERT INTO schema_migrations (version) VALUES ('20121010094309');
 INSERT INTO schema_migrations (version) VALUES ('20131128035020');
 
 INSERT INTO schema_migrations (version) VALUES ('20131128042949');
+
+INSERT INTO schema_migrations (version) VALUES ('20140417030826');
+

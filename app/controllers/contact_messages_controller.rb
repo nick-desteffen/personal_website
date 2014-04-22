@@ -9,7 +9,8 @@ class ContactMessagesController < ApplicationController
   def create
     begin
       @contact_message = ContactMessage.new(contact_message_params)
-      @contact_message.user_agent = request.user_agent
+      @contact_message.user_agent   = request.user_agent
+      @contact_message.http_request = request
 
       if @contact_message.save
         redirect_to root_path, notice: "Thanks! I'll be in touch soon!"
