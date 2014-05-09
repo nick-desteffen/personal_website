@@ -18,7 +18,7 @@ gem 'coffee-rails', "4.0.1"
 gem 'uglifier', "2.5.0"
 
 group :development, :test do
-  gem "rspec-rails", "2.14.2"
+  gem 'rspec-rails', '3.0.0.beta2'
   gem "factory_girl_rails", "4.4.1"
   gem "debugger"
   gem "spring", "~> 1.1.2"

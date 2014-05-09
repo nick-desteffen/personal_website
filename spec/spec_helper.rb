@@ -15,10 +15,10 @@ RSpec.configure do |config|
   config.order = :random
 
   config.before do
-    Comment.any_instance.stub(:spam?).and_return(false)
-    Comment.any_instance.stub(:spam!).and_return(true)
-    ContactMessage.any_instance.stub(:spam?).and_return(false)
-    ContactMessage.any_instance.stub(:spam!).and_return(true)
+    allow_any_instance_of(Comment).to receive(:spam?).and_return(false)
+    allow_any_instance_of(Comment).to receive(:spam!).and_return(true)
+    allow_any_instance_of(ContactMessage).to receive(:spam?).and_return(false)
+    allow_any_instance_of(ContactMessage).to receive(:spam!).and_return(true)
   end
 end
 

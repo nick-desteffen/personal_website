@@ -4,75 +4,75 @@ describe Comment do
 
   describe "validations" do
     it "requires a name" do
-      comment = FactoryGirl.build(:comment, :name => nil)
+      comment = FactoryGirl.build(:comment, name: nil)
 
-      comment.valid?.should == false
-      comment.errors.size.should == 1
-      comment.errors[:name].size.should == 1
+      expect(comment).to_not be_valid
+      expect(comment.errors.size).to eq(1)
+      expect(comment.errors[:name].size).to eq(1)
     end
     it "requires a body" do
-      comment = FactoryGirl.build(:comment, :body => nil)
+      comment = FactoryGirl.build(:comment, body: nil)
 
-      comment.valid?.should == false
-      comment.errors.size.should == 1
-      comment.errors[:body].size.should == 1
+      expect(comment).to_not be_valid
+      expect(comment.errors.size).to eq(1)
+      expect(comment.errors[:body].size).to eq(1)
     end
     it "requires a valid email address if email is present" do
-      comment = FactoryGirl.build(:comment, :email => "nick")
+      comment = FactoryGirl.build(:comment, email: "nick")
 
-      comment.valid?.should == false
-      comment.errors.size.should == 1
-      comment.errors[:email].size.should == 1
+      expect(comment).to_not be_valid
+      expect(comment.errors.size).to eq(1)
+      expect(comment.errors[:email].size).to eq(1)
     end
     it "requires a valid url if url is present" do
-      comment = FactoryGirl.build(:comment, :url => "google.com")
+      comment = FactoryGirl.build(:comment, url: "google.com")
 
-      comment.valid?.should == false
-      comment.errors.size.should == 1
-      comment.errors[:url].size.should == 1
+      expect(comment).to_not be_valid
+      expect(comment.errors.size).to eq(1)
+      expect(comment.errors[:url].size).to eq(1)
     end
     it "should be invalid if it is flagged as spam" do
-      comment = FactoryGirl.build(:comment, :url => "google.com")
-      comment.stub(:spam?).and_return(true)
+      comment = FactoryGirl.build(:comment, url: "google.com")
+      allow(comment).to receive(:spam?).and_return(true)
 
-      comment.valid?.should == false
+      expect(comment).to_not be_valid
       expect(comment.errors[:base].size).to eq(1)
     end
   end
 
   describe "generate_gravatar_hash" do
     it "is generated after create if email address is present" do
-      comment = FactoryGirl.create(:comment, :gravatar_hash => nil, :email => "nick.desteffen@gmail.com")
+      comment = FactoryGirl.create(:comment, gravatar_hash: nil, email: "nick.desteffen@gmail.com")
 
-      comment.gravatar_hash.should_not == nil
+      expect(comment.gravatar_hash).to_not be_nil
     end
     it "is not generated if email is not present" do
-      comment = FactoryGirl.create(:comment, :gravatar_hash => nil, :email => nil)
+      comment = FactoryGirl.create(:comment, gravatar_hash: nil, email: nil)
 
-      comment.gravatar_hash.should == nil
+      expect(comment.gravatar_hash).to be_nil
     end
   end
 
   describe "flag_spam!" do
     it "flags a comment as spam" do
       comment = FactoryGirl.create(:comment)
-      comment.should_receive(:spam!).once
+      allow(comment).to receive(:spam!).once
 
       comment.flag_spam!
 
-      comment.spam_flag?.should == true
+      expect(comment).to be_spam_flag
     end
   end
 
   describe "not_spam" do
     it "only returns comments that haven't been flagged as spam" do
-      spam = FactoryGirl.create(:comment, :spam_flag => true)
-      not_spam = FactoryGirl.create(:comment, :spam_flag => false)
+      spam = FactoryGirl.create(:comment, spam_flag: true)
+      not_spam = FactoryGirl.create(:comment, spam_flag: false)
 
       comments = Comment.not_spam
 
-      comments.include?(not_spam).should == true
-      comments.include?(spam).should == false
+      expect(comments).to include(not_spam)
+      expect(comments).to_not include(spam)
     end
   end
 
@@ -82,9 +82,9 @@ describe Comment do
 
       comment = Comment.preview(params)
 
-      comment.created_at.should_not be_nil
-      comment.gravatar_hash.should_not be_nil
-      comment.new_record?.should == true
+      expect(comment.created_at).to_not be_nil
+      expect(comment.gravatar_hash).to_not be_nil
+      expect(comment).to be_new_record
     end
   end
 
@@ -95,10 +95,10 @@ describe Comment do
       ActionMailer::Base.deliveries.clear
       comment2 = FactoryGirl.create(:comment, post: post, new_comment_notification: true)
 
-      ActionMailer::Base.deliveries.size.should == 2
+      expect(ActionMailer::Base.deliveries.size).to eq(2)
       recipients = ActionMailer::Base.deliveries.map(&:to).flatten
 
-      recipients.sort.should == ["commenter@gmail.com", "nick.desteffen@gmail.com"]
+      expect(recipients.sort).to eq ["commenter@gmail.com", "nick.desteffen@gmail.com"]
     end
     it "should not send a person more than 1 email" do
       comment1 = FactoryGirl.create(:comment, post: post, new_comment_notification: true, email: "commenter@gmail.com")
@@ -107,10 +107,10 @@ describe Comment do
       ActionMailer::Base.deliveries.clear
       comment3 = FactoryGirl.create(:comment, post: post, new_comment_notification: true, email: "commenter@gmail.com")
 
-      ActionMailer::Base.deliveries.size.should == 2
+      expect(ActionMailer::Base.deliveries.size).to eq(2)
       recipients = ActionMailer::Base.deliveries.map(&:to).flatten
 
-      recipients.sort.should == ["commenter@gmail.com", "nick.desteffen@gmail.com"]
+      expect(recipients.sort).to eq ["commenter@gmail.com", "nick.desteffen@gmail.com"]
     end
     it "should work with a comment that has a blank email address field" do
       comment1 = FactoryGirl.create(:comment, post: post, new_comment_notification: true, email: "")
@@ -118,9 +118,9 @@ describe Comment do
 
       comment2 = FactoryGirl.create(:comment, post: post)
 
-      ActionMailer::Base.deliveries.size.should == 1
+      expect(ActionMailer::Base.deliveries.size).to eq(1)
       recipients = ActionMailer::Base.deliveries.map(&:to).flatten
-      recipients.sort.should == ["nick.desteffen@gmail.com"]
+      expect(recipients.sort).to eq ["nick.desteffen@gmail.com"]
     end
   end
 
@@ -131,9 +131,9 @@ describe Comment do
 
       notifications = Comment.notify
 
-      notifications.size.should == 1
-      notifications.include?(comment1).should == true
-      notifications.include?(comment2).should == false
+      expect(notifications.size).to eq(1)
+      expect(notifications).to include(comment1)
+      expect(notifications).to_not include(comment2)
     end
   end
 

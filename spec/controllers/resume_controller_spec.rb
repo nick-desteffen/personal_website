@@ -4,14 +4,14 @@ describe ResumeController do
 
   describe "index" do
     it "send the resume file from Github" do
-      controller.stub(:render)
+      allow(controller).to receive(:render)
       resume = double(:resume, body: "Nicholas DeSteffen Resume")
-      Net::HTTP.stub(:get_response).and_return(resume)
-      controller.should_receive(:send_data).once
+      allow(Net::HTTP).to receive(:get_response).and_return(resume)
+      allow(controller).to receive(:send_data).once
 
       get :index
 
-      response.should be_success
+      expect(response).to be_success
     end
   end
 

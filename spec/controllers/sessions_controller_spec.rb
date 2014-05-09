@@ -6,41 +6,41 @@ describe SessionsController do
     it "has a session object" do
       get :new
 
-      assigns(:session).should_not be_nil
+      expect(assigns(:session)).to_not be_nil
     end
   end
 
   describe "create" do
     it "logs a user in" do
-      user = FactoryGirl.create(:user, :password => "secret1")
+      user = FactoryGirl.create(:user, password: "secret1")
 
-      post :create, :session => {:email => user.email, :password => "secret1"}
+      post :create, session: {email: user.email, password: "secret1"}
 
-      session[:user_id].should == user.id
-      flash[:notice].should_not be_nil
-      response.should redirect_to admin_index_path
+      expect(session[:user_id]).to eq(user.id)
+      expect(flash[:notice]).to_not be_nil
+      expect(response).to redirect_to admin_index_path
     end
     it "reloads the page if errors are present" do
-      user = FactoryGirl.create(:user, :password => "secret1")
+      user = FactoryGirl.create(:user, password: "secret1")
 
-      post :create, :session => {:email => user.email, :password => "secret2"}
+      post :create, session: {email: user.email, password: "secret2"}
 
-      session[:user_id].should == nil
-      flash.now[:alert].should_not be_nil
-      response.should render_template(:new)
+      expect(session[:user_id]).to be_nil
+      expect(flash.now[:alert]).to_not be_nil
+      expect(response).to render_template(:new)
     end
   end
 
   describe "destroy" do
     it "destroys the session" do
       user = FactoryGirl.create(:user)
-      session[:user_id] = user.id
+      login_as(user)
 
       delete :destroy
 
-      session[:user_id].should == nil
-      flash[:notice].should_not be_nil
-      response.should redirect_to root_path
+      expect(session[:user_id]).to be_nil
+      expect(flash[:notice]).to_not be_nil
+      expect(response).to redirect_to root_path
     end
   end
 
