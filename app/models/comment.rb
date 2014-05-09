@@ -13,7 +13,7 @@ class Comment < ActiveRecord::Base
   rakismet_attrs author: :name, author_email: :email, author_url: :url, content: :body, user_ip: :remote_ip, user_agent: :user_agent, referrer: :referrer
 
   validates_presence_of :body, :name
-  validates_format_of :email, with: EmailAddressValidation::EMAIL_ADDRESS_EXACT_PATTERN, allow_blank: true
+  validates_format_of :email, with: Rails.configuration.email_validation_regex, allow_blank: true
   validates_format_of :url, with: URI::regexp(%w(http https)), allow_blank: true, message: "should be fully qualified."
 
   scope :notify, -> { where(new_comment_notification: true) }

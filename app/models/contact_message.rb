@@ -3,7 +3,7 @@ class ContactMessage < ActiveRecord::Base
 
   validates_presence_of :email, :name, :message
   validates_length_of :phone_number, within: (10..11), allow_blank: true
-  validates_format_of :email, with: EmailAddressValidation::EMAIL_ADDRESS_EXACT_PATTERN
+  validates_format_of :email, with: Rails.configuration.email_validation_regex
 
   before_validation :sanitize_phone_number
   after_create :deliver_email_notification

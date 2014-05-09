@@ -10,8 +10,7 @@ Bundler.require(*Rails.groups)
 
 module PersonalWebsite
   class Application < Rails::Application
-    config.autoload_paths += %W(#{config.root}/lib)
-    config.autoload_paths += %W(#{Rails.root}/app/modules)
+    config.autoload_paths += %W(#{Rails.root}/lib)
 
     config.time_zone = 'Central Time (US & Canada)'
 
@@ -34,6 +33,8 @@ module PersonalWebsite
       :password       => ENV['SENDGRID_PASSWORD'],
       :domain         => ENV['SENDGRID_DOMAIN']
     }
+
+    config.email_validation_regex = /\A[^@\s]+@([^@\s]+\.)+[^@\s]+\z/
 
   end
 end
