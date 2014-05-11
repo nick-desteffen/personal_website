@@ -48,7 +48,7 @@ GEM
     diff-lcs (1.2.5)
     erubis (2.7.0)
     eventmachine (1.0.3)
-    exception_notification (4.0.1)
+    exception_notification (4.1.0.rc1)
       actionmailer (>= 3.0.4)
       activesupport (>= 3.0.4)
     execjs (2.0.2)
@@ -166,7 +166,7 @@ DEPENDENCIES
   bcrypt (= 3.1.7)
   coffee-rails (= 4.0.1)
   debugger
-  exception_notification (= 4.0.1)
+  exception_notification (= 4.1.0.rc1)
   factory_girl_rails (= 4.4.1)
   friendly_id (= 5.0.3)
   jquery-rails (= 3.1.0)

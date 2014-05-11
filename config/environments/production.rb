@@ -16,9 +16,11 @@ PersonalWebsite::Application.configure do
   config.log_formatter = ::Logger::Formatter.new
   config.active_record.dump_schema_after_migration = false
 
-  config.middleware.use ExceptionNotification::Rack, email: {
-    sender_address:       'nick.desteffen@gmail.com',
-    exception_recipients: 'nick.desteffen@gmail.com'
-  }
+  config.middleware.use ExceptionNotification::Rack,
+    email: {
+      sender_address:       'nick.desteffen@gmail.com',
+      exception_recipients: 'nick.desteffen@gmail.com'
+    },
+    ignore_exceptions: ExceptionNotifier.ignored_exceptions + ['ActionController::BadRequest']
 
 end
