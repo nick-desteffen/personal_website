@@ -1,4 +1,4 @@
-require 'spec_helper'
+require 'rails_helper'
 
 describe PostsHelper do
 
@@ -36,24 +36,21 @@ describe PostsHelper do
 
   describe "admin_comment_links" do
     it "returns noting unless there is a current_user" do
-      allow(helper).to receive(:current_user).and_return(nil)
       comment = FactoryGirl.create(:comment)
 
-      expect(helper.admin_comment_links(comment)).to be_nil
+      expect(helper.admin_comment_links(comment, nil)).to be_nil
     end
     it "returns nothing if the comment hasn't been saved" do
-      allow(helper).to receive(:current_user).and_return(nil)
-      expect(helper.admin_comment_links(Comment.new)).to be_nil
+      expect(helper.admin_comment_links(Comment.new, nil)).to be_nil
     end
     it "returns a link to flag the comment as spam, edit the comment, and destroy the comment" do
       user = FactoryGirl.create(:user)
-      allow(helper).to receive(:current_user).and_return(user)
 
       comment = FactoryGirl.create(:comment)
 
-      expect(helper.admin_comment_links(comment)).to match /Flag Spam/
-      expect(helper.admin_comment_links(comment)).to match /Edit/
-      expect(helper.admin_comment_links(comment)).to match /Destroy/
+      expect(helper.admin_comment_links(comment, user)).to match /Flag Spam/
+      expect(helper.admin_comment_links(comment, user)).to match /Edit/
+      expect(helper.admin_comment_links(comment, user)).to match /Destroy/
     end
   end
 

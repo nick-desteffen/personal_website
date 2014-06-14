@@ -22,7 +22,7 @@ module PostsHelper
     markdown_renderer.render(comment).html_safe
   end
 
-  def admin_comment_links(comment)
+  def admin_comment_links(comment, current_user)
     return unless current_user
     return if comment.new_record?
     links = link_to "Flag Spam", flag_spam_path(comment.post, comment), remote: true, method: :post, class: "admin_link", data: {confirm: "Are you sure?"}

@@ -1,28 +1,22 @@
-ENV["RAILS_ENV"] ||= 'test'
-
-require File.expand_path("../../config/environment", __FILE__)
-require 'rspec/rails'
-
-Dir[Rails.root.join("spec/support/**/*.rb")].each {|f| require f}
-
-ActiveRecord::Migration.maintain_test_schema!
-
 RSpec.configure do |config|
-  config.mock_with :rspec
-  config.render_views
-  config.use_transactional_fixtures = true
-  config.infer_base_class_for_anonymous_controllers = true
-  config.order = :random
-  config.infer_spec_type_from_file_location!
+  config.filter_run :focus
+  config.run_all_when_everything_filtered = true
 
-  config.before do
-    allow_any_instance_of(Comment).to receive(:spam?).and_return(false)
-    allow_any_instance_of(Comment).to receive(:spam!).and_return(true)
-    allow_any_instance_of(ContactMessage).to receive(:spam?).and_return(false)
-    allow_any_instance_of(ContactMessage).to receive(:spam!).and_return(true)
+  if config.files_to_run.one?
+    config.default_formatter = 'doc'
   end
-end
 
-def login_as(user)
-  session[:user_id] = user.id
+  config.profile_examples = 10
+  config.order = :random
+  Kernel.srand config.seed
+
+  config.expect_with :rspec do |expectations|
+    expectations.syntax = :expect
+  end
+
+  config.mock_with :rspec do |mocks|
+    mocks.syntax = :expect
+    mocks.verify_partial_doubles = true
+  end
+
 end
