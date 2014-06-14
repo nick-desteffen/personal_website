@@ -1,5 +1,6 @@
-<%= content_for :description, teaser(@post) %>
-<%= content_for :keywords, tags(@post) %>
+<% content_for :description, teaser(@post) %>
+<% content_for :keywords, tags(@post) %>
+<% content_for :page_title, @post.title %>
 
 <div class="blog_post">
   <h1><%= link_to @post.title, blog_post_path(@post) %></h1>

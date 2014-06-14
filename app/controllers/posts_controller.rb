@@ -19,7 +19,6 @@ class PostsController < ApplicationController
   def show
     @comments = @post.comments.not_spam
     @comment = Comment.new
-    @page_title = @post.title
   end
 
   def new

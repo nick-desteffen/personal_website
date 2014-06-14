@@ -35,7 +35,6 @@ describe PostsController do
       expect(assigns(:post)).to eq(published_post)
       expect(assigns(:comments).size).to eq(1)
       expect(assigns(:comment)).to_not be_nil
-      expect(assigns(:page_title)).to eq(assigns(:post).title)
     end
   end
 

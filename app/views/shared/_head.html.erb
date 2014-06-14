@@ -3,8 +3,8 @@
   <%= stylesheet_link_tag "application" %>
 
   <%= csrf_meta_tags %>
-  <meta name="description" content="<%= content_for?(:description) ? yield(:description) : "Nick DeSteffen's Blog" %>" />
-  <meta name="keywords" content="<%= content_for?(:keywords) ? yield(:keywords) : "nick, desteffen, chicago, ruby, rails, ruby on rails, java, j2ee, consultant, IT, rspec, javascript, jquery" %>" />
+  <meta name="description" content="<%= description %>" />
+  <meta name="keywords" content="<%= keywords %>" />
 
   <%= auto_discovery_link_tag(:atom, blog_path(:atom)) %>
   <%= favicon_link_tag %>

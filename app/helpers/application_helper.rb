@@ -45,10 +45,30 @@ module ApplicationHelper
   end
 
   def page_title
-    return "#{@page_title} | Nick DeSteffen" if defined?(@page_title)
-    title = controller.active_tab.present? ? controller.active_tab.capitalize : nil
-    return "#{title} | Nick DeSteffen" if title
+    if content_for?(:page_title)
+      page_title = content_for(:page_title)
+      return "#{page_title} | Nick DeSteffen"
+    else
+      title = controller.active_tab.present? ? controller.active_tab.capitalize : nil
+      return "#{title} | Nick DeSteffen" if title
+    end
     return "Nick DeSteffen"
+  end
+
+  def description
+    if content_for?(:description)
+      content_for(:description)
+    else
+      "Nick DeSteffen's Blog"
+    end
+  end
+
+  def keywords
+    if content_for?(:keywords)
+      content_for(:keywords)
+    else
+      "nick, desteffen, chicago, ruby, rails, ruby on rails, java, j2ee, consultant, IT, rspec, javascript, jquery"
+    end
   end
 
 end

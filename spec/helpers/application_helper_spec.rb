@@ -78,7 +78,7 @@ describe ApplicationHelper do
       allow(helper).to receive(:controller).and_return(ApplicationController.new)
     end
     it "and_return the page title in @page_title" do
-      @page_title = "Test"
+      view.content_for(:page_title, "Test")
 
       expect(helper.page_title).to eq("Test | Nick DeSteffen")
     end
@@ -89,6 +89,28 @@ describe ApplicationHelper do
     end
     it "and_return Nick DeSteffen if nothing else is present" do
       expect(helper.page_title).to eq("Nick DeSteffen")
+    end
+  end
+
+  describe "keywords" do
+    it "should return defined keywords" do
+      view.content_for(:keywords, "one, two, three")
+
+      expect(helper.keywords).to eq("one, two, three")
+    end
+    it "should return a default if nothing is defined" do
+      expect(helper.keywords).to eq("nick, desteffen, chicago, ruby, rails, ruby on rails, java, j2ee, consultant, IT, rspec, javascript, jquery")
+    end
+  end
+
+  describe "description" do
+    it "should return a defined description" do
+      view.content_for(:description, "one, two, three")
+
+      expect(helper.description).to eq("one, two, three")
+    end
+    it "should return a default if nothing is defined" do
+      expect(helper.description).to eq("Nick DeSteffen's Blog")
     end
   end
 
