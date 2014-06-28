@@ -1,9 +1,9 @@
 source "https://rubygems.org"
 ruby "2.1.2"
 
-gem 'rails', '4.1.1'
+gem 'rails', '4.1.2'
 gem "pg", "0.17.1"
-gem 'jquery-rails', "3.1.0"
+gem 'jquery-rails', "3.1.1"
 gem 'friendly_id', '5.0.4'
 gem 'bcrypt', '3.1.7'
 gem 'redcarpet', '3.1.2'

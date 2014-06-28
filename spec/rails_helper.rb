@@ -8,7 +8,6 @@ Dir[Rails.root.join("spec/support/**/*.rb")].each {|f| require f}
 ActiveRecord::Migration.maintain_test_schema!
 
 RSpec.configure do |config|
-  config.mock_with :rspec
   config.render_views
   config.use_transactional_fixtures = true
   config.infer_base_class_for_anonymous_controllers = true

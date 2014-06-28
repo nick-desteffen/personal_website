@@ -16,16 +16,19 @@ module Spam
   end
 
   def flag_spam!
-    self.spam_flag = true
-    self.save
+    update_column(:spam_flag, true)
     spam!
   end
 
 private
 
   def spam_check
-    if spam?
-      errors.add(:base, "Sorry, but this appears to be spam. Please try harder.")
+    begin
+      if spam?
+        errors.add(:base, "Sorry, but this appears to be spam. Please try harder.")
+      end
+    rescue Net::ReadTimeout => exception
+      ## NOOP
     end
   end
 

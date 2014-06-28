@@ -57,10 +57,11 @@ describe Comment do
     it "flags a comment as spam" do
       comment = FactoryGirl.create(:comment)
       allow(comment).to receive(:spam!).once
+      allow(comment).to receive(:spam?).once.and_return(true)
 
       comment.flag_spam!
 
-      expect(comment).to be_spam_flag
+      expect(comment.reload).to be_spam_flag
     end
   end
 
