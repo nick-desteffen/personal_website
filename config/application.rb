@@ -4,7 +4,6 @@ require 'active_record/railtie'
 require 'action_controller/railtie'
 require 'action_mailer/railtie'
 require 'sprockets/railtie'
-require "bcrypt"
 
 Bundler.require(*Rails.groups)
 

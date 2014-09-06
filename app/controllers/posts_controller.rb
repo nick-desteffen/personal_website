@@ -8,7 +8,7 @@ class PostsController < ApplicationController
   layout "one_column"
 
   def index
-    page = params[:page] || 1
+    page = params.fetch(:page, 1)
     @posts = Post.published.page(page)
   end
 
