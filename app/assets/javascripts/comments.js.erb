@@ -1,7 +1,7 @@
 $(function(){
-  $("#preview-button").click(function(){
+  $("#preview-button").on("click", function(){
     var data = $("#new_comment").serialize();
-    $.ajax({url: '<%= PersonalWebsite::Application.routes.url_helpers.preview_comment_path %>', type: 'POST', data: data})
+    $.ajax({url: '<%= Rails.application.routes.url_helpers.preview_comment_path %>', type: 'POST', data: data})
     return false;
   });
 });

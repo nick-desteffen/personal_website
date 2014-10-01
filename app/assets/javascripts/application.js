@@ -22,11 +22,11 @@ function add_fields(link, association, content) {
 }
 
 $(function(){
-  $("#markdown_link").click(function(){
+  $("#markdown_link").on("click", function(){
     $("#markdown_examples").slideToggle();
   });
 
-  $("a.close").click(function(){
+  $("a.close").on("click", function(){
     $(this).parents('.flash-messages').fadeOut();
     return false;
   });
