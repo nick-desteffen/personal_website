@@ -17,7 +17,7 @@ private
   end
 
   def deliver_email_notification
-    Notifier.new_contact_message(self).deliver
+    Notifier.new_contact_message(self).deliver_now
   end
 
 end

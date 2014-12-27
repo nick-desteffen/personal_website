@@ -2,7 +2,7 @@ class Comment < ActiveRecord::Base
   include Spam
   include PgSearch
 
-  default_scope -> { order("created_at ASC") }
+  default_scope -> { order(created_at: :asc) }
 
   belongs_to :post
 
@@ -42,11 +42,11 @@ private
       .reject{ |comment| comment == self || comment.email.blank? }
       .collect{ |comment| {name: comment.name, email: comment.email} }
       .uniq
-      .each{ |recipient| Notifier.new_comment(post, recipient[:email], recipient[:name]).deliver }
+      .each{ |recipient| Notifier.new_comment(post, recipient[:email], recipient[:name]).deliver_now }
   end
 
   def notify_me
-    Notifier.new_comment(self.post, "nick.desteffen@gmail.com", "Nick").deliver
+    Notifier.new_comment(self.post, "nick.desteffen@gmail.com", "Nick").deliver_now
   end
 
 end

@@ -14,7 +14,7 @@ describe NestedAttributesHelper do
         end
       end
 
-      expect(link).to eq "<input id=\"post_related_links_attributes_0__destroy\" name=\"post[related_links_attributes][0][_destroy]\" type=\"hidden\" value=\"false\" /><a data-destroy=\"true\" href=\"#\">remove</a><input id=\"post_related_links_attributes_0_id\" name=\"post[related_links_attributes][0][id]\" type=\"hidden\" value=\"#{related_link.id}\" />"
+      expect(link).to eq "<input type=\"hidden\" value=\"false\" name=\"post[related_links_attributes][0][_destroy]\" id=\"post_related_links_attributes_0__destroy\" /><a data-destroy=\"true\" href=\"#\">remove</a>"
     end
   end
 
@@ -29,7 +29,7 @@ describe NestedAttributesHelper do
         end
       end
 
-      expect(link).to eq "<a data-add-related-links=\"true\" href=\"#\">My Link</a><input id=\"post_related_links_attributes_0_id\" name=\"post[related_links_attributes][0][id]\" type=\"hidden\" value=\"#{related_link.id}\" />"
+      expect(link).to eq "<a data-add-related-links=\"true\" href=\"#\">My Link</a>"
     end
   end
 
@@ -42,7 +42,7 @@ describe NestedAttributesHelper do
         end
       end
 
-      expect(template).to eq "<div class=\\\"fields\\\">\\n  <label for=\\\"post_related_links_attributes_new_related_links_title\\\">Title<\\/label>\\n  <input id=\\\"post_related_links_attributes_new_related_links_title\\\" name=\\\"post[related_links_attributes][new_related_links][title]\\\" type=\\\"text\\\" />\\n  <label for=\\\"post_related_links_attributes_new_related_links_url\\\">Url<\\/label>\\n  <input id=\\\"post_related_links_attributes_new_related_links_url\\\" name=\\\"post[related_links_attributes][new_related_links][url]\\\" type=\\\"url\\\" />\\n  <br />\\n  <input id=\\\"post_related_links_attributes_new_related_links__destroy\\\" name=\\\"post[related_links_attributes][new_related_links][_destroy]\\\" type=\\\"hidden\\\" value=\\\"false\\\" /><a data-destroy=\\\"true\\\" href=\\\"#\\\">remove<\\/a>\\n<\\/div><input id=\"post_related_links_attributes_0_id\" name=\"post[related_links_attributes][0][id]\" type=\"hidden\" value=\"#{related_link.id}\" />"
+      expect(template).to eq "<div class=\\\"fields\\\">\\n  <label for=\\\"post_related_links_attributes_new_related_links_title\\\">Title<\\/label>\\n  <input type=\\\"text\\\" name=\\\"post[related_links_attributes][new_related_links][title]\\\" id=\\\"post_related_links_attributes_new_related_links_title\\\" />\\n  <label for=\\\"post_related_links_attributes_new_related_links_url\\\">Url<\\/label>\\n  <input type=\\\"url\\\" name=\\\"post[related_links_attributes][new_related_links][url]\\\" id=\\\"post_related_links_attributes_new_related_links_url\\\" />\\n  <br />\\n  <input type=\\\"hidden\\\" value=\\\"false\\\" name=\\\"post[related_links_attributes][new_related_links][_destroy]\\\" id=\\\"post_related_links_attributes_new_related_links__destroy\\\" /><a data-destroy=\\\"true\\\" href=\\\"#\\\">remove<\\/a>\\n<\\/div>"
     end
   end
 

@@ -1,4 +1,4 @@
-//= require jquery
+//= require jquery2
 //= require jquery_ujs
 //= require syntaxhighlighter_3.0.83/scripts/shCore
 //= require syntaxhighlighter_3.0.83/scripts/shBrushRuby

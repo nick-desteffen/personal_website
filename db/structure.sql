@@ -3,6 +3,7 @@
 --
 
 SET statement_timeout = 0;
+SET lock_timeout = 0;
 SET client_encoding = 'UTF8';
 SET standard_conforming_strings = on;
 SET check_function_bodies = false;
@@ -35,11 +36,11 @@ SET default_with_oids = false;
 CREATE TABLE comments (
     id integer NOT NULL,
     post_id integer,
-    name character varying(255),
-    email character varying(255),
+    name character varying,
+    email character varying,
     body text,
-    url character varying(255),
-    gravatar_hash character varying(255),
+    url character varying,
+    gravatar_hash character varying,
     created_at timestamp without time zone,
     updated_at timestamp without time zone,
     spam_flag boolean DEFAULT false,
@@ -73,12 +74,12 @@ ALTER SEQUENCE comments_id_seq OWNED BY comments.id;
 
 CREATE TABLE contact_messages (
     id integer NOT NULL,
-    name character varying(255),
-    email character varying(255),
+    name character varying,
+    email character varying,
     message text,
-    user_agent character varying(255),
-    subject character varying(255),
-    phone_number character varying(255),
+    user_agent character varying,
+    subject character varying,
+    phone_number character varying,
     created_at timestamp without time zone,
     updated_at timestamp without time zone,
     spam_flag boolean DEFAULT false,
@@ -113,9 +114,9 @@ CREATE TABLE pg_search_documents (
     id integer NOT NULL,
     content text,
     searchable_id integer,
-    searchable_type character varying(255),
-    created_at timestamp without time zone NOT NULL,
-    updated_at timestamp without time zone NOT NULL
+    searchable_type character varying,
+    created_at timestamp without time zone,
+    updated_at timestamp without time zone
 );
 
 
@@ -144,13 +145,13 @@ ALTER SEQUENCE pg_search_documents_id_seq OWNED BY pg_search_documents.id;
 
 CREATE TABLE posts (
     id integer NOT NULL,
-    title character varying(255),
+    title character varying,
     body text,
     published_at timestamp without time zone,
     created_at timestamp without time zone,
     updated_at timestamp without time zone,
-    slug character varying(255),
-    tags character varying(255)[] DEFAULT '{}'::character varying[]
+    slug character varying,
+    tags character varying[] DEFAULT '{}'::character varying[]
 );
 
 
@@ -180,8 +181,8 @@ ALTER SEQUENCE posts_id_seq OWNED BY posts.id;
 CREATE TABLE related_links (
     id integer NOT NULL,
     post_id integer,
-    title character varying(255),
-    url character varying(255),
+    title character varying,
+    url character varying,
     created_at timestamp without time zone,
     updated_at timestamp without time zone
 );
@@ -211,7 +212,7 @@ ALTER SEQUENCE related_links_id_seq OWNED BY related_links.id;
 --
 
 CREATE TABLE schema_migrations (
-    version character varying(255) NOT NULL
+    version character varying NOT NULL
 );
 
 
@@ -221,10 +222,10 @@ CREATE TABLE schema_migrations (
 
 CREATE TABLE users (
     id integer NOT NULL,
-    email character varying(255),
-    password_digest character varying(255),
-    first_name character varying(255),
-    last_name character varying(255),
+    email character varying,
+    password_digest character varying,
+    first_name character varying,
+    last_name character varying,
     created_at timestamp without time zone,
     updated_at timestamp without time zone
 );

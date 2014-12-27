@@ -10,7 +10,7 @@ module PostsHelper
 
   def comment_name(comment)
     if comment.url.present?
-      link_to comment.name, comment.url, :target => "_blank"
+      link_to comment.name, comment.url, target: "_blank"
     else
       comment.name
     end
@@ -32,7 +32,7 @@ module PostsHelper
   end
 
   def teaser(post)
-    truncate(strip_tags(post.body).gsub("&ndash;", " - "), length: 300, omission: '...')
+    truncate(strip_tags(post.body.gsub("\r", "")).gsub("&ndash;", " - "), length: 300, omission: '...')
   end
 
   def tags(post)

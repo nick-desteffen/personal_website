@@ -1,7 +1,8 @@
 module NestedAttributesHelper
 
   def link_to_remove_fields(title, form)
-    form.hidden_field(:_destroy) + link_to(title, "#", data: {destroy: 'true'})
+    link = form.hidden_field(:_destroy) + link_to(title, "#", data: {destroy: 'true'})
+    return link
   end
 
   def link_to_add_fields(title, association, form)
@@ -17,7 +18,7 @@ module NestedAttributesHelper
   end
 
   private
-  
+
   def nested_attributes_form_template(association, form)
     new_object = form.object.class.reflect_on_association(association).klass.new
     fields = form.fields_for(association, new_object, :child_index => "new_#{association}") do |builder|

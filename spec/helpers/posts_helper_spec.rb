@@ -11,7 +11,7 @@ describe PostsHelper do
     it "returns an image tag with the gravatar hash if it isn't blank" do
       image = gravatar_image("XXXXX")
 
-      expect(image).to eq "<img alt=\"\" src=\"http://www.gravatar.com/avatar/XXXXX?size=75\" title=\"\" />"
+      expect(image).to eq "<img alt=\"\" title=\"\" src=\"http://www.gravatar.com/avatar/XXXXX?size=75\" />"
     end
   end
 
@@ -72,7 +72,7 @@ describe PostsHelper do
     it "should replace &ndash; with - " do
       post = Post.new(body: "<h1>Title</h1> <p>The quick brown fox jumped over the lazy dog</p> <h2>Second Title &ndash; Welcome!</h2>")
 
-      expect(helper.teaser(post)).to eq "Title The quick brown fox jumped over the lazy dog Second Title  -  Welcome!"
+      expect(helper.teaser(post)).to eq "Title The quick brown fox jumped over the lazy dog Second Title – Welcome!"
     end
   end
 
