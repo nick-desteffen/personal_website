@@ -1,0 +1,51 @@
+<div>
+  <h2>Installing</h2>
+  <p>
+    <a href='http://nginx.org/' target='_blank'>Nginx</a> and <a href='https://www.phusionpassenger.com/' target='_blank'>Phusion Passenger</a> make a powerful combonation for hosting web applications.
+    Nginx is very flexible and fast. Phusion Passenger is rock solid and can be used to host Ruby, Python, and Node.js applications all at once.
+    Nginx out of the box unfortunally lacks the ability to set or modify HTTP headers from within the configuration files.
+    This is easily rectified by adding the <a href='https://github.com/openresty/headers-more-nginx-module' target='_blank'>ngx_headers_more</a> module.
+  </p>
+  <p>
+    The easiest way to install Nginx with Passenger support is through the gem.
+    You'll need to download and unarchive the <strong>ngx_headers_more</strong> module first, since we will need to point the installer to this location.
+  </p>
+  <p>
+    Below are the commands I use when installing on a server.
+    If you are installing locally for development they will probably be a bit different, but not much.
+    The <strong>passenger-install-nginx-module</strong> command is the important one.
+    Note the <strong>extra-configure-flags</strong> option, this is how you can build Nginx with support for the module.
+  </p>
+  <div class='terminal'>
+    $ sudo su -<br>
+    $ mkdir -p /opt/nginx/build-modules<br>
+    $ wget -P /opt/nginx/build-modules https://github.com/openresty/headers-more-nginx-module/archive/v0.25.tar.gz<br>
+    $ tar -xzf /opt/nginx/build-modules/v0.25.tar.gz -C /opt/nginx/build-modules<br>
+    $ gem install passenger<br>
+    $ passenger-install-nginx-module --prefix=/opt/nginx --extra-configure-flags="--add-module=/opt/nginx/build-modules/headers-more-nginx-module-0.25"<br>
+  </div>
+  <h2>Using</h2>
+  <p>
+    After you have installed Nginx with the <strong>ngx_headers_more</strong> module you will be able to add and remove headers as you please from within your Nginx configuration files.
+    This can be done from within the http or location blocks.  Below is a small example.
+  </p>
+  <p>
+    The <strong>more_clear_headers</strong> directive can be used to clear unnecessary headers, like the ones that Passenger and Nginx set to indicate their version (Server, X-Powered-By, X-Runtime).
+  </p>
+  <p>
+    The <strong>more_set_input_headers</strong> directive can be used to set a header on the incoming request.
+  </p>
+  <p>
+    The <strong>more_set_headers</strong> directive can be used to set a header on the outgoing response.
+  </p>
+  <pre class='nginx'>
+
+    http {
+      more_clear_headers 'Server' 'X-Powered-By' 'X-Runtime';
+      more_set_headers 'X-Current-Hostname: $remote_addr';
+      location /foo {
+        more_set_input_headers 'X-Location: Foo';
+      }
+    }
+  </pre>
+</div>
