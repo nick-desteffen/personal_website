@@ -10,7 +10,7 @@ PersonalWebsite::Application.configure do
   config.assets.version = '1.0'
   config.action_dispatch.x_sendfile_header = nil
   config.log_level = :info
-  config.action_mailer.default_url_options = { :host => 'www.nickdesteffen.com' }
+  config.action_mailer.default_url_options = { host: 'www.nickdesteffen.com' }
   config.i18n.fallbacks = true
   config.active_support.deprecation = :notify
   config.log_formatter = ::Logger::Formatter.new
@@ -21,6 +21,6 @@ PersonalWebsite::Application.configure do
       sender_address:       'nick.desteffen@gmail.com',
       exception_recipients: 'nick.desteffen@gmail.com'
     },
-    ignore_exceptions: ExceptionNotifier.ignored_exceptions + ['ActionController::BadRequest']
+    ignore_exceptions: ExceptionNotifier.ignored_exceptions + ['ActionController::BadRequest', 'ActionController::ParameterMissing']
 
 end
