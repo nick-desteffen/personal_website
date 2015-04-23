@@ -1,5 +1,5 @@
 source "https://rubygems.org"
-ruby "2.2.1"
+ruby "2.2.2"
 
 gem 'rails', '4.2.1'
 gem "pg", "0.18.1"
@@ -11,7 +11,7 @@ gem 'pygmentize', '0.0.3'
 gem 'thin', '1.6.3'
 gem 'rakismet', '1.5.1'
 gem 'kaminari', '0.16.3'
-gem 'pg_search', "0.7.9"
+gem 'pg_search', "1.0.0"
 
 gem 'sass-rails', "5.0.3"
 gem 'coffee-rails', "4.1.0"
