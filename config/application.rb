@@ -28,9 +28,9 @@ module PersonalWebsite
       address:        "smtp.sendgrid.net",
       port:           "25",
       authentication: :plain,
-      user_name:      Rails.application.secrets.sendgrid.username,
-      password:       Rails.application.secrets.sendgrid.password,
-      domain:         Rails.application.secrets.sendgrid.domain
+      user_name:      Rails.application.secrets.sendgrid[:username],
+      password:       Rails.application.secrets.sendgrid[:password],
+      domain:         Rails.application.secrets.sendgrid[:domain]
     }
 
     config.email_validation_regex = /\A[^@\s]+@([^@\s]+\.)+[^@\s]+\z/
