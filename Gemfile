@@ -1,5 +1,4 @@
 source "https://rubygems.org"
-ruby "2.2.2"
 
 gem 'rails', '4.2.4.rc1'
 gem "pg", "0.18.2"
@@ -22,9 +21,13 @@ group :development, :test do
   gem "factory_girl_rails", "4.5.0"
   gem "byebug", "6.0.2"
   gem "spring", "~> 1.3.4"
+
+  gem 'capistrano', '~> 3.4.0', require: false
+  gem 'capistrano-rails', '~> 1.1.3', require: false
+  gem 'capistrano-bundler', '~> 1.1.1', require: false
+  gem 'capistrano-passenger', '~> 0.1.1', require: false
 end
 
 group :production do
   gem 'exception_notification', '4.1.1'
-  gem 'rails_12factor'
 end
