@@ -1,6 +1,6 @@
 source "https://rubygems.org"
 
-gem 'rails', '4.2.4.rc1'
+gem 'rails', '4.2.4'
 gem "pg", "0.18.2"
 gem 'jquery-rails', "4.0.4"
 gem 'friendly_id', '5.1.0'
@@ -14,7 +14,7 @@ gem 'pg_search', "1.0.4"
 
 gem 'sass-rails', "5.0.3"
 gem 'coffee-rails', "4.1.0"
-gem 'uglifier', "2.7.1"
+gem 'uglifier', "2.7.2"
 
 group :development, :test do
   gem 'rspec-rails', '3.3.3'
