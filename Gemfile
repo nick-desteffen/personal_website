@@ -11,7 +11,7 @@ gem 'thin', '1.6.3'
 gem 'rakismet', '1.5.1'
 gem 'kaminari', '0.16.3'
 gem 'pg_search', "1.0.4"
-
+gem 'passenger', '5.0.16'
 gem 'sass-rails', "5.0.3"
 gem 'coffee-rails', "4.1.0"
 gem 'uglifier', "2.7.2"
