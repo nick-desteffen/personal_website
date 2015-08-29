@@ -6,7 +6,7 @@ set :branch, 'master'
 set :deploy_to, '/var/www/apps/personal_website'
 set :scm, :git
 set :format, :pretty
-set :log_level, :debug
+set :log_level, :info
 set :pty, true
 set :linked_files, fetch(:linked_files, []).push('config/database.yml', 'config/secrets.yml')
 set :linked_dirs, fetch(:linked_dirs, []).push('log', 'tmp/pids', 'tmp/cache', 'tmp/sockets', 'vendor/bundle', 'public/system')
