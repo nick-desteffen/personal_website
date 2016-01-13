@@ -10,7 +10,7 @@ describe CommentsController do
 
     it "creates a new comment" do
       expect{
-        post :create, post_id: existing_post.id, comment: FactoryGirl.attributes_for(:comment)
+        post :create, post_id: existing_post, comment: FactoryGirl.attributes_for(:comment)
       }.to change(Comment, :count).by(1)
 
       expect(flash[:notice]).to_not be_nil
@@ -54,7 +54,7 @@ describe CommentsController do
       login_as user
       comment = FactoryGirl.create(:comment)
 
-      get :edit, post_id: comment.post_id, comment_id: comment.id
+      get :edit, post_id: comment.post, comment_id: comment.id
 
       expect(assigns(:comment)).to eq(comment)
     end
@@ -73,7 +73,7 @@ describe CommentsController do
       login_as user
       comment = FactoryGirl.create(:comment, body: "Old Body")
 
-      patch :update, post_id: comment.post_id, comment_id: comment.id, comment: {body: "New Body"}
+      patch :update, post_id: comment.post, comment_id: comment.id, comment: {body: "New Body"}
 
       expect(assigns(:comment).body).to eq("New Body")
       expect(response).to redirect_to blog_post_path(comment.post)
@@ -96,7 +96,7 @@ describe CommentsController do
       post = FactoryGirl.create(:post)
       comment = FactoryGirl.create(:comment, post: post)
 
-      xhr :delete, :destroy, post_id: post.id, comment_id: comment.id
+      xhr :delete, :destroy, post_id: post.slug, comment_id: comment.id
 
       expect(response).to be_success
       expect(post.comments.size).to eq(0)

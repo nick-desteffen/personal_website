@@ -50,7 +50,7 @@ class PostsController < ApplicationController
 private
 
   def find_post
-    @post = Post.friendly.find(params[:post_id])
+    @post = Post.where(slug: params[:post_id]).first
   end
 
   def post_params

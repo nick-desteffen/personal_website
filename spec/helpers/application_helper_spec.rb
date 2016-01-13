@@ -35,7 +35,7 @@ describe ApplicationHelper do
 
       expect(helper.flash_messages).to match /error/
       expect(helper.flash_messages).to match /Something went wrong/
-      expect(helper.flash_messages).to match /24x24\/error.png/
+      expect(helper.flash_messages).to match /24x24\/error-(.*).png/
     end
     it "builds out error flash messages with a close button and error class" do
       flash_messages = {notice: "Something went right"}
@@ -43,7 +43,7 @@ describe ApplicationHelper do
 
       expect(helper.flash_messages).to match /notice/
       expect(helper.flash_messages).to match /Something went right/
-      expect(helper.flash_messages).to match /24x24\/error.png/
+      expect(helper.flash_messages).to match /24x24\/error-(.*).png/
     end
   end
 
