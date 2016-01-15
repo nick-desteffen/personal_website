@@ -26,11 +26,11 @@ module PersonalWebsite
     ActionMailer::Base.prepend_view_path "#{Rails.root}/app/mailer_views"
     ActionMailer::Base.smtp_settings = {
       address:        "smtp.sendgrid.net",
-      port:           "25",
+      port:           587,
       authentication: :plain,
-      user_name:      Rails.application.secrets.sendgrid[:username],
-      password:       Rails.application.secrets.sendgrid[:password],
-      domain:         Rails.application.secrets.sendgrid[:domain]
+      user_name:      Rails.application.secrets.sendgrid['username'],
+      password:       Rails.application.secrets.sendgrid['password'],
+      domain:         Rails.application.secrets.sendgrid['domain']
     }
 
     config.email_validation_regex = /\A[^@\s]+@([^@\s]+\.)+[^@\s]+\z/
