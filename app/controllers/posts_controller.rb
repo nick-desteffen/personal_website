@@ -51,6 +51,7 @@ private
 
   def find_post
     @post = Post.where(slug: params[:post_id]).first
+    not_found and return if @post.nil?
   end
 
   def post_params

@@ -36,6 +36,11 @@ describe PostsController do
       expect(assigns(:comments).size).to eq(1)
       expect(assigns(:comment)).to_not be_nil
     end
+    it "handles posts that aren't found" do
+      expect{
+        get :show, post_id: 'post'
+      }.to raise_error(ActionController::RoutingError)
+    end
   end
 
   describe "new" do

@@ -9,4 +9,8 @@ class ApplicationController < ActionController::Base
     self.active_tab = tab
   end
 
+  def not_found
+    raise ActionController::RoutingError.new('Not Found')
+  end
+
 end
