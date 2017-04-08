@@ -7,7 +7,7 @@ class Session
   validates_presence_of :password
 
   def authenticated?
-    @user = User.find_by_email(email)
+    @user = User.find_by(email: email)
     return true if @user && @user.authenticate(password)
     return false
   end

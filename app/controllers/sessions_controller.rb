@@ -8,16 +8,16 @@ class SessionsController < ApplicationController
     @session = Session.new(params[:session])
     if @session.valid? && @session.authenticated?
       login(@session.user)
-      redirect_to admin_index_path, :notice => "Logged in!"
+      redirect_to admin_index_path, notice: "Logged in!"
     else
       flash.now.alert = "Invalid email or password"
-      render :action => :new
+      render action: :new
     end
   end
 
   def destroy
     logout
-    redirect_to root_path, :notice => "Logged out!"
+    redirect_to root_path, notice: "Logged out!"
   end
 
 end
