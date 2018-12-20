@@ -8,7 +8,7 @@ class Comment < ActiveRecord::Base
 
   before_validation :generate_gravatar_hash
   after_create :notify_me
-  after_create :notify_commenters
+  #after_create :notify_commenters
 
   rakismet_attrs author: :name, author_email: :email, author_url: :url, content: :body, user_ip: :remote_ip, user_agent: :user_agent, referrer: :referrer
 
@@ -38,11 +38,11 @@ private
   end
 
   def notify_commenters
-    post.comments.notify
-      .reject{ |comment| comment == self || comment.email.blank? }
-      .collect{ |comment| {name: comment.name, email: comment.email} }
-      .uniq
-      .each{ |recipient| Notifier.new_comment(post, recipient[:email], recipient[:name]).deliver_now }
+    post.comments.notify.
+      reject{ |comment| comment == self || comment.email.blank? }.
+      collect{ |comment| {name: comment.name, email: comment.email} }.
+      uniq.
+      each{ |recipient| Notifier.new_comment(post, recipient[:email], recipient[:name]).deliver_now }
   end
 
   def notify_me
