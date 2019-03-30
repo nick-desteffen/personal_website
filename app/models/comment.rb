@@ -16,6 +16,8 @@ class Comment < ActiveRecord::Base
   validates_format_of :email, with: Rails.configuration.email_validation_regex, allow_blank: true
   validates_format_of :url, with: URI::regexp(%w(http https)), allow_blank: true, message: "should be fully qualified."
 
+  validate :comment_disabled
+
   scope :notify, -> { where(new_comment_notification: true) }
 
   pg_search_scope :search, against: [:body, :name], using: {tsearch: {dictionary: "english", prefix: true}}
@@ -47,6 +49,10 @@ private
 
   def notify_me
     Notifier.new_comment(self.post, "nick.desteffen@gmail.com", "Nick").deliver_now
+  end
+
+  def comment_disabled
+    errors.add(:base, 'Sorry, comments are disabled, please email me if you have something worth saying.')
   end
 
 end
