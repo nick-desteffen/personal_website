@@ -4,7 +4,7 @@ gem 'rails', '4.2.8'
 gem "pg", "0.18.4"
 gem 'jquery-rails', "4.1.1"
 gem 'bcrypt', '3.1.11'
-gem 'redcarpet', '3.3.4'
+gem 'redcarpet', '3.5.1'
 gem 'pygmentize', '0.0.3'
 gem 'rakismet', '1.5.2'
 gem 'kaminari', '0.16.3'
