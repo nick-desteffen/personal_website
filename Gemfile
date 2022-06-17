@@ -9,7 +9,7 @@ gem 'pygmentize', '0.0.3'
 gem 'rakismet', '1.5.2'
 gem 'kaminari', '0.16.3'
 gem 'pg_search', "1.0.6"
-gem 'passenger', '5.0.28', require: 'phusion_passenger/rack_handler'
+gem 'passenger', '5.3.2', require: 'phusion_passenger/rack_handler'
 gem 'sass-rails', "5.0.4"
 gem 'coffee-rails', "4.1.1"
 gem 'uglifier', "3.0.0"
